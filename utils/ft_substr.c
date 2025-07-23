@@ -1,0 +1,23 @@
+
+# include "../cub.h"
+
+char *ft_substr(char *str, int start, int end)
+{
+    int lent;
+    int i;
+    char *new;
+
+    i = 0;
+    lent = end - start;
+    new = malloc(sizeof(char) * (lent + 2));
+    if (!new)
+        return (ft_putendl_fd(ERROR_ALOCATION, 2), NULL);
+    while (start < end)
+    {
+        new[i] = str[start];
+        start++;
+        i++;
+    }
+    new[i] = '\0';
+    return (new);
+}
