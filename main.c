@@ -25,7 +25,6 @@ int main(int argc, char *argv[])
         return (free_game(game), 0);
     if (!start_parcing(argc, argv, game))
         return (free_game(game), 0);
-    if (!start_randering(game))
-        return (free_game(game), 0);
+    free_game(game);
     return (0);
 }

@@ -55,8 +55,6 @@ int init_struct(t_game *game)
     game->start_parcing_map = -1;
     game->player_y = -1;
     game->player_dir = -1;
-    game->mlx_ptr = NULL;
-    game->win_ptr = NULL;
     init_map(game->map);
     init_config(game->config);
     return (1);

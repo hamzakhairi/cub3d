@@ -19,7 +19,7 @@
 # include <stddef.h>
 # include <limits.h>
 # include <fcntl.h>
-# include "./minilibx-linux/mlx.h"
+
 
 typedef struct s_config {
 	char *no_texture;
@@ -44,13 +44,6 @@ typedef struct s_game {
 	int player_x;
 	int player_y;
 	char player_dir;
-	//
-	void *mlx_ptr;
-	void *win_ptr;
-	void *img_no;
-	void *img_so;
-	void *img_we;
-	void *img_wa;
 } t_game;
 
 typedef struct s_gnl
@@ -91,7 +84,7 @@ int cheack_lines(t_game *game);
 * 		Randering function				*
 *****************************************/
 
-int start_randering(t_game *game);
+
 
 /****************************************
 *			error						*
