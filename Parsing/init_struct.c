@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:42:19 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/07/02 18:12:44 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/07/31 09:31:32 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ void init_config(t_config *config)
 void init_map(t_map *map)
 {
     map->grid = NULL;
+    map->dir_x = 0;
+    map->dir_y = 0;
+    // map->angle = 0;
     map->width = -1;
     map->height = -1;
 }

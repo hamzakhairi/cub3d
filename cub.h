@@ -3,22 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:10:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/07/02 18:32:14 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/07/31 09:40:49 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # ifndef CUB_H
 # define CUB_H
 
+# define SIZE 32
+# define ESC 53
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_RIGHT 124
+# define KEY_LEFT 123
+# define NUM_GAME_MOVES 8
+
+// # define ANGLE 0.5
+
+# include <mlx.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <stddef.h>
 # include <limits.h>
 # include <fcntl.h>
+# include <math.h>
+
+
+
+
 
 
 typedef struct s_config {
@@ -33,6 +51,9 @@ typedef struct s_config {
 
 typedef struct s_map {
 	char **grid;
+	float dir_x;
+	float angle;
+	float dir_y;
 	int width;
 	int height;
 } t_map;
@@ -43,7 +64,24 @@ typedef struct s_game {
 	int start_parcing_map;
 	int player_x;
 	int player_y;
+	int player_pixl_x;
+	int player_pixl_y;
 	char player_dir;
+
+	// void *player;
+	// void *empty;
+	// void *wall;
+
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img_ptr;
+	
+	void	*img_p;
+	char    *addr;
+	int     bits_per_pixel;
+    int     line_length;
+    int     endian;
+
 } t_game;
 
 typedef struct s_gnl
@@ -84,7 +122,16 @@ int cheack_lines(t_game *game);
 * 		Randering function				*
 *****************************************/
 
-
+int		start_randering(t_game *game);
+int		create_window(t_game *game);
+void	create_put_image_to_window(t_game *game);
+void	ft_image(t_game *game, int width, int height);
+int		create_xpm_file_image(t_game *game);
+void	Calculate_width_height(t_game *game);
+int		moving(int key, t_game *game);
+void    setup_player(t_game *game);
+void    put_pixel(t_game *game, int x, int y, int color);
+void	store_dir(t_game *game, int width, int height);
 
 /****************************************
 *			error						*

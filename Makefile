@@ -29,8 +29,13 @@ SRC_UTILS = \
 	./utils/ft_other_strdup.c \
 	./utils/free_game.c
 
+SRC_RANDER = \
+	./rander/start_randering.c \
+	./rander/file_create_window.c \
+	./rander/implement_raycastin.c \
 
-OBJ = $(SRC_PARCING:.c=.o) $(SRC_MAIN:.c=.o) $(SRC_ERROR:.c=.o) $(SRC_GET_LINE:.c=.o) $(SRC_UTILS:.c=.o)
+
+OBJ = $(SRC_RANDER:.c=.o) $(SRC_PARCING:.c=.o) $(SRC_MAIN:.c=.o) $(SRC_ERROR:.c=.o) $(SRC_GET_LINE:.c=.o) $(SRC_UTILS:.c=.o)
 
 HEADER = cub.h
 
@@ -38,14 +43,13 @@ NAME = cub
 
 # MLX_DIR = ./minilibx-mac
 
-# MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
-
+MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
 all : $(NAME) clean
 	clear
 	./cub ./texter/map.cub
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAG) $(OBJ) -o $(NAME) 
+	$(CC) $(CFLAG) $(MLX_FLAGS) $(OBJ) -o $(NAME) 
 #$(MAKE) -C $(MLX_DIR)
 #$(MLX_FLAGS)
 

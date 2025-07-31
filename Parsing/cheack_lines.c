@@ -95,8 +95,8 @@ int cheack_lines(t_game *game)
         {
             if (ft_strchr("NSWE", map[i][j]))
             {
-                game->player_x = i;
-                game->player_y = j;
+                game->player_x = j;
+                game->player_y = i;
                 printf("[%c]\n", map[i][j]);
                 count_player++;
                 if (count_player != 1)

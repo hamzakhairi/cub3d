@@ -1,6 +1,6 @@
 /* XPM */
 static char *background[] = {
-"32 32 1 1",  /* Width, Height, Number of Colors, Characters per Pixel */
+"64 32 1 1",  /* Width, Height, Number of Colors, Characters per Pixel */
 /* Colors */
 ". c #000000",  /* Black (background) */
 /* Pixels */
