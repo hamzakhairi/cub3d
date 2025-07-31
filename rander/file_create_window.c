@@ -57,22 +57,13 @@ void ft_image(t_game *game, int width, int height)
 void store_dir(t_game *game, int width, int height)
 {
 	if (game->map->grid[height][width] == 'N')
-	{
 		game->map->angle = 0; // 0 degrees
-	}
 	else if (game->map->grid[height][width] == 'S')
-	{
 		game->map->angle = 3.1415926536; // 180 degrees
-
-	}
 	else if (game->map->grid[height][width] == 'E')
-	{
 		game->map->angle = 1.5707963268; // 90 degrees
-	}
 	else if (game->map->grid[height][width] == 'W')
-	{
 		game->map->angle = 4.7123889804; // 270 degrees
-	}
 }
 
 void create_put_image_to_window(t_game *game)

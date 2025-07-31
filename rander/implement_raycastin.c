@@ -39,80 +39,79 @@ void Move_game1(t_game *game, int key)
 }
 
 
-// void Move_game(t_game *game, int y, int x, int key)
-// {
-// 	int new_x;
-// 	int new_y;
-// 	int a;
-// 	int b;
-// 	int c;
-// 	int d;
-// 	if(key == KEY_A)
-// 	{
-// 		a = (y - 12) / SIZE;
-// 		b = (x - 12) / SIZE;
-// 		c = (y + 12) / SIZE;
-// 		d = (x - 12) / SIZE;
-// 	}
-// 	else if(key == KEY_S)
-// 	{
-// 		a = (y + 12) / SIZE;
-// 		b = (x - 12) / SIZE;
-// 		c = (y + 12) / SIZE;
-// 		d = (x + 12) / SIZE;
-// 	}
-// 	else if (key == KEY_W)
-// 	{
-// 		a = (y - 12) / SIZE;
-// 		b = (x - 12) / SIZE;
-// 		c = (y - 12) / SIZE;
-// 		d = (x + 12) / SIZE;
-// 	}
-// 	else if (key == KEY_D)
-// 	{
-// 		a = (y - 12) / SIZE;
-// 		b = (x + 12) / SIZE;
-// 		c = (y + 12) / SIZE;
-// 		d = (x + 12) / SIZE;
-// 	}
-// 	if(game->map->grid[a][b] != '1' && game->map->grid[c][d] != '1')
-// 	{
-// 		game->player_pixl_y = y;
-// 		game->player_pixl_x = x;
-// 	}
-// }
+void Move_game(t_game *game, int y, int x, int key)
+{
+	int new_x;
+	int new_y;
+	int a_y;
+	int b_x;
+	int c_y;
+	int d_x;
+	int t_y;
+	int r_x;
+	int m_y;
+	int n_x;
+
+	a_y = (y - 12) / SIZE;
+	b_x = (x - 12) / SIZE;
+	c_y = (y + 12) / SIZE;
+	d_x = (x - 12) / SIZE;
+	t_y = (y - 12) / SIZE;
+	r_x = (x + 12) / SIZE;
+	m_y = (y + 12) / SIZE;
+	n_x = (x + 12) / SIZE;
+	printf("a_y = %d\n",a_y);
+	printf("b_x = %d\n",b_x);
+	printf("c_y = %d\n",c_y);
+	printf("d_x = %d\n",d_x);
+	printf("t_y = %d\n",t_y);
+	printf("r_x = %d\n",r_x);
+	printf("m_y = %d\n",m_y);
+	printf("n_x = %d\n",n_x);
+	if (game->map->grid[a_y][b_x] != '1' && game->map->grid[c_y][d_x] != '1'
+		&& game->map->grid[t_y][r_x] != '1' && game->map->grid[m_y][n_x] != '1')
+	{
+		game->player_pixl_y = y;
+		game->player_pixl_x = x;
+	}
+}
 
 int	moving(int key, t_game *game)
 {
-
+	float new_x;
+	float new_y;
 	printf("key = %d\n", key);
 	if (key == ESC)
 		exit(0);
 	else if (key == KEY_S)
 	{
-		game->player_pixl_x = game->player_pixl_x + (sinf(game->map->angle) * -NUM_GAME_MOVES);
-		game->player_pixl_y = game->player_pixl_y + (cosf(game->map->angle) * NUM_GAME_MOVES);
+		new_x = game->player_pixl_x + (sinf(game->map->angle) * -NUM_GAME_MOVES);
+		new_y = game->player_pixl_y + (cosf(game->map->angle) * NUM_GAME_MOVES);
+		Move_game(game, new_y, new_x, key);
 		printf("x = %f\n",(sinf(game->map->angle) * -NUM_GAME_MOVES));
 		printf("y = %f\n",(cosf(game->map->angle) * NUM_GAME_MOVES));
 	}
 	else if (key == KEY_W)
 	{
-		game->player_pixl_x = game->player_pixl_x + (sinf(game->map->angle) * NUM_GAME_MOVES);
-		game->player_pixl_y = game->player_pixl_y + (cosf(game->map->angle) * -NUM_GAME_MOVES);
+		new_x = game->player_pixl_x + (sinf(game->map->angle) * NUM_GAME_MOVES);
+		new_y = game->player_pixl_y + (cosf(game->map->angle) * -NUM_GAME_MOVES);
+		Move_game(game, new_y, new_x, key);
 		printf("x = %f\n",(sinf(game->map->angle) * NUM_GAME_MOVES));
 		printf("y = %f\n",(cosf(game->map->angle) * -NUM_GAME_MOVES));
 	}
 	else if (key == KEY_A)
 	{
-		game->player_pixl_x = game->player_pixl_x + (cosf(game->map->angle) * -NUM_GAME_MOVES);
-		game->player_pixl_y = game->player_pixl_y + (sinf(game->map->angle) * -NUM_GAME_MOVES);
+		new_x = game->player_pixl_x + (cosf(game->map->angle) * -NUM_GAME_MOVES);
+		new_y = game->player_pixl_y + (sinf(game->map->angle) * -NUM_GAME_MOVES);
+		Move_game(game, new_y, new_x, key);
 		printf("x = %f\n",(cosf(game->map->angle) * -NUM_GAME_MOVES));
 		printf("y = %f\n",(sinf(game->map->angle) * -NUM_GAME_MOVES));
 	}
 	else if (key == KEY_D)
 	{
-		game->player_pixl_x = game->player_pixl_x + (cosf(game->map->angle) * NUM_GAME_MOVES);
-		game->player_pixl_y = game->player_pixl_y + (sinf(game->map->angle) * NUM_GAME_MOVES);
+		new_x = game->player_pixl_x + (cosf(game->map->angle) * NUM_GAME_MOVES);
+		new_y = game->player_pixl_y + (sinf(game->map->angle) * NUM_GAME_MOVES);
+		Move_game(game, new_y, new_x, key);
 		printf("x = %f\n",(sinf(game->map->angle) * NUM_GAME_MOVES));
 		printf("y = %f\n",(cosf(game->map->angle) * NUM_GAME_MOVES));
 	}

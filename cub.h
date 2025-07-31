@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:10:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/07/31 09:40:49 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/07/31 10:48:35 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ typedef struct s_config {
 
 typedef struct s_map {
 	char **grid;
-	float dir_x;
 	float angle;
-	float dir_y;
 	int width;
 	int height;
 } t_map;

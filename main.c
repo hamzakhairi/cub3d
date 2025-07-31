@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:11:48 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/07/29 10:05:41 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/07/31 12:45:57 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ int main(int argc, char *argv[])
     // free_game(game);
     return (0);
 }
-
