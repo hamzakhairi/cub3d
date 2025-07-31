@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:10:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/07/31 10:48:35 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/07/31 15:51:56 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ int		moving(int key, t_game *game);
 void    setup_player(t_game *game);
 void    put_pixel(t_game *game, int x, int y, int color);
 void	store_dir(t_game *game, int width, int height);
+void	setup_ray(t_game *game);
 
 /****************************************
 *			error						*

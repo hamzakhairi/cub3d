@@ -26,20 +26,20 @@ void    setup_player(t_game *game)
 
 
 
-void Move_game1(t_game *game, int key)
+void player_rotation(t_game *game, int key)
 {
 	if (key == KEY_LEFT)
 	{
-		game->map->angle = game->map->angle - 0.5;
+		game->map->angle = game->map->angle - 0.05;
 	}
 	else if (key == KEY_RIGHT)
 	{
-		game->map->angle = game->map->angle + 0.5;
+		game->map->angle = game->map->angle + 0.05;
 	}
 }
 
 
-void Move_game(t_game *game, int y, int x, int key)
+void Move_player(t_game *game, int y, int x, int key)
 {
 	int new_x;
 	int new_y;
@@ -87,38 +87,28 @@ int	moving(int key, t_game *game)
 	{
 		new_x = game->player_pixl_x + (sinf(game->map->angle) * -NUM_GAME_MOVES);
 		new_y = game->player_pixl_y + (cosf(game->map->angle) * NUM_GAME_MOVES);
-		Move_game(game, new_y, new_x, key);
-		printf("x = %f\n",(sinf(game->map->angle) * -NUM_GAME_MOVES));
-		printf("y = %f\n",(cosf(game->map->angle) * NUM_GAME_MOVES));
+		Move_player(game, new_y, new_x, key);
 	}
 	else if (key == KEY_W)
 	{
 		new_x = game->player_pixl_x + (sinf(game->map->angle) * NUM_GAME_MOVES);
 		new_y = game->player_pixl_y + (cosf(game->map->angle) * -NUM_GAME_MOVES);
-		Move_game(game, new_y, new_x, key);
-		printf("x = %f\n",(sinf(game->map->angle) * NUM_GAME_MOVES));
-		printf("y = %f\n",(cosf(game->map->angle) * -NUM_GAME_MOVES));
+		Move_player(game, new_y, new_x, key);
 	}
 	else if (key == KEY_A)
 	{
 		new_x = game->player_pixl_x + (cosf(game->map->angle) * -NUM_GAME_MOVES);
 		new_y = game->player_pixl_y + (sinf(game->map->angle) * -NUM_GAME_MOVES);
-		Move_game(game, new_y, new_x, key);
-		printf("x = %f\n",(cosf(game->map->angle) * -NUM_GAME_MOVES));
-		printf("y = %f\n",(sinf(game->map->angle) * -NUM_GAME_MOVES));
+		Move_player(game, new_y, new_x, key);
 	}
 	else if (key == KEY_D)
 	{
 		new_x = game->player_pixl_x + (cosf(game->map->angle) * NUM_GAME_MOVES);
 		new_y = game->player_pixl_y + (sinf(game->map->angle) * NUM_GAME_MOVES);
-		Move_game(game, new_y, new_x, key);
-		printf("x = %f\n",(sinf(game->map->angle) * NUM_GAME_MOVES));
-		printf("y = %f\n",(cosf(game->map->angle) * NUM_GAME_MOVES));
+		Move_player(game, new_y, new_x, key);
 	}
 	else if (key == KEY_LEFT || key == KEY_RIGHT)
-	{
-		Move_game1(game, key);
-	}
+		player_rotation(game, key);
 	create_put_image_to_window(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img_ptr, 0, 0);
 	return (0);

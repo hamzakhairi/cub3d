@@ -86,6 +86,7 @@ void create_put_image_to_window(t_game *game)
 		height++;
 	}
 	setup_player(game);
+	setup_ray(game);
 }
 
 int create_xpm_file_image(t_game *game)
