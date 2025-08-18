@@ -6,15 +6,27 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:10:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/07/31 15:51:56 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/08/14 11:25:43 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # ifndef CUB_H
 # define CUB_H
 
+# include <mlx.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <stddef.h>
+# include <limits.h>
+# include <fcntl.h>
+# include <math.h>
+
 # define SIZE 32
+# define FOV 60 * M_PI / 180 // = 60
 # define ESC 53
+# define WIDTH_IM 1280
+# define HEIGHT_IM 768
 # define KEY_W 13
 # define KEY_A 0
 # define KEY_S 1
@@ -25,14 +37,6 @@
 
 // # define ANGLE 0.5
 
-# include <mlx.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <stddef.h>
-# include <limits.h>
-# include <fcntl.h>
-# include <math.h>
 
 
 
@@ -50,35 +54,42 @@ typedef struct s_config {
 } t_config;
 
 typedef struct s_map {
-	char **grid;
-	float angle;
-	int width;
-	int height;
+	char	**grid;
+	float	dis[WIDTH_IM];
+	float	angle;
+	char	palyer;
+	float	Yh_vertical;
+	float	Xh_vertical;
+	float	Yh_horizontal;
+	float	Xh_horizontal;
+	float	d_X;
+	float	d_Y;
+	int		width_angel;
+	int		width;
+	int		height;
 } t_map;
 
 typedef struct s_game {
-	t_config *config;
-	t_map *map;
-	int start_parcing_map;
-	int player_x;
-	int player_y;
-	int player_pixl_x;
-	int player_pixl_y;
-	char player_dir;
+	t_config	*config;
+	t_map		*map;
+	int			start_parcing_map;
+	int			player_x;
+	int			player_y;
+	float		player_pixl_x;
+	float		player_pixl_y;
+	char		player_dir;
 
-	// void *player;
-	// void *empty;
-	// void *wall;
-
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img_ptr;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
 	
-	void	*img_p;
-	char    *addr;
-	int     bits_per_pixel;
-    int     line_length;
-    int     endian;
+	
+	void		*img_p;
+	char  		*addr;
+	char  		*addr1;
+	int			bits_per_pixel;
+    int			line_length;
+    int			endian;
 
 } t_game;
 
@@ -131,6 +142,7 @@ void    setup_player(t_game *game);
 void    put_pixel(t_game *game, int x, int y, int color);
 void	store_dir(t_game *game, int width, int height);
 void	setup_ray(t_game *game);
+void image_3D(t_game *game);
 
 /****************************************
 *			error						*

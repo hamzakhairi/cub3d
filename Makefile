@@ -44,7 +44,7 @@ NAME = cub
 
 # MLX_DIR = ./minilibx-mac
 
-MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
+MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit -lm
 all : $(NAME) clean
 	clear
 	./cub ./texter/map.cub
