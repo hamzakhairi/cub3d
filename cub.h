@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:10:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/14 11:25:43 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/08/25 17:59:08 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,16 @@
 # define ESC 53
 # define WIDTH_IM 1280
 # define HEIGHT_IM 768
+
+# define WIDTH_3D 1050
+# define HEIGHT_3D 768
 # define KEY_W 13
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_RIGHT 124
 # define KEY_LEFT 123
-# define NUM_GAME_MOVES 8
+# define NUM_GAME_MOVES 16
 
 // # define ANGLE 0.5
 
@@ -55,18 +58,23 @@ typedef struct s_config {
 
 typedef struct s_map {
 	char	**grid;
-	float	dis[WIDTH_IM];
+	float	dis[WIDTH_3D];
 	float	angle;
 	char	palyer;
-	float	Yh_vertical;
-	float	Xh_vertical;
-	float	Yh_horizontal;
-	float	Xh_horizontal;
-	float	d_X;
-	float	d_Y;
+	float	Y_vertical;
+	float	X_vertical;
+	float	Y_horizontal;
+	float	X_horizontal;
+	float	d_X[WIDTH_3D];
+	float	d_Y[WIDTH_3D];
 	int		width_angel;
 	int		width;
 	int		height;
+
+	int RayFacingDown;
+	int RayFacingUp;
+	int RayFacingRight;
+	int RayFacingLeft;
 } t_map;
 
 typedef struct s_game {
@@ -143,6 +151,8 @@ void    put_pixel(t_game *game, int x, int y, int color);
 void	store_dir(t_game *game, int width, int height);
 void	setup_ray(t_game *game);
 void image_3D(t_game *game);
+int create_image(t_game *game);
+void setup1_ray(t_game *game);
 
 /****************************************
 *			error						*

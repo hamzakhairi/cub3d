@@ -1,16 +1,67 @@
 #include "../cub.h"
 
+void store_dir(t_game *game, int width, int height)
+{
+	if (game->map->grid[height][width] == 'N')
+	{
+		game->map->palyer = 'N';
+		game->map->angle = (3 * M_PI) / 2; // 270 degrees
+	}
+	else if (game->map->grid[height][width] == 'S')
+	{
+		game->map->palyer = 'S';
+		game->map->angle = M_PI / 2; // 90 degrees
+	}
+	else if (game->map->grid[height][width] == 'E')
+	{
+		game->map->palyer = 'E';
+		game->map->angle = 0; // 0 degrees
+	}
+	else if (game->map->grid[height][width] == 'W')
+	{
+		game->map->palyer = 'W';
+		game->map->angle = M_PI; // 180 degrees
+	}
+}
+
+void Calculate_width_height(t_game *game)
+{
+	int width;
+	int height;
+
+	int x = 0;
+
+	height = 0;
+	game->player_pixl_x = game->player_x * SIZE + (SIZE / 2);
+	game->player_pixl_y = game->player_y * SIZE + (SIZE / 2);
+	while (game->map->grid[height])
+	{
+		width = 0;
+		while (game->map->grid[height][width])
+		{
+			if (game->map->grid[height][width] == 'N' || game->map->grid[height][width] == 'S'
+				|| game->map->grid[height][width] == 'E' || game->map->grid[height][width] == 'W')
+				store_dir(game, width, height);
+			width++;
+		}
+		if(x < width)
+			x = width;
+		height++;
+	}
+	game->map->width = x * SIZE;
+	game->map->height = height * SIZE;
+}
+
 int create_window(t_game *game)
 {
 	Calculate_width_height(game);
 	game->mlx_ptr = mlx_init();
     if (!game->mlx_ptr)
         return (1);
-	game->win_ptr = mlx_new_window(game->mlx_ptr, game->map->width, game->map->height, "cub3D");
-	// game->win_ptr = mlx_new_window(game->mlx_ptr, WIDTH_IM, HEIGHT_IM, "cub3D");
+	game->win_ptr = mlx_new_window(game->mlx_ptr, WIDTH_3D, HEIGHT_3D, "cub3D");
     if (!game->win_ptr)
         return (1);
-	if (create_xpm_file_image(game))
+	if (create_image(game))
 		return (1);
 	create_put_image_to_window(game);
 	mlx_hook(game->win_ptr, 2, 0, moving, game);
