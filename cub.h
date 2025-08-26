@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:10:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/26 10:00:00 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/08/26 12:48:05 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,13 @@ void	setup_ray(t_game *game);
 void image_3D(t_game *game);
 int create_image(t_game *game);
 void setup1_ray(t_game *game);
+void Move_player(t_game *game, float y, float x);
+
+/*
+	bonus
+*/
+int mouse_move_player(int x, int y, void *struct_game);
+
 
 /****************************************
 *			error						*

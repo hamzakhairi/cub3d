@@ -34,6 +34,7 @@ SRC_RANDER = \
 	./rander/file_create_window.c \
 	./rander/move_player.c \
 	./rander/ray_drawing.c \
+	./rander/handel_direction.c
 
 
 OBJ = $(SRC_RANDER:.c=.o) $(SRC_PARCING:.c=.o) $(SRC_MAIN:.c=.o) $(SRC_ERROR:.c=.o) $(SRC_GET_LINE:.c=.o) $(SRC_UTILS:.c=.o)

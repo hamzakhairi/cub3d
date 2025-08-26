@@ -65,6 +65,7 @@ int create_window(t_game *game)
 		return (1);
 	create_put_image_to_window(game);
 	mlx_hook(game->win_ptr, 2, 0, moving, game);
+	mlx_hook(game->win_ptr, 6, 0L, mouse_move_player, game);
 	return (0);
 }
 
