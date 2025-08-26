@@ -1,28 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file_create_window.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/26 11:04:49 by ylagzoul          #+#    #+#             */
+/*   Updated: 2025/08/26 11:07:45 by ylagzoul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub.h"
 
-void put_pixel(t_game *game, int x, int y, int color)
+void	put_pixel(t_game *game, int x, int y, int color)
 {
-    if (x < 0 || y < 0 || x >= WIDTH_3D || y >= HEIGHT_3D)
-        return;
-    char *dst = game->addr + (y * game->line_length + x * (game->bits_per_pixel / 8));
-    *(unsigned int*)dst = color;
+	char	*dst;
+
+	if (x < 0 || y < 0 || x >= WIDTH_3D || y >= HEIGHT_3D)
+		return ;
+	dst = game->addr + (y * game->line_length + x * (game->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
 }
 
-void ft_image_minimap(t_game *game, int width, int height)
+void	ft_image_minimap(t_game *game, int width, int height)
 {
-	int y;
-	int x;
-	int color;
-	int scale = 4;
-	int mini_size = SIZE / scale;
-	
+	int	y;
+	int	x;
+	int	color;
+	int	mini_size;
+
 	y = 0;
+	mini_size = SIZE / SCALE;
 	if (game->map->grid[height][width] == '1')
 		color = 0x0000FF;
 	else
 		color = 0x000000;
-		
-	while(y < mini_size)
+	while (y < mini_size)
 	{
 		x = 0;
 		while (x < mini_size)
@@ -34,30 +47,33 @@ void ft_image_minimap(t_game *game, int width, int height)
 	}
 }
 
-
-void setup_minimap_player(t_game *game)
+void	setup_minimap_player(t_game *game)
 {
-    int i, j;
-    int r = 2;
-    int scale = 4;
-    int center_x = (game->player_pixl_x / scale);
-    int center_y = (game->player_pixl_y / scale);
+	int i;
+	int j;
+	int r;
+	int center_x;
+	int center_y;
 
-    i = -r;
-    while (i <= r)
-    {
-        j = -r;
-        while (j <= r)
-        {
-            if (i * i + j * j <= r * r)
-                put_pixel(game, center_x + j, center_y + i, 0x00FF0000);
-            j++;
-        }
-        i++;
-    }
+	r = 2;
+	center_x = (game->player_pixl_x / SCALE);
+	center_y = (game->player_pixl_y / SCALE);
+
+	i = -r;
+	while (i <= r)
+	{
+		j = -r;
+		while (j <= r)
+		{
+			if (i * i + j * j <= r * r)
+				put_pixel(game, center_x + j, center_y + i, 0x00FF0000);
+			j++;
+		}
+		i++;
+	}
 }
 
-void create_put_image_to_window(t_game *game)
+void	create_put_image_to_window(t_game *game)
 {
 	int width;
 	int height;
@@ -66,10 +82,10 @@ void create_put_image_to_window(t_game *game)
 	height = 0;
 	while (game->map->grid[height])
 	{
-        width = 0;
+		width = 0;
 		while (game->map->grid[height][width])
 		{
-            ft_image_minimap(game, width, height);
+			ft_image_minimap(game, width, height);
 			width++; 
 		}
 		height++;
@@ -78,7 +94,7 @@ void create_put_image_to_window(t_game *game)
 	setup1_ray(game);
 }
 
-int create_image(t_game *game)
+int	create_image(t_game *game)
 {
 	game->img_ptr = mlx_new_image(game->mlx_ptr, WIDTH_3D, HEIGHT_3D);
 	if (!game->img_ptr)
@@ -88,4 +104,3 @@ int create_image(t_game *game)
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img_ptr, 0, 0);
 	return (0);
 }
-    

@@ -33,6 +33,7 @@ SRC_RANDER = \
 	./rander/start_randering.c \
 	./rander/file_create_window.c \
 	./rander/move_player.c \
+	./rander/ray_casting.c \
 	./rander/ray_drawing.c \
 
 
