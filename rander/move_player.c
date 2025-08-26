@@ -1,10 +1,10 @@
 #include "../cub.h"
 
-void player_rotation(t_game *game, int key)
+void player_rotation(t_game *game)
 {
-	if (key == KEY_LEFT)
+	if (game->map->key == KEY_LEFT)
 		game->map->angle = game->map->angle - 0.1;
-	else if (key == KEY_RIGHT)
+	else if (game->map->key == KEY_RIGHT)
 		game->map->angle = game->map->angle + 0.1;
 	if(game->map->angle >= 2 * M_PI)
 		game->map->angle -= 2 * M_PI;
@@ -12,7 +12,7 @@ void player_rotation(t_game *game, int key)
 		game->map->angle += 2 * M_PI;
 }
 
-void Move_player(t_game *game, float y, float x, int key)
+void Move_player(t_game *game, float y, float x)
 {
 	float a_y;
 	float b_x;
@@ -73,7 +73,7 @@ void Move_player(t_game *game, float y, float x, int key)
 	// n_x = (x + 4) / SIZE;
 
 	else if (game->map->grid[(int)y/ SIZE][(int)(x - 4) / SIZE] != '1' && game->map->grid[(int)y/ SIZE][(int)(x - 4) / SIZE] != '1'
-		&& game->map->grid[(int)y/ SIZE][(int)(x + 4) / SIZE] != '1' && game->map->grid[(int)y/ SIZE][(int)(x + 4) / SIZE] != '1' && (key == KEY_W || key == KEY_S))
+		&& game->map->grid[(int)y/ SIZE][(int)(x + 4) / SIZE] != '1' && game->map->grid[(int)y/ SIZE][(int)(x + 4) / SIZE] != '1' && (game->map->key == KEY_W || game->map->key == KEY_S))
 	{
 		game->player_pixl_x = x;
 	}
@@ -86,7 +86,7 @@ void Move_player(t_game *game, float y, float x, int key)
 	// m_y = (y + 4) / SIZE;
 	// n_x = x / SIZE;
 	else if (game->map->grid[(int)(y - 4) / SIZE][(int) x / SIZE] != '1' && game->map->grid[(int)(y + 4) / SIZE][(int)x / SIZE] != '1'
-		&& game->map->grid[(int)(y - 4) / SIZE][(int)x / SIZE] != '1' && game->map->grid[(int)(y + 4) / SIZE][(int)x / SIZE] != '1' && (key == KEY_W || key == KEY_S))
+		&& game->map->grid[(int)(y - 4) / SIZE][(int)x / SIZE] != '1' && game->map->grid[(int)(y + 4) / SIZE][(int)x / SIZE] != '1' && (game->map->key == KEY_W || game->map->key == KEY_S))
 	{
 		game->player_pixl_y = y;
 	}
@@ -94,37 +94,38 @@ void Move_player(t_game *game, float y, float x, int key)
 
 int	moving(int key, t_game *game)
 {
+	game->map->key = key;
 	float new_x;
 	float new_y;
 	
-	if (key == ESC)
+	if (game->map->key == ESC)
 		exit(0);
-	else if (key == KEY_S)
+	else if (game->map->key == KEY_S)
 	{
 		new_x = game->player_pixl_x - (cosf(game->map->angle) * NUM_GAME_MOVES);
 		new_y = game->player_pixl_y - (sinf(game->map->angle) * NUM_GAME_MOVES);
-		Move_player(game, new_y, new_x, key);
+		Move_player(game, new_y, new_x);
 	}
-	else if (key == KEY_W)
+	else if (game->map->key == KEY_W)
 	{
 		new_x = game->player_pixl_x + (cosf(game->map->angle) * NUM_GAME_MOVES);
 		new_y = game->player_pixl_y + (sinf(game->map->angle) * NUM_GAME_MOVES);
-		Move_player(game, new_y, new_x, key);
+		Move_player(game, new_y, new_x);
 	}
-	else if (key == KEY_A)
+	else if (game->map->key == KEY_A)
 	{
 		new_x = game->player_pixl_x - (sinf(game->map->angle) * NUM_GAME_MOVES);
 		new_y = game->player_pixl_y + (cosf(game->map->angle) * NUM_GAME_MOVES);
-		Move_player(game, new_y, new_x, key);
+		Move_player(game, new_y, new_x);
 	}
-	else if (key == KEY_D)
+	else if (game->map->key == KEY_D)
 	{
 		new_x = game->player_pixl_x + (sinf(game->map->angle) * NUM_GAME_MOVES);
 		new_y = game->player_pixl_y - (cosf(game->map->angle) * NUM_GAME_MOVES);
-		Move_player(game, new_y, new_x, key);
+		Move_player(game, new_y, new_x);
 	}
-	else if (key == KEY_LEFT || key == KEY_RIGHT)
-		player_rotation(game, key);
+	else if (game->map->key == KEY_LEFT || game->map->key == KEY_RIGHT)
+		player_rotation(game);
 	
 	create_put_image_to_window(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img_ptr, 0, 0);
