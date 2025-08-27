@@ -97,7 +97,6 @@ int	moving(int key, t_game *game)
 	game->map->key = key;
 	float new_x;
 	float new_y;
-	
 	if (game->map->key == ESC)
 		exit(0);
 	else if (game->map->key == KEY_S)
@@ -124,10 +123,18 @@ int	moving(int key, t_game *game)
 		new_y = game->player_pixl_y - (cosf(game->map->angle) * NUM_GAME_MOVES);
 		Move_player(game, new_y, new_x);
 	}
+	else if (game->map->key == KEY_T)
+	{
+		game->img_player->isWhat_shot_walk = 1;
+		game->img_player->current_image = 0;
+	}
 	else if (game->map->key == KEY_LEFT || game->map->key == KEY_RIGHT)
 		player_rotation(game);
 	
-	create_put_image_to_window(game);
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img_ptr, 0, 0);
+	// create_put_image_to_window(game);
+	// mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img_ptr, 0, 0);
+	// update_state(game);
+    // render_images(game);
+	// loop_inimation(game);
 	return (0);
 }

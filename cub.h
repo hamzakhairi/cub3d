@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:10:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/26 12:48:05 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/08/27 14:35:56 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <math.h>
+# include <string.h>
 
 # define SIZE 32
 # define FOV 60 * M_PI / 180 // = 60
 # define ESC 53
-# define WIDTH_IM 1280
-# define HEIGHT_IM 768
+# define SCALE 4
 
 # define WIDTH_3D 1050
 # define HEIGHT_3D 768
@@ -34,17 +34,11 @@
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
+# define KEY_T 17
 # define KEY_RIGHT 124
 # define KEY_LEFT 123
 # define NUM_GAME_MOVES 16
-
-// # define ANGLE 0.5
-
-
-
-
-
-
+# define SPEED 4
 
 typedef struct s_config {
 	char *no_texture;
@@ -66,8 +60,7 @@ typedef struct s_map {
 	float	X_vertical;
 	float	Y_horizontal;
 	float	X_horizontal;
-	float	d_X[WIDTH_3D];
-	float	d_Y[WIDTH_3D];
+	float	wall_direction[WIDTH_3D];
 	int		width_angel;
 	int		width;
 	int		height;
@@ -78,6 +71,17 @@ typedef struct s_map {
 	int RayFacingLeft;
 } t_map;
 
+typedef struct s_player
+{
+	void **images_walk;
+	void **images_shout;
+	int images_counter_walk;
+	int images_counter_shot;
+	int current_image;
+	int frame;
+	int isWhat_shot_walk;
+} t_player;
+
 typedef struct s_game {
 	t_config	*config;
 	t_map		*map;
@@ -86,19 +90,18 @@ typedef struct s_game {
 	int			player_y;
 	float		player_pixl_x;
 	float		player_pixl_y;
-	char		player_dir;
 
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
 	
-	
-	void		*img_p;
 	char  		*addr;
-	char  		*addr1;
 	int			bits_per_pixel;
     int			line_length;
     int			endian;
+
+	// 
+	t_player *img_player;
 
 } t_game;
 
@@ -154,13 +157,19 @@ void	setup_ray(t_game *game);
 void image_3D(t_game *game);
 int create_image(t_game *game);
 void setup1_ray(t_game *game);
+float ray_casting(t_game *game, float ray_angle, int ray_count);
+
 void Move_player(t_game *game, float y, float x);
 
 /*
 	bonus
 */
-int mouse_move_player(int x, int y, void *struct_game);
 
+int mouse_move_player(int x, int y, void *struct_game);
+int loading_image(t_game *game);
+int loop_inimation(t_game *game);
+void update_state(t_game *game);
+void render_images(t_game *game);
 
 /****************************************
 *			error						*
@@ -189,5 +198,16 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n);
 char *ft_substr(char *str, int start, int end);
 char	*ft_strchr(const char *s, int c);
 char	*ft_other_strdup(char *s);
+char	*ft_itoa(int n);
+
+
+/****************************************
+*	ceiling_color = (game->config->ceiling_color[0] << 16) | 
+					(game->config->ceiling_color[1] << 8) | 
+					game->config->ceiling_color[2];
+	floor_color = (game->config->floor_color[0] << 16) | 
+				  (game->config->floor_color[1] << 8) | 
+				  game->config->floor_color[2];				*
+*****************************************/
 
 #endif

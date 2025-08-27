@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start_randering.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/26 10:55:48 by ylagzoul          #+#    #+#             */
+/*   Updated: 2025/08/26 16:11:13 by hkhairi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub.h"
 
-void store_dir(t_game *game, int width, int height)
+void	store_dir(t_game *game, int width, int height)
 {
 	if (game->map->grid[height][width] == 'N')
 	{
@@ -28,9 +40,9 @@ void Calculate_width_height(t_game *game)
 {
 	int width;
 	int height;
+	int x;
 
-	int x = 0;
-
+	x = 0;
 	height = 0;
 	game->player_pixl_x = game->player_x * SIZE + (SIZE / 2);
 	game->player_pixl_y = game->player_y * SIZE + (SIZE / 2);
@@ -44,7 +56,7 @@ void Calculate_width_height(t_game *game)
 				store_dir(game, width, height);
 			width++;
 		}
-		if(x < width)
+		if (x < width)
 			x = width;
 		height++;
 	}
@@ -52,20 +64,22 @@ void Calculate_width_height(t_game *game)
 	game->map->height = height * SIZE;
 }
 
-int create_window(t_game *game)
+int	create_window(t_game *game)
 {
 	Calculate_width_height(game);
 	game->mlx_ptr = mlx_init();
-    if (!game->mlx_ptr)
-        return (1);
+	if (!game->mlx_ptr)
+		return (1);
+	loading_image(game);
 	game->win_ptr = mlx_new_window(game->mlx_ptr, WIDTH_3D, HEIGHT_3D, "cub3D");
-    if (!game->win_ptr)
-        return (1);
+	if (!game->win_ptr)
+		return (1);
 	if (create_image(game))
 		return (1);
 	create_put_image_to_window(game);
 	mlx_hook(game->win_ptr, 2, 0, moving, game);
 	mlx_hook(game->win_ptr, 6, 0L, mouse_move_player, game);
+	mlx_loop_hook(game->mlx_ptr, loop_inimation, game);
 	return (0);
 }
 
