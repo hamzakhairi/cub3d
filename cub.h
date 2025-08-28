@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:10:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/27 14:35:56 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/08/27 16:59:07 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
+# define KEY_ZOOM 6
 # define KEY_T 17
 # define KEY_RIGHT 124
 # define KEY_LEFT 123
@@ -65,6 +66,10 @@ typedef struct s_map {
 	int		width;
 	int		height;
 
+	int iszoom;
+	int scale;
+	int player_size;
+
 	int RayFacingDown;
 	int RayFacingUp;
 	int RayFacingRight;
@@ -94,6 +99,12 @@ typedef struct s_game {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
+
+	float distance_plane;
+	float wall_height;
+	int wall_top;
+	int wall_bottom;
+	float corrected_distance;
 	
 	char  		*addr;
 	int			bits_per_pixel;
@@ -154,12 +165,12 @@ void    setup_player(t_game *game);
 void    put_pixel(t_game *game, int x, int y, int color);
 void	store_dir(t_game *game, int width, int height);
 void	setup_ray(t_game *game);
-void image_3D(t_game *game);
+void image_3d(t_game *game);
 int create_image(t_game *game);
 void setup1_ray(t_game *game);
 float ray_casting(t_game *game, float ray_angle, int ray_count);
 
-void Move_player(t_game *game, float y, float x);
+int Move_player(t_game *game, float y, float x, int i);
 
 /*
 	bonus

@@ -31,6 +31,12 @@ void free_game(t_game *game)
 {
     free_map(game->map);
     free_config(game->config);
+    if(game->mlx_ptr)
+        free(game->mlx_ptr);
+    if(game->win_ptr)
+        free(game->win_ptr);
+     if(game->img_ptr)
+        free(game->img_ptr);
     free(game->map);
     free(game);
 }

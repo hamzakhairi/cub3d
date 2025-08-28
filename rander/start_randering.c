@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_randering.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 10:55:48 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/26 16:11:13 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/08/27 16:45:05 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@ void	store_dir(t_game *game, int width, int height)
 	if (game->map->grid[height][width] == 'N')
 	{
 		game->map->palyer = 'N';
-		game->map->angle = (3 * M_PI) / 2; // 270 degrees
+		game->map->angle = (3 * M_PI) / 2;//270 degrees
 	}
 	else if (game->map->grid[height][width] == 'S')
 	{
 		game->map->palyer = 'S';
-		game->map->angle = M_PI / 2; // 90 degrees
+		game->map->angle = M_PI / 2;//90 degrees
 	}
 	else if (game->map->grid[height][width] == 'E')
 	{
 		game->map->palyer = 'E';
-		game->map->angle = 0; // 0 degrees
+		game->map->angle = 0;//0 degrees
 	}
 	else if (game->map->grid[height][width] == 'W')
 	{
 		game->map->palyer = 'W';
-		game->map->angle = M_PI; // 180 degrees
+		game->map->angle = M_PI;// 180 degrees
 	}
 }
 

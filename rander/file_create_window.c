@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:04:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/26 11:07:45 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:51:42 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	put_pixel(t_game *game, int x, int y, int color)
 	if (x < 0 || y < 0 || x >= WIDTH_3D || y >= HEIGHT_3D)
 		return ;
 	dst = game->addr + (y * game->line_length + x * (game->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 void	ft_image_minimap(t_game *game, int width, int height)
@@ -30,7 +30,7 @@ void	ft_image_minimap(t_game *game, int width, int height)
 	int	mini_size;
 
 	y = 0;
-	mini_size = SIZE / SCALE;
+	mini_size = SIZE / game->map->scale;
 	if (game->map->grid[height][width] == '1')
 		color = 0x0000FF;
 	else
@@ -40,7 +40,8 @@ void	ft_image_minimap(t_game *game, int width, int height)
 		x = 0;
 		while (x < mini_size)
 		{
-			put_pixel(game, x + width * mini_size, y + height * mini_size, color);
+			put_pixel(game,
+				x + width * mini_size, y + height * mini_size, color);
 			x++;
 		}
 		y++;
@@ -49,16 +50,15 @@ void	ft_image_minimap(t_game *game, int width, int height)
 
 void	setup_minimap_player(t_game *game)
 {
-	int i;
-	int j;
-	int r;
-	int center_x;
-	int center_y;
+	int	i;
+	int	j;
+	int	r;
+	int	center_x;
+	int	center_y;
 
-	r = 2;
-	center_x = (game->player_pixl_x / SCALE);
-	center_y = (game->player_pixl_y / SCALE);
-
+	r = game->map->player_size;
+	center_x = (game->player_pixl_x / game->map->scale);
+	center_y = (game->player_pixl_y / game->map->scale);
 	i = -r;
 	while (i <= r)
 	{
@@ -75,10 +75,10 @@ void	setup_minimap_player(t_game *game)
 
 void	create_put_image_to_window(t_game *game)
 {
-	int width;
-	int height;
+	int	width;
+	int	height;
 
-	setup_ray(game);  
+	setup_ray(game);
 	height = 0;
 	while (game->map->grid[height])
 	{
@@ -86,7 +86,7 @@ void	create_put_image_to_window(t_game *game)
 		while (game->map->grid[height][width])
 		{
 			ft_image_minimap(game, width, height);
-			width++; 
+			width++;
 		}
 		height++;
 	}

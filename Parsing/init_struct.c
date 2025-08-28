@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:42:19 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/26 10:31:34 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/08/27 15:45:56 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ void init_map(t_map *map)
     map->grid = NULL;
     map->width = -1;
     map->height = -1;
+    map->iszoom = 0;
+    map->player_size = 1;
+    map->scale = SCALE;
 }
 
 int init_struct(t_game *game)
