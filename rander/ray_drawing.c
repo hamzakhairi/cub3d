@@ -6,28 +6,29 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:57:01 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/29 19:53:23 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/08/29 19:57:56 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-// Fixed texture pixel getter with proper bounds checking
 int get_tex_pixel(t_tex *tex, int x, int y)
 {
     char *dst;
 
-    // Clamp coordinates to texture bounds
-    if (x < 0) x = 0;
-    if (x >= tex->width) x = tex->width - 1;
-    if (y < 0) y = 0;
-    if (y >= tex->height) y = tex->height - 1;
+    if (x < 0)
+		x = 0;
+    if (x >= tex->width)
+		x = tex->width - 1;
+    if (y < 0)
+		y = 0;
+    if (y >= tex->height)
+		y = tex->height - 1;
 
     dst = tex->addr + (y * tex->line_len + x * (tex->bpp / 8));
     return (*(unsigned int *)dst);
 }
 
-// Select the correct texture based on wall direction
 t_tex *get_wall_texture(t_game *game, int ray_index)
 {
     int wall_dir = game->map->wall_direction[ray_index];
@@ -63,6 +64,8 @@ float calculate_wall_hit_x(t_game *game, int ray_index, float distance)
 void draw_line_height(t_game *game, int x)
 {
 	int draw_start;
+	float tex_step;
+	float tex_pos;
 	int draw_end;
     int y = 0;
     t_tex *tex = get_wall_texture(game, x);
@@ -85,13 +88,10 @@ void draw_line_height(t_game *game, int x)
 	else
 		draw_end = game->wall_bottom;
 
-    float tex_step = (float)tex->height / game->wall_height;
-    
-    // Calculate starting texture position
-    float tex_pos = 0;
+    tex_step = (float)tex->height / game->wall_height;
+    tex_pos = 0;
     if (game->wall_top < 0)
     {
-        // If wall extends above screen, calculate which part of texture to start with
         tex_pos = (0 - game->wall_top) * tex_step;
     }
     
