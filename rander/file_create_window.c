@@ -6,11 +6,28 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:04:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/27 16:51:42 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/08/29 15:14:35 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
+
+int load_texture(t_game *game, t_tex *tex, char *path)
+{
+    int w, h;
+    tex->img = mlx_xpm_file_to_image(game->mlx_ptr, path, &w, &h);
+    if (!tex->img)
+    {
+        printf("Error loading %s\n", path);
+        return (1);
+    }
+    tex->addr = mlx_get_data_addr(tex->img, &tex->bpp,
+            &tex->line_len, &tex->endian);
+    tex->width = w;
+    tex->height = h;
+	printf("h %d\n",tex->height);
+	return (0);
+}
 
 void	put_pixel(t_game *game, int x, int y, int color)
 {
@@ -100,6 +117,14 @@ int	create_image(t_game *game)
 	if (!game->img_ptr)
 		return (1);
 	game->addr = mlx_get_data_addr(game->img_ptr, &game->bits_per_pixel, &game->line_length, &game->endian);
+	if (load_texture(game, &game->img_north, "texter/wall/wall_1.xpm"))
+		return (1);
+	if (load_texture(game, &game->img_east, "texter/wall/wall_2.xpm"))
+		return (1);
+	if (load_texture(game, &game->img_west, "texter/wall/wall_3.xpm"))
+		return (1);
+	if (load_texture(game, &game->img_south, "texter/wall/wall_4.xpm"))
+		return (1);
 	create_put_image_to_window(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img_ptr, 0, 0);
 	return (0);
