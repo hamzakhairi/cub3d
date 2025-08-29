@@ -1,7 +1,7 @@
-SO ./texter/wall.xpm
-NO ./texter/empty.xpm
-WE ./texter/player.xpm
-EA ./texter/empty.xpm
+SO ./texter/wall/1.xpm
+NO ./texter/wall/2.xpm
+WE ./texter/wall/3.xpm
+EA ./texter/wall/4.xpm
 
 F 220,100,0
 C 225,30,0

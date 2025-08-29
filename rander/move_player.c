@@ -106,7 +106,13 @@ int	moving(int key, t_game *game)
 		}
 		else if (game->map->key == KEY_T)
 		{
-			game->img_player->isWhat_shot_walk = 1;
+			game->img_player->is_state = 1;
+			game->img_player->current_image = 0;
+			check = 0;
+		}
+		else if (game->map->key == KEY_F)
+		{
+			game->img_player->is_state = 2;
 			game->img_player->current_image = 0;
 			check = 0;
 		}

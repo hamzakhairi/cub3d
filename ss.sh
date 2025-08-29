@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get all .xpm files sorted by name
-files=(ezgif-frame-*.xpm)
+files=(*.xpm)
 
 # Counter starts at 1
 count=1

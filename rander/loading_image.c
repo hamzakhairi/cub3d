@@ -42,7 +42,7 @@ int loading_image(t_game *game)
     i = 0;
     while (i < game->img_player->images_counter_walk)
     {
-        char *str = path_image_image("./texter/player/rm_bg_walk/", i + 1);
+        char *str = path_image_image(PATH_WLKING, i + 1);
         game->img_player->images_walk[i] =
             mlx_xpm_file_to_image(game->mlx_ptr, str, &img_width, &img_height);
         free(str);
@@ -54,14 +54,14 @@ int loading_image(t_game *game)
         i++;
     }
 
-    game->img_player->images_shout = malloc(sizeof(void *) * 81);
+    game->img_player->images_shout = malloc(sizeof(void *) * 3);
     if (!game->img_player->images_shout)
         return 0;
-    game->img_player->images_counter_shot = 80;
+    game->img_player->images_counter_shot = 2;
     i = 0;
     while (i < game->img_player->images_counter_shot)
     {
-        char *str = path_image_image("./texter/player/xpm_shot/", i + 1);
+        char *str = path_image_image(PATH_SOTING, i + 1);
         game->img_player->images_shout[i] =
             mlx_xpm_file_to_image(game->mlx_ptr, str, &img_width, &img_height);
         free(str);
@@ -72,9 +72,27 @@ int loading_image(t_game *game)
         }
         i++;
     }
+    game->img_player->images_Feeding = malloc(sizeof(void *) * 42);
+    if (!game->img_player->images_Feeding)
+        return 0;
+    game->img_player->images_counter_Feeding = 41;
+    i = 0;
+    while (i < game->img_player->images_counter_Feeding)
+    {
+        char *str = path_image_image(PATH_FEEDING, i + 1);
+        game->img_player->images_Feeding[i] =
+            mlx_xpm_file_to_image(game->mlx_ptr, str, &img_width, &img_height);
+        free(str);
+        if (!game->img_player->images_Feeding[i])
+        {
+            printf("Error feeding %d \n", i);
+            return 0;
+        }
+        i++;
+    }
 
     game->img_player->frame = 0;
-    game->img_player->isWhat_shot_walk = 0;
+    game->img_player->is_state = 0;
     return 1;
 }
 
@@ -88,30 +106,36 @@ void update_state(t_game *game)
         game->img_player->frame = 0;
         game->img_player->current_image++;
 
-        if (game->img_player->isWhat_shot_walk == 0)
+        if (game->img_player->is_state == 0)
             max_frames = game->img_player->images_counter_walk;
-        else
+        else if (game->img_player->is_state == 1)
             max_frames = game->img_player->images_counter_shot;
+        else
+            max_frames = game->img_player->images_counter_Feeding;
 
         if (game->img_player->current_image >= max_frames)
         {
             game->img_player->current_image = 0;
-            game->img_player->isWhat_shot_walk = 0;
+            game->img_player->is_state = 0;
         }
     }
 }
 
 void render_images(t_game *game)
 {
-    // printf("~~~~%d~~~~~~\n", game->img_player->current_image);
-    if (game->img_player->isWhat_shot_walk == 0)
+    if (game->img_player->is_state == 0)
         mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
             game->img_player->images_walk[game->img_player->current_image],
             (game->map->width) / 2 - (game->map->width / 4),
             game->map->height + 16);
-    else
+    else if (game->img_player->is_state == 1)
         mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
             game->img_player->images_shout[game->img_player->current_image],
+            (game->map->width) / 2 - (game->map->width / 4),
+            game->map->height + 16);
+    else
+        mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+            game->img_player->images_Feeding[game->img_player->current_image],
             (game->map->width) / 2 - (game->map->width / 4),
             game->map->height + 16);
 }
@@ -123,6 +147,5 @@ int loop_inimation(t_game *game)
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img_ptr, 0, 0);
     update_state(game);
     render_images(game);
-    // printf("-- %d\n", game->img_player->isWhat_shot_walk);
     return 0;
 }

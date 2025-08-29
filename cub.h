@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:10:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/27 16:59:07 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/08/29 18:09:07 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <string.h>
 
 # define SIZE 32
-# define FOV 60 * M_PI / 180 // = 60
+# define FOV 60 * M_PI / 180
 # define ESC 53
 # define SCALE 4
 
@@ -35,11 +35,15 @@
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_ZOOM 6
-# define KEY_T 17
+# define KEY_T 14
+# define KEY_F 12
 # define KEY_RIGHT 124
 # define KEY_LEFT 123
 # define NUM_GAME_MOVES 16
 # define SPEED 4
+# define PATH_WLKING "./texter/player/rm_bg_walk/"
+# define PATH_FEEDING "./texter/player/feeding/"
+# define PATH_SOTING "./texter/player/xpm_shot/"
 
 typedef struct s_config {
 	char *no_texture;
@@ -80,12 +84,16 @@ typedef struct s_player
 {
 	void **images_walk;
 	void **images_shout;
+	void **images_Feeding;
 	int images_counter_walk;
 	int images_counter_shot;
+	int images_counter_Feeding;
 	int current_image;
 	int frame;
-	int isWhat_shot_walk;
+	int is_state;
 } t_player;
+
+
 
 typedef struct s_game {
 	t_config	*config;
