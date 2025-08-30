@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:58:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/27 17:14:24 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/08/29 18:16:48 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,18 @@ void	get_vertical(t_game *game)
 	game->map->Y_vertical += yv_step;
 }
 
-void	directoin_player(t_game *game)
+void directoin_player(t_game *game)
 {
-	game->map->RayFacingDown = game->map->angle > 0 && game->map->angle < M_PI;
-	game->map->RayFacingUp = !game->map->RayFacingDown;
-	game->map->RayFacingRight = game->map->angle < M_PI / 2
-		|| game->map->angle > 3 * M_PI / 2;
-	game->map->RayFacingLeft = !game->map->RayFacingRight;
+    // Normalize angle to 0-2π range
+    while (game->map->angle < 0)
+		game->map->angle += 2 * M_PI;
+    while (game->map->angle >= 2 * M_PI)
+		game->map->angle -= 2 * M_PI;
+    
+    game->map->RayFacingDown = (game->map->angle > 0 && game->map->angle < M_PI);
+    game->map->RayFacingUp = !game->map->RayFacingDown;
+    game->map->RayFacingRight = (game->map->angle < M_PI / 2 || game->map->angle > 3 * M_PI / 2);
+    game->map->RayFacingLeft = !game->map->RayFacingRight;
 }
 
 float	horizontal_wall(t_game *game)
@@ -103,28 +108,24 @@ float	vertical_wall(t_game *game)
 	return (INFINITY);
 }
 
-float	distance_palyer_wall(t_game *game, float dis_v, float dis_h, int ray_count)
+float distance_palyer_wall(t_game *game, float dis_v, float dis_h, int ray_count)
 {
-	if (dis_v < dis_h)
-	{	
-		if (game->map->RayFacingUp && game->map->RayFacingRight)
-			game->map->wall_direction[ray_count] = 2;
-		else if (game->map->RayFacingUp && game->map->RayFacingLeft)
-			game->map->wall_direction[ray_count] = 3;
-		else if (game->map->RayFacingDown && game->map->RayFacingLeft)
-			game->map->wall_direction[ray_count] = 3;
-		else if (game->map->RayFacingDown && game->map->RayFacingRight)
-			game->map->wall_direction[ray_count] = 2;
-		return dis_v;
-	}
-	else
-	{
-		if (game->map->RayFacingUp)
-			game->map->wall_direction[ray_count] = 1;
-		else if (game->map->RayFacingDown)
-			game->map->wall_direction[ray_count] = 4;
-		return dis_h;
-	}
+    if (dis_v < dis_h)
+    {
+        if (game->map->RayFacingRight)
+            game->map->wall_direction[ray_count] = 3;
+        else
+            game->map->wall_direction[ray_count] = 2;
+        return dis_v;
+    }
+    else
+    {
+        if (game->map->RayFacingDown)
+            game->map->wall_direction[ray_count] = 1;
+        else
+            game->map->wall_direction[ray_count] = 4;
+        return dis_h;
+    }
 }
 
 float	ray_casting(t_game *game, float ray_angle, int ray_count)

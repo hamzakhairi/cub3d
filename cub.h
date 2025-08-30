@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:10:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/29 18:09:07 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/08/29 20:03:23 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,19 @@ typedef struct s_config {
 	int *check_duplicate;
 	int floor_color[3];
 	int ceiling_color[3];
-} t_config;
+}		t_config;
+
+typedef struct s_tex
+{
+    void    *img;
+    char    *addr;
+    int     width;
+    int     height;
+    int     bpp;
+    int     line_len;
+    int     endian;
+}   t_tex;
+
 
 typedef struct s_map {
 	char	**grid;
@@ -107,6 +119,11 @@ typedef struct s_game {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
+	
+	t_tex		img_north;
+	t_tex		img_south;
+	t_tex		img_east;
+	t_tex		img_west;
 
 	float distance_plane;
 	float wall_height;
@@ -179,6 +196,8 @@ void setup1_ray(t_game *game);
 float ray_casting(t_game *game, float ray_angle, int ray_count);
 
 int Move_player(t_game *game, float y, float x, int i);
+void directoin_player(t_game *game);
+float distance_palyer_wall(t_game *game, float dis_v, float dis_h, int ray_count);
 
 /*
 	bonus
