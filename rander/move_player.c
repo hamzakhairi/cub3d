@@ -25,46 +25,12 @@ int Move_player(t_game *game, float y, float x, int i)
 		y = y - 1;
 	}
 
-	if (game->map->grid[(int)y / SIZE][(int)x / SIZE] != '1')
+	if (game->map->grid[(int)y / SIZE][(int)x / SIZE] != '1' && game->map->grid[(int)y / SIZE][(int)x / SIZE] != 'D')
 	{
 		game->player_pixl_y = y;
 		game->player_pixl_x = x;
 		return(0);
 	}
-	if (i == 1)
-	{
-		if (game->map->RayFacingUp)
-		{
-			if (game->map->RayFacingLeft && game->map->grid[(int)y / SIZE][(int)(x + 4) / SIZE] != '1')
-				game->player_pixl_x = game->player_pixl_x + 4;
-			else if (game->map->RayFacingRight && game->map->grid[(int)y / SIZE][(int)(x - 4) / SIZE] != '1')
-				game->player_pixl_x = game->player_pixl_x - 4;
-		}
-		else if (game->map->RayFacingLeft)
-		{
-			if (game->map->RayFacingUp && game->map->grid[(int)(y - 4) / SIZE][(int)x / SIZE] != '1')
-				game->player_pixl_y = game->player_pixl_y - 4;
-			else if (game->map->RayFacingDown && game->map->grid[(int)(y + 4) / SIZE][(int)x / SIZE] != '1')
-				game->player_pixl_y = game->player_pixl_y + 4;
-		}
-		else if (game->map->RayFacingRight)
-		{
-			if (game->map->RayFacingUp && game->map->grid[(int)(y - 4) / SIZE][(int)x / SIZE] != '1')
-				game->player_pixl_y = game->player_pixl_y - 4;
-			else if (game->map->RayFacingDown && game->map->grid[(int)(y + 4) / SIZE][(int)x / SIZE] != '1')
-				game->player_pixl_y = game->player_pixl_y + 4;
-		}
-		else if (game->map->RayFacingDown)
-		{
-			if (game->map->RayFacingLeft && game->map->grid[(int)y / SIZE][(int)(x + 4) / SIZE] != '1')
-				game->player_pixl_x = game->player_pixl_x + 4;
-			else if (game->map->RayFacingRight && game->map->grid[(int)y / SIZE][(int)(x - 4) / SIZE] != '1')
-				game->player_pixl_x = game->player_pixl_x - 4;
-		}
-		else
-			printf("___________________ next\n");
-	}
-
 	return (1);
 }
 
@@ -132,11 +98,5 @@ int	moving(int key, t_game *game)
 			break ;
 		i--;
 	}
-	
-	// create_put_image_to_window(game);
-	// mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img_ptr, 0, 0);
-	// update_state(game);
-    // render_images(game);
-	// loop_inimation(game);
 	return (0);
 }

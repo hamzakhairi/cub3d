@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:57:01 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/29 19:57:56 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/08/30 12:18:17 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,17 +101,25 @@ void draw_line_height(t_game *game, int x)
             put_pixel(game, x, y, 0xFF0000);
         else if (y <= draw_end)
         {
-            int tex_y = (int)tex_pos;
-
-            if (tex_y >= tex->height)
-				tex_y = tex->height - 1;
-            if (tex_y < 0)
-				tex_y = 0;
-            
-            int color = get_tex_pixel(tex, tex_x, tex_y);
-            put_pixel(game, x, y, color);
-            
-            tex_pos += tex_step;
+			if(game->ray_valeu[x] == '1')
+			{
+				// printf("game->ray_valeu[x]== %c\n",game->ray_valeu[x]);
+            	int tex_y = (int)tex_pos;
+	
+            	if (tex_y >= tex->height)
+					tex_y = tex->height - 1;
+            	if (tex_y < 0)
+					tex_y = 0;
+	
+            	int color = get_tex_pixel(tex, tex_x, tex_y);
+            	put_pixel(game, x, y, color);
+	
+            	tex_pos += tex_step;
+			}
+			else
+			{
+				printf("game->ray_valeu[x]== %c \n",game->ray_valeu[x]);
+			}
         }
         else
             put_pixel(game, x, y, 0x8B4513);
@@ -184,10 +192,10 @@ void	setup1_ray(t_game *game)
 		while (1)
 		{
 			new_x = game->player_pixl_x + (cosf(cpy_angle) * i);
-			if (game->map->grid[((int)new_y) / SIZE][((int)new_x) / SIZE] == '1')
+			if (game->map->grid[((int)new_y) / SIZE][((int)new_x) / SIZE] == '1' || game->map->grid[((int)new_y) / SIZE][((int)new_x) / SIZE] == 'D')
 				break ;
 			new_y = game->player_pixl_y + (sinf(cpy_angle) * i);
-			if (game->map->grid[((int)new_y) / SIZE][((int)new_x) / SIZE] == '1')
+			if (game->map->grid[((int)new_y) / SIZE][((int)new_x) / SIZE] == '1' || game->map->grid[((int)new_y) / SIZE][((int)new_x) / SIZE] == 'D')
 				break ;
 			put_pixel(game, (int)new_x / game->map->scale, (int)new_y / game->map->scale, 0x00FFFF00);
 			i++;

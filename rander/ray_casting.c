@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:58:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/29 18:16:48 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/08/30 12:20:22 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,13 @@ float	horizontal_wall(t_game *game)
 		check_y = yh;
 		if (game->map->RayFacingUp)
 			check_y = yh - 1;
-		if (check_y >= 0 && check_y < (game->map->height / SIZE) && game->map->grid[check_y][xh] == '1')
+		if (check_y >= 0 && check_y < (game->map->height / SIZE) && (game->map->grid[check_y][xh] == '1'
+			|| game->map->grid[check_y][xh] == 'D'))
 		{
+			if(game->map->grid[check_y][xh] == '1')
+				game->ray_valeu_h = '1';
+			else
+				game->ray_valeu_h = 'D';
 			return (sqrtf(powf(game->map->X_horizontal - game->player_pixl_x, 2) + powf(game->map->Y_horizontal - game->player_pixl_y, 2)));
 		}
 		get_horizontal(game);
@@ -99,8 +104,13 @@ float	vertical_wall(t_game *game)
 		check_x = xv;
 		if (game->map->RayFacingLeft)
 			check_x = xv - 1;
-		if (check_x >= 0 && check_x < (game->map->width / SIZE) && game->map->grid[yv][check_x] == '1')
+		if (check_x >= 0 && check_x < (game->map->width / SIZE) && (game->map->grid[yv][check_x] == '1'
+			|| game->map->grid[yv][check_x] == 'D'))
 		{
+			if(game->map->grid[yv][check_x] == '1')
+				game->ray_valeu_v = '1';
+			else
+				game->ray_valeu_v = 'D';
 			return (sqrtf(powf(game->map->X_vertical - game->player_pixl_x, 2) + powf(game->map->Y_vertical - game->player_pixl_y, 2)));
 		}
 		get_vertical(game);
@@ -116,6 +126,7 @@ float distance_palyer_wall(t_game *game, float dis_v, float dis_h, int ray_count
             game->map->wall_direction[ray_count] = 3;
         else
             game->map->wall_direction[ray_count] = 2;
+		game->ray_valeu[ray_count] = game->ray_valeu_v;
         return dis_v;
     }
     else
@@ -124,6 +135,7 @@ float distance_palyer_wall(t_game *game, float dis_v, float dis_h, int ray_count
             game->map->wall_direction[ray_count] = 1;
         else
             game->map->wall_direction[ray_count] = 4;
+		game->ray_valeu[ray_count] = game->ray_valeu_h;
         return dis_h;
     }
 }
@@ -137,18 +149,25 @@ float	ray_casting(t_game *game, float ray_angle, int ray_count)
 	temp_angle = game->map->angle;
 	game->map->angle = ray_angle;
 	directoin_player(game);
+
 	game->map->Y_horizontal = floorf(game->player_pixl_y / SIZE) * SIZE;
 	if (game->map->RayFacingDown)
 		game->map->Y_horizontal += SIZE;
+
 	game->map->X_horizontal = game->player_pixl_x + (game->map->Y_horizontal - game->player_pixl_y) / tanf(ray_angle);
 	dis_h = horizontal_wall(game);
+
 	game->map->X_vertical = floorf(game->player_pixl_x / SIZE) * SIZE;
 	if (game->map->RayFacingRight)
 		game->map->X_vertical += SIZE;
+	
 	game->map->Y_vertical = game->player_pixl_y + (game->map->X_vertical - game->player_pixl_x) * tanf(ray_angle);
 	dis_v = vertical_wall(game);
+	
 	directoin_player(game);
+	
 	game->map->angle = temp_angle;
 	game->map->wall_direction[ray_count] = 0;
+	
 	return (distance_palyer_wall(game, dis_v, dis_h, ray_count));
 }
