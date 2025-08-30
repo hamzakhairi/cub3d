@@ -28,7 +28,7 @@ int check_dir(char *str, int index, t_game *game)
     }
     while (str[i + j])
     {
-        if (!ft_strchr(" 01NSWED", str[i + j]))
+        if (!ft_strchr(" 01NSWE", str[i + j]))
             return (ft_putendl_fd(ERROR_MAP, 2), 0);
         
         if ((j == 0 || ((j + i) == length - 1)) && (str[i + j] != '1'))

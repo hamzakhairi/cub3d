@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:10:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/30 12:07:21 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/08/30 16:20:21 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ typedef struct s_map {
 	int iszoom;
 	int scale;
 	int player_size;
+	int minimap_size;
+	int prefix_palyer_x;
+	int prefix_palyer_y;
 
 	int RayFacingDown;
 	int RayFacingUp;
@@ -111,10 +114,6 @@ typedef struct s_game {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
-	
-	char		ray_valeu[WIDTH_3D];
-	char		ray_valeu_v;
-	char		ray_valeu_h;
 	
 	t_tex		img_north;
 	t_tex		img_south;
