@@ -44,7 +44,7 @@ int extarct_rgb(int *color, char *str)
         j = i;
         while (str[i] && str[i] != ',')
             i++;
-        if (index >= 3)
+        if (index >= 3 || (j == i))
             return (ft_putendl_fd(ERROR_VALUE, 2), 0);
         color[index] = ft_mini_atoi(str, j, i);
         if (color[index] < 0 || color[index] > 255)

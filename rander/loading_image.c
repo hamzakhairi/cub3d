@@ -29,7 +29,6 @@ int loading_image(t_game *game)
     int img_width, img_height;
     int i;
 
-    printf("hello\n");
     game->img_player = malloc(sizeof(t_player));
     if (!game->img_player)
         return 0;

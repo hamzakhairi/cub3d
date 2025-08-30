@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:10:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/29 20:03:23 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/08/30 16:48:28 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_ZOOM 6
+# define KEY_Q 12
 # define KEY_T 14
-# define KEY_F 12
+# define KEY_F 15
 # define KEY_RIGHT 124
 # define KEY_LEFT 123
 # define NUM_GAME_MOVES 16
@@ -120,11 +121,16 @@ typedef struct s_game {
 	void		*win_ptr;
 	void		*img_ptr;
 	
+	char		ray_valeu[WIDTH_3D];
+	char		ray_valeu_v;
+	char		ray_valeu_h;
+	
 	t_tex		img_north;
 	t_tex		img_south;
 	t_tex		img_east;
 	t_tex		img_west;
-
+	t_tex		img_door;
+	int is_open_door;
 	float distance_plane;
 	float wall_height;
 	int wall_top;

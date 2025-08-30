@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_create_window.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:04:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/29 15:14:35 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/08/30 16:27:29 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ int	create_image(t_game *game)
 	if (load_texture(game, &game->img_west, "texter/wall/wall_3.xpm"))
 		return (1);
 	if (load_texture(game, &game->img_south, "texter/wall/wall_4.xpm"))
+		return (1);
+	if (load_texture(game, &game->img_door, "texter/door/1.xpm"))
 		return (1);
 	create_put_image_to_window(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img_ptr, 0, 0);

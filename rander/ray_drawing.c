@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:57:01 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/30 11:55:14 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/08/30 16:37:04 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_tex *get_wall_texture(t_game *game, int ray_index)
 {
     int wall_dir = game->map->wall_direction[ray_index];
 
+	if (game->ray_valeu[ray_index] == 'D')
+		return &game->img_door;
 	if (wall_dir == 1)
 		return &game->img_north;
 	else if (wall_dir == 2)
@@ -43,7 +45,6 @@ t_tex *get_wall_texture(t_game *game, int ray_index)
 		return &game->img_south;
 	else
 		return &game->img_north;
-		
 }
 
 float calculate_wall_hit_x(t_game *game, int ray_index, float distance)
@@ -61,6 +62,7 @@ float calculate_wall_hit_x(t_game *game, int ray_index, float distance)
         return hit_y - floor(hit_y / SIZE) * SIZE;
 }
 
+
 void draw_line_height(t_game *game, int x)
 {
 	int draw_start;
@@ -77,7 +79,7 @@ void draw_line_height(t_game *game, int x)
 		tex_x = 0;
     if (tex_x >= tex->width)
 		tex_x = tex->width - 1;
-	
+
 	if (game->wall_top < 0)
 		draw_start = 0;
 	else
@@ -101,17 +103,27 @@ void draw_line_height(t_game *game, int x)
             put_pixel(game, x, y, 0xFF0000);
         else if (y <= draw_end)
         {
-            int tex_y = (int)tex_pos;
-
-            if (tex_y >= tex->height)
-				tex_y = tex->height - 1;
-            if (tex_y < 0)
-				tex_y = 0;
-            
-            int color = get_tex_pixel(tex, tex_x, tex_y);
-            put_pixel(game, x, y, color);
-            
-            tex_pos += tex_step;
+			// if(game->ray_valeu[x] == '1')
+			// {
+				// printf("game->ray_valeu[x]== %c\n",game->ray_valeu[x]);
+            	int tex_y = (int)tex_pos;
+	
+            	if (tex_y >= tex->height)
+					tex_y = tex->height - 1;
+            	if (tex_y < 0)
+					tex_y = 0;
+	
+            	int color = get_tex_pixel(tex, tex_x, tex_y);
+            	put_pixel(game, x, y, color);
+	
+            	tex_pos += tex_step;
+			// }
+			// else
+			// {
+			// 	// int color = get_tex_pixel(tex, tex_x, tex_y);
+            // 	// put_pixel(game, x, y, 0xFF0000);
+			// 	// printf("game->ray_valeu[x]== %c \n",game->ray_valeu[x]);
+			// }
         }
         else
             put_pixel(game, x, y, 0x8B4513);
@@ -184,10 +196,12 @@ void	setup1_ray(t_game *game)
 		while (1)
 		{
 			new_x = game->player_pixl_x + (cosf(cpy_angle) * i);
-			if (game->map->grid[((int)new_y) / SIZE][((int)new_x) / SIZE] == '1')
+			if (game->map->grid[((int)new_y) / SIZE][((int)new_x) / SIZE] == '1'
+			 || game->map->grid[((int)new_y) / SIZE][((int)new_x) / SIZE] == 'D')
 				break ;
 			new_y = game->player_pixl_y + (sinf(cpy_angle) * i);
-			if (game->map->grid[((int)new_y) / SIZE][((int)new_x) / SIZE] == '1')
+			if (game->map->grid[((int)new_y) / SIZE][((int)new_x) / SIZE] == '1'
+				|| game->map->grid[((int)new_y) / SIZE][((int)new_x) / SIZE] == 'D')
 				break ;
 			put_pixel(game, (int)new_x / game->map->scale, (int)new_y / game->map->scale, 0x00FFFF00);
 			i++;

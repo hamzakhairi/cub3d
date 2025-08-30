@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:42:19 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/29 18:04:35 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/08/30 15:29:05 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ int init_struct(t_game *game)
     game->player_y = -1;
     init_map(game->map);
     init_config(game->config);
+    game->is_open_door = 0;
     return (1);
 }

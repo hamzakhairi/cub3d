@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filling_game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:12:05 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/19 10:16:40 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/08/30 17:03:32 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,15 @@ int filling_game(int argc, char *argv[], t_game *game)
         str = get_next_line(fd);
     }
 
-    printf("\n[%s]\n[%s]\n[%s]\n[%s]\n F : [%d,%d,%d]\n C : [%d,%d,%d]\nline : [%d]\n", game->config->no_texture, game->config->so_texture, game->config->we_texture
-    ,game->config->ea_texture
-    ,game->config->floor_color[0]
-    ,game->config->floor_color[1]
-    ,game->config->floor_color[2]
-    ,game->config->ceiling_color[0]
-    ,game->config->ceiling_color[1]
-    ,game->config->ceiling_color[2]
-    ,game->start_parcing_map);
+    // printf("\n[%s]\n[%s]\n[%s]\n[%s]\n F : [%d,%d,%d]\n C : [%d,%d,%d]\nline : [%d]\n", game->config->no_texture, game->config->so_texture, game->config->we_texture
+    // ,game->config->ea_texture
+    // ,game->config->floor_color[0]
+    // ,game->config->floor_color[1]
+    // ,game->config->floor_color[2]
+    // ,game->config->ceiling_color[0]
+    // ,game->config->ceiling_color[1]
+    // ,game->config->ceiling_color[2]
+    // ,game->start_parcing_map);
     int i = 0;
     while (i <= 5)
     {
