@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:58:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/31 22:26:13 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/08/31 22:50:34 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,6 @@ float	horizontal_wall(t_game *game)
 	int	yh;
 	int	check_y;
     int map_x, map_y;
-    int max_grid_x, max_grid_y;
-    
-    max_grid_y = 0;
-    while (game->map->grid[max_grid_y] != NULL)
-        max_grid_y++;
-    
-    max_grid_x = 0;
-    if (max_grid_y > 0)
-        max_grid_x = strlen(game->map->grid[0]);
 
 	while (1)
 	{
@@ -83,15 +74,14 @@ float	horizontal_wall(t_game *game)
 		map_x = xh;
         map_y = yh;
 		
-		if (xh < 0 || yh < 0 || xh >= (game->map->width / SIZE) || yh >= (game->map->height / SIZE) || map_y < 0 || map_y >= max_grid_y ||
-            map_x < 0 || map_x >= max_grid_x || game->map->grid[map_y] == NULL || map_x >= (int)strlen(game->map->grid[map_y]))
+		if (xh < 0 || yh < 0 || xh >= (game->map->width / SIZE) || yh >= (game->map->height / SIZE) || game->map->grid[map_y] == NULL || map_x >= (int)strlen(game->map->grid[map_y]))
 			break ;
 		check_y = yh;
 		if (game->map->RayFacingUp)
 			check_y = yh - 1;
 
-		if (check_y >= 0 && check_y < (game->map->height / SIZE) && (game->map->grid[check_y][xh] == '1'
-			|| (game->map->grid[check_y][xh] == 'D' && !game->is_open_door)))
+		if (check_y >= 0 && check_y < (game->map->height / SIZE) && xh < (int)strlen(game->map->grid[check_y]) &&
+		    game->map->grid[check_y] != NULL && (game->map->grid[check_y][xh] == '1' || (game->map->grid[check_y][xh] == 'D' && !game->is_open_door)))
 		{
 			if (game->map->grid[check_y][xh] == '1')
 				game->ray_valeu_h = '1';
@@ -110,35 +100,19 @@ float	vertical_wall(t_game *game)
 	int	yv;
 	int	check_x;
 
-	int i, j, color, r;
-    int center_x, center_y;
-    int map_x, map_y;
-    int max_grid_x, max_grid_y;
-    
-    max_grid_y = 0;
-    while (game->map->grid[max_grid_y] != NULL)
-        max_grid_y++;
-    
-    max_grid_x = 0;
-    if (max_grid_y > 0)
-        max_grid_x = strlen(game->map->grid[0]);
-
 	while (1)
 	{
 		xv = (int)game->map->X_vertical / SIZE;
 		yv = (int)game->map->Y_vertical / SIZE;
-
-		map_x = xv;
-        map_y = yv;
 		
-		if (xv < 0 || yv < 0 || xv >= (game->map->width / SIZE) || yv >= (game->map->height / SIZE) || map_y < 0 || map_y >= max_grid_y ||
-            map_x < 0 || map_x >= max_grid_x || game->map->grid[map_y] == NULL || map_x >= (int)strlen(game->map->grid[map_y]))
+		if (xv < 0 || yv < 0 || xv >= (game->map->width / SIZE) || yv >= (game->map->height / SIZE) || game->map->grid[yv] == NULL || xv >= (int)strlen(game->map->grid[yv]))
 			break ;
 		check_x = xv;
 		if (game->map->RayFacingLeft)
 			check_x = xv - 1;
-		if (check_x >= 0 && check_x < (game->map->width / SIZE) && (game->map->grid[yv][check_x] == '1'
-			|| (game->map->grid[yv][check_x] == 'D' && !game->is_open_door)))
+
+		if (check_x >= 0 && check_x < (game->map->width / SIZE) && yv < (game->map->height / SIZE) &&
+		    check_x < (int)strlen(game->map->grid[yv]) && (game->map->grid[yv][check_x] == '1' || (game->map->grid[yv][check_x] == 'D' && !game->is_open_door)))
 		{
 			if (game->map->grid[yv][check_x] == '1')
 				game->ray_valeu_v = '1';

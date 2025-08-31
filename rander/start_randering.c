@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 10:55:48 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/31 15:16:38 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/08/31 15:22:51 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void Calculate_width_height(t_game *game)
 				store_direction(game, width, height);
 			width++;
 		}
-		if (x <= width)
+		if (x < width)
 			x = width;
 		height++;
 	}
