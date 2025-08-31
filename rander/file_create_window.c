@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:04:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/31 09:42:07 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/08/31 10:29:40 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,16 @@ void setup_minimap_player(t_game *game)
                 }
                 else if (game->map->grid[map_y][map_x] == '1')
                     color = 0x0000FF; // Blue for walls
-                else if (game->map->grid[map_y][map_x] == 'D' && !game->is_open_door)
+                else if (game->map->grid[map_y][map_x] == 'D')
+                {
                     color = 0x00FF00;
+                    if (game->is_open_door)
+                        color = 0xB2BEB5;             
+                }
                 else if (game->map->grid[map_y][map_x] == '0')
                     color = 0xB2BEB5; // Gray for empty spaces
+                else if (game->map->grid[map_y][map_x] == ' ' || game->map->grid[map_y][map_x] == '\t')
+                    color = 0x000000;
                 put_pixel(game, game->map->prefix_palyer_x + j, game->map->prefix_palyer_y + i, color);
             }
             j++;

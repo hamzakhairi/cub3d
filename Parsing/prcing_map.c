@@ -54,7 +54,7 @@ int filling_map(t_game *game, char *path)
         {
             free(line);
             game->map->grid[i] = NULL;
-            return(ft_putendl_fd(ERROR_MAP, 2), 0);
+            return(printf("{}{}{}{}{1}{1}\n"),ft_putendl_fd(ERROR_MAP, 2), 0);
         }
         free(line);
         i++;

@@ -167,7 +167,7 @@ typedef struct s_gnl
 *****************************************/
 
 int		start_parcing(int argc, char *argv[], t_game *game);
-int		filling_game(int argc, char *argv[], t_game *game);
+int		filling_game(char *argv[], t_game *game);
 int		init_struct(t_game *game);
 int check_cloros(t_game *game, char *str);
 int parce_and_filling_line(char **texter, char *str, int *index, char *prifex);

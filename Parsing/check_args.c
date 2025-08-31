@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 14:42:43 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/07/02 18:16:36 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/08/31 11:02:08 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,18 @@ int start_parcing(int argc, char *argv[], t_game *game)
     }
     if (!check_name(argv[1]))
         return (0);
-    if (!filling_game(argc, argv, game))
+    if (!filling_game(argv, game))
+        return (0);
+    int i = 0;
+    while (i <= 5)
+    {
+        if (game->config->check_duplicate[i] != 1)
+            return (ft_putendl_fd(ERROR_DUP, 2), 0);
+        i++;
+    }
+    if (!filling_map(game, argv[1]))
+        return (0);
+    if (!cheack_lines(game))
         return (0);
     return (1);
 }

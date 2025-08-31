@@ -31,11 +31,6 @@ int check_dir(char *str, int index, t_game *game)
         if (!ft_strchr(" 01NSWED", str[i + j]))
             return (ft_putendl_fd(ERROR_MAP, 2), 0);
         
-        if ((j == 0 || ((j + i) == length - 1)) && (str[i + j] != '1'))
-        {
-            // printf("[%c]\n", str[i + j]);
-            return (ft_putendl_fd(ERROR_MAP, 2), 0);
-        }
         else
         {
             if (str[i + j] != '1')
@@ -45,6 +40,7 @@ int check_dir(char *str, int index, t_game *game)
                     || (str[i + j + 1] && str[i + j + 1] == ' ')
                     || (!str[i + j + 1])))
                 {
+
                     return (ft_putendl_fd(ERROR_MAP, 2), 0);
                 }
                 // check up
@@ -58,6 +54,7 @@ int check_dir(char *str, int index, t_game *game)
                 else if (ft_strchr("0NSWE", str[i + j])
                     && game->map->grid[index + 1][i + j] == ' ')
                 {
+
                     // printf("2: %s\n",str);
                     return (ft_putendl_fd(ERROR_MAP, 2), 0);
                 }
