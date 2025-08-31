@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/28 17:10:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/30 16:48:28 by hkhairi          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 # ifndef CUB_H
 # define CUB_H
@@ -86,6 +76,9 @@ typedef struct s_map {
 	int iszoom;
 	int scale;
 	int player_size;
+	int minimap_size;
+	int prefix_palyer_x;
+	int prefix_palyer_y;
 
 	int RayFacingDown;
 	int RayFacingUp;
@@ -121,10 +114,11 @@ typedef struct s_game {
 	void		*win_ptr;
 	void		*img_ptr;
 	
-	char		ray_valeu[WIDTH_3D];
-	char		ray_valeu_v;
-	char		ray_valeu_h;
 	
+	char	ray_valeu[WIDTH_3D];
+	char	ray_valeu_v;
+	char	ray_valeu_h;
+
 	t_tex		img_north;
 	t_tex		img_south;
 	t_tex		img_east;

@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:57:01 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/30 16:37:04 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/08/31 09:36:49 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,27 +103,23 @@ void draw_line_height(t_game *game, int x)
             put_pixel(game, x, y, 0xFF0000);
         else if (y <= draw_end)
         {
-			// if(game->ray_valeu[x] == '1')
-			// {
-				// printf("game->ray_valeu[x]== %c\n",game->ray_valeu[x]);
-            	int tex_y = (int)tex_pos;
-	
-            	if (tex_y >= tex->height)
-					tex_y = tex->height - 1;
-            	if (tex_y < 0)
-					tex_y = 0;
-	
-            	int color = get_tex_pixel(tex, tex_x, tex_y);
-            	put_pixel(game, x, y, color);
-	
-            	tex_pos += tex_step;
-			// }
-			// else
-			// {
-			// 	// int color = get_tex_pixel(tex, tex_x, tex_y);
-            // 	// put_pixel(game, x, y, 0xFF0000);
-			// 	// printf("game->ray_valeu[x]== %c \n",game->ray_valeu[x]);
-			// }
+			// if(game->ray_valeu[x] == 'D')
+            // {
+            //     printf("game->ray_valeu[x] =%c\n", game->ray_valeu[x]);
+            // }
+
+            int tex_y = (int)tex_pos;
+
+            if (tex_y >= tex->height)
+				tex_y = tex->height - 1;
+            if (tex_y < 0)
+				tex_y = 0;
+
+            int color = get_tex_pixel(tex, tex_x, tex_y);
+            put_pixel(game, x, y, color);
+
+            tex_pos += tex_step;
+
         }
         else
             put_pixel(game, x, y, 0x8B4513);
@@ -177,35 +173,3 @@ void	setup_ray(t_game *game)
 	image_3d(game);
 }
 
-void	setup1_ray(t_game *game)
-{
-    float	new_x;
-	float	new_y;
-	float	cpy_angle;
-    float	i;
-	int		face;
-	float	angle_step;
-
-	angle_step = FOV / WIDTH_3D;
-	cpy_angle = game->map->angle - FOV / 2;
-	while (cpy_angle <= game->map->angle + FOV / 2)
-	{
-		i = 1;
-		new_x = game->player_pixl_x + (cosf(cpy_angle) * i);
-		new_y = game->player_pixl_y + (sinf(cpy_angle) * i);
-		while (1)
-		{
-			new_x = game->player_pixl_x + (cosf(cpy_angle) * i);
-			if (game->map->grid[((int)new_y) / SIZE][((int)new_x) / SIZE] == '1'
-			 || game->map->grid[((int)new_y) / SIZE][((int)new_x) / SIZE] == 'D')
-				break ;
-			new_y = game->player_pixl_y + (sinf(cpy_angle) * i);
-			if (game->map->grid[((int)new_y) / SIZE][((int)new_x) / SIZE] == '1'
-				|| game->map->grid[((int)new_y) / SIZE][((int)new_x) / SIZE] == 'D')
-				break ;
-			put_pixel(game, (int)new_x / game->map->scale, (int)new_y / game->map->scale, 0x00FFFF00);
-			i++;
-		}
-		cpy_angle += angle_step;
-	}
-}

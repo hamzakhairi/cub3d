@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:42:19 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/30 15:29:05 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/08/30 18:36:04 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void init_map(t_map *map)
     map->width = -1;
     map->height = -1;
     map->iszoom = 0;
-    map->player_size = 1;
+    map->player_size = 4;
+    map->minimap_size = 100;
+    map->prefix_palyer_x = 102;
+    map->prefix_palyer_y = 102;
     map->scale = SCALE;
 }
 

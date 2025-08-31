@@ -99,12 +99,18 @@ int	moving(int key, t_game *game)
 			if(game->map->iszoom == 0)
 			{
 				game->map->player_size = 8;
+				game->map->minimap_size = 250;
+				game->map->prefix_palyer_x = WIDTH_3D / 2;
+				game->map->prefix_palyer_y = HEIGHT_3D / 2;
 				game->map->scale = 1;
 				game->map->iszoom = 1;
 			}
 			else
 			{
-				game->map->player_size = 1;
+				game->map->player_size = 4;
+				game->map->minimap_size = 100;
+				game->map->prefix_palyer_x = 102;
+				game->map->prefix_palyer_y = 102;
 				game->map->scale = SCALE;
 				game->map->iszoom = 0;
 			}
