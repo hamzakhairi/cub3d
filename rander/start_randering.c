@@ -3,36 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   start_randering.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 10:55:48 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/29 18:04:16 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/08/31 15:16:38 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-void	store_dir(t_game *game, int width, int height)
+void	store_direction(t_game *game, int width, int height)
 {
 	if (game->map->grid[height][width] == 'N')
 	{
 		game->map->palyer = 'N';
-		game->map->angle = (3 * M_PI) / 2;//270 degrees
+		game->map->angle = (3 * M_PI) / 2;//270 degrees dwon
 	}
 	else if (game->map->grid[height][width] == 'S')
 	{
 		game->map->palyer = 'S';
-		game->map->angle = M_PI / 2;//90 degrees
+		game->map->angle = M_PI / 2;//90 degrees up
 	}
 	else if (game->map->grid[height][width] == 'E')
 	{
 		game->map->palyer = 'E';
-		game->map->angle = 0;//0 degrees
+		game->map->angle = 0;//0 degrees left
 	}
 	else if (game->map->grid[height][width] == 'W')
 	{
 		game->map->palyer = 'W';
-		game->map->angle = M_PI;// 180 degrees
+		game->map->angle = M_PI;// 180 degrees rigte¢
 	}
 }
 
@@ -53,10 +53,10 @@ void Calculate_width_height(t_game *game)
 		{
 			if (game->map->grid[height][width] == 'N' || game->map->grid[height][width] == 'S'
 				|| game->map->grid[height][width] == 'E' || game->map->grid[height][width] == 'W')
-				store_dir(game, width, height);
+				store_direction(game, width, height);
 			width++;
 		}
-		if (x < width)
+		if (x <= width)
 			x = width;
 		height++;
 	}
@@ -69,11 +69,11 @@ int	create_window(t_game *game)
 	Calculate_width_height(game);
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
-		return (1);
+		return (ft_putendl_fd(ERROR_INIT, 2), 1);
 	loading_image(game);
 	game->win_ptr = mlx_new_window(game->mlx_ptr, WIDTH_3D, HEIGHT_3D, "cub3D");
 	if (!game->win_ptr)
-		return (1);
+		return (ft_putendl_fd(ERROR_WINDOW, 2), 1);
 	if (create_image(game))
 		return (1);
 	create_put_image_to_window(game);
