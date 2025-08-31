@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_create_window.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:04:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/31 15:22:46 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/08/31 22:43:31 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,7 @@ void setup_minimap_player(t_game *game)
     int i, j, color, r;
     int center_x, center_y;
     int map_x, map_y;
-    int max_grid_x, max_grid_y;
     
-    max_grid_y = 0;
-    while (game->map->grid[max_grid_y] != NULL)
-        max_grid_y++;
-    
-    max_grid_x = 0;
-    if (max_grid_y > 0)
-        max_grid_x = strlen(game->map->grid[0]);
     
     r = game->map->minimap_size;
     i = -r;
@@ -68,8 +60,8 @@ void setup_minimap_player(t_game *game)
             
                 if (center_x < 0 || center_y < 0 || 
                     center_x >= game->map->width || center_y >= game->map->height ||
-                    map_y < 0 || map_y >= max_grid_y ||
-                    map_x < 0 || map_x >= max_grid_x ||
+                    map_y < 0 || map_y >= game->map->height / SIZE ||
+                    map_x < 0 || map_x >= game->map->width / SIZE ||
                     game->map->grid[map_y] == NULL ||
                     map_x >= (int)strlen(game->map->grid[map_y]))
                 {

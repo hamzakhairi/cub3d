@@ -25,6 +25,13 @@ int Move_player(t_game *game, float y, float x, int i)
 		y = y - 1;
 	}
 
+	if (x < 0 || y < 0 || x > game->map->width || y > game->map->height)
+	{
+		printf("x = %f y = %f\n", x /SIZE, y /SIZE);
+		printf("game->map->width = %d   game->map->height  = %d\n", game->map->width/SIZE, game->map->height/SIZE);
+		return (0);
+	}
+
 	if (game->map->grid[(int)y / SIZE][(int)x / SIZE] != '1' && (game->map->grid[(int)y / SIZE][(int)x / SIZE] != 'D' || game->is_open_door))
 	{
 		game->player_pixl_y = y;
