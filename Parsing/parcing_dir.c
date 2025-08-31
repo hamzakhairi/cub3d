@@ -1,5 +1,4 @@
 
-
 # include "../cub.h"
 
 void updated_number_index(int *index, char *prifex)

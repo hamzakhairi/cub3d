@@ -125,18 +125,22 @@ void render_images(t_game *game)
     if (game->img_player->is_state == 0)
         mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
             game->img_player->images_walk[game->img_player->current_image],
-            (game->map->width) / 2 - (game->map->width / 4),
-            game->map->height + 16);
+            (WIDTH_3D) / 2 - (WIDTH_3D / 4),
+            (HEIGHT_3D - 400) + (HEIGHT_3D - 400) / 16);
+
+            // HEIGHT_3D + 16);
     else if (game->img_player->is_state == 1)
         mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
             game->img_player->images_shout[game->img_player->current_image],
-            (game->map->width) / 2 - (game->map->width / 4),
-            game->map->height + 16);
+            (WIDTH_3D) / 2 - (WIDTH_3D / 4),
+            (HEIGHT_3D - 400) + (HEIGHT_3D - 400) / 16);
+
+            // HEIGHT_3D + 16);
     else
         mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
             game->img_player->images_Feeding[game->img_player->current_image],
-            (game->map->width) / 2 - (game->map->width / 4),
-            game->map->height + 16);
+            (WIDTH_3D) / 2 - (WIDTH_3D / 4),
+            (HEIGHT_3D - 400) + (HEIGHT_3D - 400) / 16);
 }
 
 

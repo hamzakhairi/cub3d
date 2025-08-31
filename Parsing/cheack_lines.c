@@ -8,7 +8,7 @@ int ft_check_FL_line(char *str)
     i = 0;
     while (str[i])
     {
-        if (str[i] != '1' && str[i] != ' ')
+        if (str[i] != '1' && str[i] != ' ' && str[i] != '\t')
             return (0);
         i++;
     }
