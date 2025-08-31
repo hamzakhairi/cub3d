@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_drawing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:57:01 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/31 09:36:49 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/08/31 15:13:43 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,6 @@ void draw_line_height(t_game *game, int x)
             put_pixel(game, x, y, 0xFF0000);
         else if (y <= draw_end)
         {
-			// if(game->ray_valeu[x] == 'D')
-            // {
-            //     printf("game->ray_valeu[x] =%c\n", game->ray_valeu[x]);
-            // }
-
             int tex_y = (int)tex_pos;
 
             if (tex_y >= tex->height)

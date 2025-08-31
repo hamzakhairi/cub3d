@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:04:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/31 10:29:40 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/08/31 15:22:46 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,15 @@
 
 int load_texture(t_game *game, t_tex *tex, char *path)
 {
-    int w, h;
+    int w;
+    int h;
     tex->img = mlx_xpm_file_to_image(game->mlx_ptr, path, &w, &h);
     if (!tex->img)
-    {
-        printf("Error loading %s\n", path);
-        return (1);
-    }
+        return (ft_putendl_fd(ERROR_IMAGE_XPM, 2), 1);
     tex->addr = mlx_get_data_addr(tex->img, &tex->bpp,
             &tex->line_len, &tex->endian);
     tex->width = w;
     tex->height = h;
-	printf("h %d\n",tex->height);
 	return (0);
 }
 
@@ -80,15 +77,11 @@ void setup_minimap_player(t_game *game)
                 }
                 else if (game->map->grid[map_y][map_x] == '1')
                     color = 0x0000FF; // Blue for walls
-                else if (game->map->grid[map_y][map_x] == 'D')
-                {
+                else if (game->map->grid[map_y][map_x] == 'D' && !game->is_open_door)
                     color = 0x00FF00;
-                    if (game->is_open_door)
-                        color = 0xB2BEB5;             
-                }
-                else if (game->map->grid[map_y][map_x] == '0')
+                else if (game->map->grid[map_y][map_x] == '0' || (game->map->grid[map_y][map_x] == 'D' && game->is_open_door))
                     color = 0xB2BEB5; // Gray for empty spaces
-                else if (game->map->grid[map_y][map_x] == ' ' || game->map->grid[map_y][map_x] == '\t')
+                else if (!ft_strchr("NWSE",game->map->grid[map_y][map_x]))
                     color = 0x000000;
                 put_pixel(game, game->map->prefix_palyer_x + j, game->map->prefix_palyer_y + i, color);
             }
@@ -125,7 +118,7 @@ int	create_image(t_game *game)
 {
 	game->img_ptr = mlx_new_image(game->mlx_ptr, WIDTH_3D, HEIGHT_3D);
 	if (!game->img_ptr)
-		return (1);
+		return (ft_putendl_fd(ERROR_IMAGE, 2), 1);
 	game->addr = mlx_get_data_addr(game->img_ptr, &game->bits_per_pixel, &game->line_length, &game->endian);
 	if (load_texture(game, &game->img_north, "texter/wall/wall_1.xpm"))
 		return (1);

@@ -162,6 +162,11 @@ typedef struct s_gnl
 # define ERROR_RENDER		"error in render game"
 # define ERROR_IMG			"error in images game"
 
+#define ERROR_WINDOW		"error in mlx_new_window"
+#define ERROR_INIT			"error in mlx_init"
+#define ERROR_IMAGE			"error in mlx_new_image"
+#define ERROR_IMAGE_XPM	"error in mlx_xpm_file_to_image"
+
 /****************************************
 * 		Parsing function				*
 *****************************************/
