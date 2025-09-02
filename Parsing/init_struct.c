@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:42:19 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/01 11:07:04 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/02 09:45:29 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ void init_config(t_config *config)
 
 void init_map(t_map *map)
 {
-	map->grid = NULL;
-	map->width = -1;
-	map->height = -1;
-	map->iszoom = 0;
-	map->player_size = 4;
-	map->minimap_size = 100;
-	map->prefix_palyer_x = 102;
-	map->prefix_palyer_y = 102;
-	map->scale = SCALE;
+    map->grid = NULL;
+    map->width = -1;
+    map->height = -1;
+    map->iszoom = 0;
+    map->player_size = PLAYER_SIZE;
+    map->minimap_size = 100;
+    map->prefix_palyer_x = 102;
+    map->prefix_palyer_y = 102;
+    map->scale = SCALE;
 }
 
 int init_struct(t_game *game)
