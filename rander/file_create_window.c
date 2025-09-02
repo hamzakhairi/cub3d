@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:04:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/01 21:17:49 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/02 12:14:05 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	put_pixel(t_game *game, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void setup_minimap_player(t_game *game)
+void setup_minimap(t_game *game)
 {
     int i;
     int j;
@@ -86,7 +86,17 @@ void setup_minimap_player(t_game *game)
         }
         i++;
     }
-    // Draw player dot
+}
+
+void player_drawing(t_game *game)
+{
+    int i;
+    int j;
+    int color;
+    int r;
+    int center_x;
+    int center_y;
+
     r = game->map->player_size;
     center_x = game->map->prefix_palyer_x;
     center_y = game->map->prefix_palyer_y;
@@ -104,11 +114,11 @@ void setup_minimap_player(t_game *game)
     }
 }
 
-
 void	create_put_image_to_window(t_game *game)
 {
 	setup_ray(game);
-	setup_minimap_player(game);
+	setup_minimap(game);
+    player_drawing(game);
 }
 
 int	create_image(t_game *game)

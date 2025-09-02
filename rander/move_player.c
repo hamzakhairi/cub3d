@@ -160,9 +160,9 @@ int	moving(int key, t_game *game)
 			else
 			{
 				game->map->player_size = PLAYER_SIZE;
-				game->map->minimap_size = 100;
-				game->map->prefix_palyer_x = 102;
-				game->map->prefix_palyer_y = 102;
+				game->map->minimap_size = MINIMAP_SIZE;
+				game->map->prefix_palyer_x = PREFIX_PX;
+				game->map->prefix_palyer_y = PREFIX_PY;
 				game->map->scale = SCALE;
 				game->map->iszoom = 0;
 			}

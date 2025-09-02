@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:42:19 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/02 10:20:36 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/02 12:03:04 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void init_map(t_map *map)
     map->height = -1;
     map->iszoom = 0;
     map->player_size = PLAYER_SIZE;
-    map->minimap_size = 100;
-    map->prefix_palyer_x = 102;
-    map->prefix_palyer_y = 102;
+    map->minimap_size = MINIMAP_SIZE;
+    map->prefix_palyer_x = PREFIX_PX;
+    map->prefix_palyer_y = PREFIX_PY;
     map->scale = SCALE;
 }
 
