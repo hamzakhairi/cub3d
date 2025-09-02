@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:04:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/31 22:43:31 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:17:49 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,14 @@ void	put_pixel(t_game *game, int x, int y, int color)
 
 void setup_minimap_player(t_game *game)
 {
-    int i, j, color, r;
-    int center_x, center_y;
-    int map_x, map_y;
+    int i;
+    int j;
+    int color;
+    int r;
+    int center_x;
+    int center_y;
+    int map_x;
+    int map_y;
     
     
     r = game->map->minimap_size;
@@ -65,14 +70,14 @@ void setup_minimap_player(t_game *game)
                     game->map->grid[map_y] == NULL ||
                     map_x >= (int)strlen(game->map->grid[map_y]))
                 {
-                    color = 0x000000; // Black for out of bounds
+                    color = 0x000000;
                 }
                 else if (game->map->grid[map_y][map_x] == '1')
-                    color = 0x0000FF; // Blue for walls
+                    color = 0x0000FF;
                 else if (game->map->grid[map_y][map_x] == 'D' && !game->is_open_door)
                     color = 0x00FF00;
                 else if (game->map->grid[map_y][map_x] == '0' || (game->map->grid[map_y][map_x] == 'D' && game->is_open_door))
-                    color = 0xB2BEB5; // Gray for empty spaces
+                    color = 0xB2BEB5;
                 else if (!ft_strchr("NWSE",game->map->grid[map_y][map_x]))
                     color = 0x000000;
                 put_pixel(game, game->map->prefix_palyer_x + j, game->map->prefix_palyer_y + i, color);

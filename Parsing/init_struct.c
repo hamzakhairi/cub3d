@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:42:19 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/30 18:36:04 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/01 11:11:51 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void init_map(t_map *map)
     map->width = -1;
     map->height = -1;
     map->iszoom = 0;
-    map->player_size = 4;
+    map->player_size = PLAYER_SIZE;
     map->minimap_size = 100;
     map->prefix_palyer_x = 102;
     map->prefix_palyer_y = 102;

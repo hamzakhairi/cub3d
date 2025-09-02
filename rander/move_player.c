@@ -6,7 +6,7 @@ int player_rotation(t_game *game)
 		game->map->angle = game->map->angle - 0.1;
 	else if (game->map->key == KEY_RIGHT)
 		game->map->angle = game->map->angle + 0.1;
-	if(game->map->angle >= 2 * M_PI)
+	if (game->map->angle >= 2 * M_PI)
 		game->map->angle -= 2 * M_PI;
 	if (game->map->angle < 0)
 		game->map->angle += 2 * M_PI;
@@ -15,68 +15,114 @@ int player_rotation(t_game *game)
 
 int Move_player(t_game *game, float y, float x, int i)
 {
-	if (game->map->RayFacingUp && game->map->RayFacingLeft)
-		y = y - 1;
-	else if (game->map->RayFacingRight && game->map->RayFacingDown)
-		x = x - 1;
-	else if (game->map->RayFacingUp && game->map->RayFacingRight)
-	{
-		x = x - 1;
-		y = y - 1;
-	}
+	float move_player_size_x_y;
 
-	if (x < 0 || y < 0 || x > game->map->width || y > game->map->height)
-	{
-		printf("x = %f y = %f\n", x /SIZE, y /SIZE);
-		printf("game->map->width = %d   game->map->height  = %d\n", game->map->width/SIZE, game->map->height/SIZE);
-		return (0);
-	}
+	float a_y;
+	float b_x;
+	float c_y;
+	float d_x;
+	float t_y;
+	float r_x;
+	float m_y;
+	float n_x;
 
-	if (game->map->grid[(int)y / SIZE][(int)x / SIZE] != '1' && (game->map->grid[(int)y / SIZE][(int)x / SIZE] != 'D' || game->is_open_door))
+	float a_yy;
+	float b_xx;
+	float c_yy;
+	float d_xx;
+	float t_yy;
+	float r_xx;
+	float m_yy;
+	float n_xx;
+
+	move_player_size_x_y = sqrtf(powf(MOVE_PLAYER_SIZE, 2) - (powf(MOVE_PLAYER_SIZE, 2) / 2));
+
+	a_y = (y - MOVE_PLAYER_SIZE) / SIZE;
+	b_x = (x) / SIZE;
+	c_y = (y + MOVE_PLAYER_SIZE) / SIZE;
+	d_x = (x) / SIZE;
+	t_y = (y) / SIZE;
+	r_x = (x + MOVE_PLAYER_SIZE) / SIZE;
+
+	m_y = (y) / SIZE;
+	n_x = (x - MOVE_PLAYER_SIZE) / SIZE;
+//
+	a_yy = (y - move_player_size_x_y) / SIZE;
+	b_xx =(x + move_player_size_x_y) / SIZE;
+
+	c_yy = (y + move_player_size_x_y) / SIZE;
+	d_xx =(x + move_player_size_x_y) / SIZE;
+
+	t_yy = (y - move_player_size_x_y) / SIZE;
+	r_xx =(x - move_player_size_x_y) / SIZE;
+
+	m_yy = (y + move_player_size_x_y) / SIZE;
+	n_xx =(x - move_player_size_x_y) / SIZE;
+
+	if (game->map->grid[(int)a_y][(int)b_x] != '1' && game->map->grid[(int)c_y][(int)d_x] != '1' 
+		&& game->map->grid[(int)t_y][(int)r_x] != '1' && game->map->grid[(int)m_y][(int)n_x] != '1'
+		&& game->map->grid[(int)a_yy][(int)b_xx] != '1' && game->map->grid[(int)c_yy][(int)d_xx] != '1'
+		&& game->map->grid[(int)t_yy][(int)r_xx] != '1' && game->map->grid[(int)m_yy][(int)n_xx] != '1'
+		&& (game->map->grid[(int)y / SIZE][(int)x / SIZE] != 'D' || game->is_open_door))
 	{
-		game->player_pixl_y = y;
 		game->player_pixl_x = x;
-		return(0);
+		game->player_pixl_y = y;
+		return (0);
 	}
 	return (1);
 }
 
+int move_game(t_game *game, int i)
+{
+	float new_x;
+	float new_y;
+	int check;
+
+	if (game->map->key == KEY_S)
+	{
+		new_x = game->player_pixl_x - (cosf(game->map->angle) * i);
+		new_y = game->player_pixl_y - (sinf(game->map->angle) * i);
+		check = Move_player(game, new_y, new_x, i);
+	}
+	else if (game->map->key == KEY_W)
+	{
+		new_x = game->player_pixl_x + (cosf(game->map->angle) * i);
+		new_y = game->player_pixl_y + (sinf(game->map->angle) * i);
+		check = Move_player(game, new_y, new_x , i);
+	}
+	else if (game->map->key == KEY_A)
+	{
+		new_x = game->player_pixl_x - (sinf(game->map->angle) * i);
+		new_y = game->player_pixl_y + (cosf(game->map->angle) * i);
+		check = Move_player(game, new_y, new_x, i);
+	}
+	else if (game->map->key == KEY_D)
+	{
+		new_x = game->player_pixl_x + (sinf(game->map->angle) * i);
+		new_y = game->player_pixl_y - (cosf(game->map->angle) * i);
+		check = Move_player(game, new_y, new_x, i);
+	}
+	return (check);
+}
+
+
 int	moving(int key, t_game *game)
 {
 	game->map->key = key;
-	// printf("[%d]\n", key);
 	int i;
 	int check;
 	float new_x;
 	float new_y;
+
+
 	i = NUM_GAME_MOVES;
 	while(i > 0)
 	{
 		if (game->map->key == ESC)
 			exit(0);
-		else if (game->map->key == KEY_S)
+		else if (game->map->key == KEY_S || game->map->key == KEY_W || game->map->key == KEY_A || game->map->key == KEY_D)
 		{
-			new_x = game->player_pixl_x - (cosf(game->map->angle) * i);
-			new_y = game->player_pixl_y - (sinf(game->map->angle) * i);
-			check = Move_player(game, new_y, new_x, i);
-		}
-		else if (game->map->key == KEY_W)
-		{
-			new_x = game->player_pixl_x + (cosf(game->map->angle) * i);
-			new_y = game->player_pixl_y + (sinf(game->map->angle) * i);
-			check = Move_player(game, new_y, new_x , i);
-		}
-		else if (game->map->key == KEY_A)
-		{
-			new_x = game->player_pixl_x - (sinf(game->map->angle) * i);
-			new_y = game->player_pixl_y + (cosf(game->map->angle) * i);
-			check = Move_player(game, new_y, new_x, i);
-		}
-		else if (game->map->key == KEY_D)
-		{
-			new_x = game->player_pixl_x + (sinf(game->map->angle) * i);
-			new_y = game->player_pixl_y - (cosf(game->map->angle) * i);
-			check = Move_player(game, new_y, new_x, i);
+			check = move_game(game, i);
 		}
 		else if (game->map->key == KEY_T)
 		{
@@ -86,7 +132,6 @@ int	moving(int key, t_game *game)
 		}
 		else if (game->map->key == KEY_Q)
 		{
-			
 			if (!game->is_open_door)
 				game->is_open_door = 1;
 			else
@@ -114,7 +159,7 @@ int	moving(int key, t_game *game)
 			}
 			else
 			{
-				game->map->player_size = 4;
+				game->map->player_size = PLAYER_SIZE;
 				game->map->minimap_size = 100;
 				game->map->prefix_palyer_x = 102;
 				game->map->prefix_palyer_y = 102;

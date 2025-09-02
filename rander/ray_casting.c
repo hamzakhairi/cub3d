@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:58:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/31 22:43:14 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/02 09:08:42 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	get_vertical(t_game *game)
 
 void directoin_player(t_game *game)
 {
-    while (game->map->angle < 0)
+    if (game->map->angle < 0)
 		game->map->angle += 2 * M_PI;
-    while (game->map->angle >= 2 * M_PI)
+    if (game->map->angle >= 2 * M_PI)
 		game->map->angle -= 2 * M_PI;
     
     game->map->RayFacingDown = (game->map->angle > 0 && game->map->angle < M_PI);
@@ -64,17 +64,13 @@ float	horizontal_wall(t_game *game)
 	int	xh;
 	int	yh;
 	int	check_y;
-    int map_x, map_y;
 
 	while (1)
 	{
 		xh = (int)game->map->X_horizontal / SIZE;
 		yh = (int)game->map->Y_horizontal / SIZE;
 		
-		map_x = xh;
-        map_y = yh;
-		
-		if (xh < 0 || yh < 0 || xh >= (game->map->width / SIZE) || yh >= (game->map->height / SIZE) || game->map->grid[map_y] == NULL || map_x >= (int)strlen(game->map->grid[map_y]))
+		if (xh < 0 || yh < 0 || xh >= (game->map->width / SIZE) || yh >= (game->map->height / SIZE) || game->map->grid[yh] == NULL || xh >= (int)strlen(game->map->grid[yh]))
 			break ;
 		check_y = yh;
 		if (game->map->RayFacingUp)
@@ -157,12 +153,12 @@ float	ray_casting(t_game *game, float ray_angle, int ray_count)
 	temp_angle = game->map->angle;
 	game->map->angle = ray_angle;
 	directoin_player(game);
-	game->map->Y_horizontal = floorf(game->player_pixl_y / SIZE) * SIZE;
+	game->map->Y_horizontal = (float)(((int)game->player_pixl_y / SIZE) * SIZE);
 	if (game->map->RayFacingDown)
 		game->map->Y_horizontal += SIZE;
 	game->map->X_horizontal = game->player_pixl_x + (game->map->Y_horizontal - game->player_pixl_y) / tanf(ray_angle);
 	dis_h = horizontal_wall(game);
-	game->map->X_vertical = floorf(game->player_pixl_x / SIZE) * SIZE;
+	game->map->X_vertical = (float)(((int)game->player_pixl_x / SIZE) * SIZE);
 	if (game->map->RayFacingRight)
 		game->map->X_vertical += SIZE;
 	game->map->Y_vertical = game->player_pixl_y + (game->map->X_vertical - game->player_pixl_x) * tanf(ray_angle);

@@ -7,13 +7,15 @@ int handel_move(int val, int set)
         x = val;
     else
         return x;
-    return -1;
+    return (-1);
 }
 
 int mouse_move_player(int x, int y, void *struct_game)
 {
-    t_game *game = (t_game *)struct_game;
-    static int start = 0;
+    t_game      *game;
+    static int  start = 0;
+
+    game = (t_game *)struct_game;
     if (start == 0)
     {
         handel_move(x, 0);
@@ -34,7 +36,7 @@ int mouse_move_player(int x, int y, void *struct_game)
             handel_move(x, 0);
         }        
     }
-    return 0;
+    return (0);
 }
 
 

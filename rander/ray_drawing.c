@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:57:01 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/31 20:50:56 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:14:52 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,49 +31,58 @@ int get_tex_pixel(t_tex *tex, int x, int y)
 
 t_tex *get_wall_texture(t_game *game, int ray_index)
 {
-    int wall_dir = game->map->wall_direction[ray_index];
+    int wall_dir;
+
+    wall_dir = game->map->wall_direction[ray_index];
 
 	if (game->ray_valeu[ray_index] == 'D')
-		return &game->img_door;
+		return (&game->img_door);
 	if (wall_dir == 1)
-		return &game->img_north;
+		return (&game->img_north);
 	else if (wall_dir == 2)
-		return &game->img_east;
+		return (&game->img_east);
 	else if (wall_dir == 3)
 		return &game->img_west;
 	else if (wall_dir == 4)
-		return &game->img_south;
+		return (&game->img_south);
 	else
-		return &game->img_north;
+		return (&game->img_north);
 }
 
 float calculate_wall_hit_x(t_game *game, int ray_index, float distance)
 {
-    float ray_angle = game->map->angle - FOV / 2 + (ray_index * FOV / WIDTH_3D);
-    float hit_x, hit_y;
-    
+    int     wall_dir;
+    float   ray_angle;
+    float   hit_x;
+    float   hit_y;
+
+    ray_angle = game->map->angle - FOV / 2 + (ray_index * FOV / WIDTH_3D);
     hit_x = game->player_pixl_x + distance * cosf(ray_angle);
     hit_y = game->player_pixl_y + distance * sinf(ray_angle);
 
-    int wall_dir = game->map->wall_direction[ray_index];
+    wall_dir = game->map->wall_direction[ray_index];
     if (wall_dir == 1 || wall_dir == 4)
-        return hit_x - floor(hit_x / SIZE) * SIZE;
+        return (hit_x - floor(hit_x / SIZE) * SIZE);
     else
-        return hit_y - floor(hit_y / SIZE) * SIZE;
+        return (hit_y - floor(hit_y / SIZE) * SIZE);
 }
 
 
 void draw_line_height(t_game *game, int x)
 {
-	int draw_start;
-	float tex_step;
-	float tex_pos;
-	int draw_end;
-    int y = 0;
-    t_tex *tex = get_wall_texture(game, x);
-    
-    float wall_hit = calculate_wall_hit_x(game, x, game->map->dis[x]);
-    int tex_x = (int)((wall_hit / SIZE) * tex->width);
+	int     draw_start;
+	float   tex_step;
+	float   tex_pos;
+	int     draw_end;
+    int     y;
+    t_tex   *tex;
+    float   wall_hit;
+    int     tex_x;
+
+    tex = get_wall_texture(game, x);
+    y = 0;
+    wall_hit = calculate_wall_hit_x(game, x, game->map->dis[x]);
+    tex_x = (int)((wall_hit / SIZE) * tex->width);
     
     if (tex_x < 0)
 		tex_x = 0;
@@ -93,9 +102,7 @@ void draw_line_height(t_game *game, int x)
     tex_step = (float)tex->height / game->wall_height;
     tex_pos = 0;
     if (game->wall_top < 0)
-    {
         tex_pos = (0 - game->wall_top) * tex_step;
-    }
     
     while (y < HEIGHT_3D)
     {
@@ -126,12 +133,15 @@ void draw_line_height(t_game *game, int x)
 
 void image_3d(t_game *game)
 {
-    int x = 0;
+    int     x;
+    float   ray_angle;
+
+    x = 0;
     game->distance_plane = (WIDTH_3D / 2) / tanf(FOV / 2);
     
     while (x < WIDTH_3D)
     {
-        float ray_angle = game->map->angle - FOV / 2 + (x * FOV / WIDTH_3D);
+        ray_angle = game->map->angle - FOV / 2 + (x * FOV / WIDTH_3D);
         game->corrected_distance = game->map->dis[x] * cosf(game->map->angle - ray_angle);
         if (game->corrected_distance < 0.1f)
             game->corrected_distance = 0.1f;
