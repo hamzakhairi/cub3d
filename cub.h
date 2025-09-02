@@ -75,30 +75,29 @@ typedef struct s_map {
 	int		width;
 	int		height;
 
-	int iszoom;
-	int scale;
-	int player_size;
-	int minimap_size;
-	int prefix_palyer_x;
-	int prefix_palyer_y;
-
-	int RayFacingDown;
-	int RayFacingUp;
-	int RayFacingRight;
-	int RayFacingLeft;
+	int		iszoom;
+	int		scale;
+	int		player_size;
+	int		minimap_size;
+	int		prefix_palyer_x;
+	int		prefix_palyer_y;
+	int		RayFacingDown;
+	int		RayFacingUp;
+	int		RayFacingRight;
+	int		RayFacingLeft;
 } t_map;
 
 typedef struct s_player
 {
-	void **images_walk;
-	void **images_shout;
-	void **images_Feeding;
-	int images_counter_walk;
-	int images_counter_shot;
-	int images_counter_Feeding;
-	int current_image;
-	int frame;
-	int is_state;
+	void	**images_walk;
+	void	**images_shout;
+	void	**images_Feeding;
+	int		images_counter_walk;
+	int		images_counter_shot;
+	int		images_counter_Feeding;
+	int		current_image;
+	int		frame;
+	int		is_state;
 } t_player;
 
 
@@ -111,9 +110,6 @@ typedef struct s_game {
 	int			player_y;
 	float		player_pixl_x;
 	float		player_pixl_y;
-
-	float		cp_player_pixl_x;
-	float		cp_player_pixl_y;
 
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -129,12 +125,13 @@ typedef struct s_game {
 	t_tex		img_east;
 	t_tex		img_west;
 	t_tex		img_door;
-	int is_open_door;
-	float distance_plane;
-	float wall_height;
-	int wall_top;
-	int wall_bottom;
-	float corrected_distance;
+
+	int		is_open_door;
+	float	distance_plane;
+	float	wall_height;
+	int		wall_top;
+	int		wall_bottom;
+	float	corrected_distance;
 	
 	char  		*addr;
 	int			bits_per_pixel;
@@ -249,6 +246,7 @@ char	*ft_other_strdup(char *s);
 char	*ft_itoa(int n);
 int	ft_isdigit(int c);
 int	ft_mini_atoi(char *str, int start, int end);
+void free_game(t_game *game);
 
 /****************************************
 *	ceiling_color = (game->config->ceiling_color[0] << 16) | 

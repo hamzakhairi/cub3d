@@ -1,5 +1,5 @@
 CC = cc
-CFLAG = -fsanitize=address -g #-Wall -Wextra -Werror
+CFLAG = -g -fsanitize=address  #-Wall -Wextra -Werror
 
 SRC_MAIN = \
 	./main.c
@@ -53,7 +53,6 @@ NAME = cub
 MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit -lm
 all : $(NAME) clean
 	clear
-	./cub ./texter/map.cub
 
 $(NAME) : $(OBJ)
 	$(CC) $(CFLAG) $(MLX_FLAGS) $(OBJ) -o $(NAME) 

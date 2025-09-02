@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:42:19 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/02 09:45:29 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/02 10:53:49 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,42 @@ void init_map(t_map *map)
     map->scale = SCALE;
 }
 
+void init_game(t_game *game)
+{
+    game->mlx_ptr = NULL;
+    game->win_ptr = NULL;
+    game->img_ptr = NULL;
+    game->addr = NULL;
+    game->map = NULL;
+    game->config = NULL;
+    game->img_door.addr = NULL;
+    game->img_door.img = NULL;
+    game->img_south.addr = NULL;
+    game->img_south.img = NULL;
+    game->img_north.addr = NULL;
+    game->img_north.img = NULL;
+    game->img_west.addr = NULL;
+    game->img_west.img = NULL;
+    game->img_east.addr = NULL;
+    game->img_east.img = NULL;
+    game->player_x = -1;
+    game->start_parcing_map = -1;
+    game->player_y = -1;
+    game->is_open_door = 0;
+}
+
 int init_struct(t_game *game)
 {
-	game->config = malloc(sizeof(t_config));
-	if (!game->config)
-		return (0);
-	game->map = malloc(sizeof(t_map));
-	if (!game->map)
-		return (free(game->config), 0);
-	game->player_x = -1;
-	game->start_parcing_map = -1;
-	game->player_y = -1;
-	init_map(game->map);
-	init_config(game->config);
-	game->is_open_door = 0;
-	return (1);
+    init_game(game);
+    game->config = NULL;
+    game->map = NULL;
+    game->config = malloc(sizeof(t_config));
+    if (!game->config)
+        return (0);
+    game->map = malloc(sizeof(t_map));
+    if (!game->map)
+        return (free(game->config), 0);
+    init_map(game->map);
+    init_config(game->config);
+    return (1);
 }
