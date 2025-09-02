@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:11:48 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/31 11:18:49 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/02 10:14:37 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int main(int argc, char *argv[])
 {
     t_game *game;
-    void *mlx_ptr;
-    void *win_ptr; 
 
     game = malloc(sizeof(t_game));
     if (!game)

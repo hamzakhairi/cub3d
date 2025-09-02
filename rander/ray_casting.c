@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:58:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/02 09:08:42 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/02 09:43:38 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,16 @@ float	horizontal_wall(t_game *game)
 		xh = (int)game->map->X_horizontal / SIZE;
 		yh = (int)game->map->Y_horizontal / SIZE;
 		
-		if (xh < 0 || yh < 0 || xh >= (game->map->width / SIZE) || yh >= (game->map->height / SIZE) || game->map->grid[yh] == NULL || xh >= (int)strlen(game->map->grid[yh]))
+		if (xh < 0 || yh < 0 || xh >= (game->map->width / SIZE) || yh >= (game->map->height / SIZE)
+			|| game->map->grid[yh] == NULL || xh >= (int)strlen(game->map->grid[yh]))
 			break ;
 		check_y = yh;
 		if (game->map->RayFacingUp)
 			check_y = yh - 1;
 
-		if (check_y >= 0 && check_y < (game->map->height / SIZE) && xh < (int)strlen(game->map->grid[check_y]) &&
-		    game->map->grid[check_y] != NULL && (game->map->grid[check_y][xh] == '1' || (game->map->grid[check_y][xh] == 'D' && !game->is_open_door)))
+		if (check_y >= 0 && check_y < (game->map->height / SIZE) && xh < (int)strlen(game->map->grid[check_y])
+			&& game->map->grid[check_y] != NULL && (game->map->grid[check_y][xh] == '1'
+			|| (game->map->grid[check_y][xh] == 'D' && !game->is_open_door)))
 		{
 			if (game->map->grid[check_y][xh] == '1')
 				game->ray_valeu_h = '1';
