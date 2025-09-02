@@ -1,5 +1,5 @@
 CC = cc
-CFLAG = -fsanitize=address -g #-Wall -Wextra -Werror
+CFLAG = -g -fsanitize=address  #-Wall -Wextra -Werror
 
 SRC_MAIN = \
 	./main.c
@@ -10,7 +10,7 @@ SRC_PARCING = \
 	./Parsing/init_struct.c \
 	./Parsing/parcing_color.c \
 	./Parsing/parcing_dir.c \
-	./Parsing/prcing_map.c \
+	./Parsing/parcing_map.c \
 	./Parsing/cheack_lines.c
 
 SRC_ERROR = \
@@ -28,7 +28,8 @@ SRC_UTILS = \
 	./utils/ft_strchr.c \
 	./utils/ft_other_strdup.c \
 	./utils/free_game.c \
-	./utils/ft_itoa.c
+	./utils/ft_itoa.c \
+	./utils/ft_isdigit.c
 
 SRC_RANDER = \
 	./rander/file_create_window.c \
@@ -37,7 +38,8 @@ SRC_RANDER = \
 	./rander/ray_drawing.c \
 	./rander/handel_direction.c \
 	./rander/start_randering.c \
-	./rander/loading_image.c
+	./rander/loading_image.c \
+	./utils/ft_mini_atoi.c
 
 
 OBJ = $(SRC_RANDER:.c=.o) $(SRC_PARCING:.c=.o) $(SRC_MAIN:.c=.o) $(SRC_ERROR:.c=.o) $(SRC_GET_LINE:.c=.o) $(SRC_UTILS:.c=.o)
@@ -51,7 +53,6 @@ NAME = cub
 MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit -lm
 all : $(NAME) clean
 	clear
-	./cub ./texter/map.cub
 
 $(NAME) : $(OBJ)
 	$(CC) $(CFLAG) $(MLX_FLAGS) $(OBJ) -o $(NAME) 

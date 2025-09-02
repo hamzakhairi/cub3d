@@ -247,7 +247,9 @@ char *ft_substr(char *str, int start, int end);
 char	*ft_strchr(const char *s, int c);
 char	*ft_other_strdup(char *s);
 char	*ft_itoa(int n);
-
+int	ft_isdigit(int c);
+int	ft_mini_atoi(char *str, int start, int end);
+void free_game(t_game *game);
 
 /****************************************
 *	ceiling_color = (game->config->ceiling_color[0] << 16) | 

@@ -21,22 +21,25 @@ void free_map(t_map *map)
     int i = 0;
     while (map->grid[i])
     {
+        // printf("free ::: %d\n", i);
         free(map->grid[i]);
         i++;
     }
     free(map->grid);
+    free(map);
 }
 
 void free_game(t_game *game)
 {
-    free_map(game->map);
-    free_config(game->config);
+    if (game->map)
+        free_map(game->map);
+    if (game->config)
+        free_config(game->config);
     if(game->mlx_ptr)
         free(game->mlx_ptr);
     if(game->win_ptr)
         free(game->win_ptr);
      if(game->img_ptr)
         free(game->img_ptr);
-    free(game->map);
     free(game);
 }
