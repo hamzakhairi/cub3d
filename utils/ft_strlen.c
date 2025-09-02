@@ -6,11 +6,11 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:17:42 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/07/02 18:18:34 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/02 22:33:02 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../cub.h"
+#include "../cub.h"
 
 int	ft_strlen(const char *s)
 {

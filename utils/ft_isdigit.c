@@ -6,13 +6,13 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 21:51:24 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/31 21:52:05 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/02 22:32:21 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../cub.h"
+#include "../cub.h"
 
 int	ft_isdigit(int c)
 {
-	return (c >= 48 && c <= 57);
+	return ((c >= 48) && (c <= 57));
 }

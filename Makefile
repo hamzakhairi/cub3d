@@ -29,7 +29,8 @@ SRC_UTILS = \
 	./utils/ft_other_strdup.c \
 	./utils/free_game.c \
 	./utils/ft_itoa.c \
-	./utils/ft_isdigit.c
+	./utils/ft_isdigit.c \
+	./utils/ft_mini_atoi.c
 
 SRC_RANDER = \
 	./rander/file_create_window.c \
@@ -39,7 +40,8 @@ SRC_RANDER = \
 	./rander/handel_direction.c \
 	./rander/start_randering.c \
 	./rander/loading_image.c \
-	./utils/ft_mini_atoi.c
+	./rander/init_image_player.c \
+	./rander/rollback.c
 
 
 OBJ = $(SRC_RANDER:.c=.o) $(SRC_PARCING:.c=.o) $(SRC_MAIN:.c=.o) $(SRC_ERROR:.c=.o) $(SRC_GET_LINE:.c=.o) $(SRC_UTILS:.c=.o)

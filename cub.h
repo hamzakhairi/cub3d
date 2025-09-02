@@ -218,6 +218,11 @@ int loading_image(t_game *game);
 int loop_inimation(t_game *game);
 void update_state(t_game *game);
 void render_images(t_game *game);
+int loading_image(t_game *game);
+void free_feed_images(t_game *game);
+void free_shot_images(t_game *game);
+void free_walk_images(t_game *game);
+char *path_image_image(char *PRE_FIX, int n);
 
 /****************************************
 *			error						*

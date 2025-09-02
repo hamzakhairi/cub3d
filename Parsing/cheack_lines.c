@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 21:16:33 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/01 09:09:07 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/02 22:36:36 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,25 @@ int	ft_check_fl_line(char *str)
 int	check_direction(t_game *game, int index, int i, int j)
 {
 	char	*str;
+	int		x;
 
 	str = game->map->grid[index];
-	if (ft_strchr("0NSWED", str[i + j]) && ((str[i + j - 1] == ' ')
-			|| (str[i + j + 1] && str[i + j + 1] == ' ')
-			|| (!str[i + j + 1])))
+	x = i + j;
+	if (x > 0 && ft_strchr("0NSWED", str[x]) && ft_strchr(" \t", str[x - 1]))
 		return (ft_putendl_fd(ERROR_MAP, 2), 0);
-	else if (ft_strchr("0NSWED", str[i + j])
-		&& game->map->grid[index - 1][i + j] == ' ')
+	if (ft_strchr("0NSWED", str[x]) && ft_strchr(" \t", str[x + 1]))
 		return (ft_putendl_fd(ERROR_MAP, 2), 0);
-	else if (ft_strchr("0NSWED", str[i + j])
-		&& game->map->grid[index + 1][i + j] == ' ')
+	if (ft_strchr("0NSWED", str[x])
+		&& (index > 0
+			&& ((ft_strlen(game->map->grid[index - 1]) > x
+					&& ft_strchr(" \t", game->map->grid[index - 1][x]))
+			|| ft_strlen(game->map->grid[index - 1]) < x)))
+		return (ft_putendl_fd(ERROR_MAP, 2), 0);
+	if (ft_strchr("0NSWED", str[x])
+		&& (game->map->grid[index + 1]
+			&& ((ft_strlen(game->map->grid[index + 1]) > x
+					&& ft_strchr(" \t", game->map->grid[index + 1][x]))
+			|| ft_strlen(game->map->grid[index + 1]) < x)))
 		return (ft_putendl_fd(ERROR_MAP, 2), 0);
 	return (1);
 }
@@ -57,7 +65,7 @@ int	check_dir(char *str, int index, t_game *game)
 		i++;
 	while (str[i + j])
 	{
-		if (!ft_strchr(" 01NSWED", str[i + j]))
+		if (!ft_strchr("\t 01NSWED", str[i + j]))
 			return (ft_putendl_fd(ERROR_MAP, 2), 0);
 		else if (str[i + j] != '1')
 		{

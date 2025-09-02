@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 10:10:02 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/01 10:38:53 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/02 22:17:13 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ int	get_map_length(char *path, int skip_lines)
 		(free(line), line = get_next_line(fd));
 		i++;
 	}
+	free(line);
 	line = get_next_line(fd);
 	while (line)
 	{
 		(free(line), length += 1);
 		line = get_next_line(fd);
 	}
-	close(fd);
-	return (length);
+	return (get_next_line(-1), close(fd), length);
 }
 
 int	skip_to_map(int fd, int limit)

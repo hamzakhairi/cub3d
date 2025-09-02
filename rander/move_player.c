@@ -119,7 +119,7 @@ int	moving(int key, t_game *game)
 	while(i > 0)
 	{
 		if (game->map->key == ESC)
-			exit(0);
+			(free_game(game), exit(0));
 		else if (game->map->key == KEY_S || game->map->key == KEY_W || game->map->key == KEY_A || game->map->key == KEY_D)
 		{
 			check = move_game(game, i);

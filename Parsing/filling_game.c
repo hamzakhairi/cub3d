@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:12:05 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/31 22:01:14 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/02 22:16:39 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,16 @@ int	filling_game(char *argv[], t_game *game)
 	while (str)
 	{
 		if (game->start_parcing_map == -1 && !check_diection_texter(game, str))
-			return (get_next_line(-1), free(str), 0);
+			return (get_next_line(-1), free(str), close(fd), 0);
 		else if (game->start_parcing_map == -1 && !check_cloros(game, str))
-			return (get_next_line(-1), free(str), 0);
+			return (get_next_line(-1), free(str), close(fd), 0);
 		else if (!check_if_start_prcing_map(str))
 		{
 			game->start_parcing_map = ++start;
 			(get_next_line(-1), free(str));
 			break ;
 		}
-		(free(str), start++);
-		str = get_next_line(fd);
+		(free(str), start++, str = get_next_line(fd));
 	}
-	return (1);
+	return (close(fd), 1);
 }

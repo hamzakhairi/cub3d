@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/02 22:28:55 by hkhairi           #+#    #+#             */
+/*   Updated: 2025/09/02 22:33:16 by hkhairi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-# include "../cub.h"
+#include "../cub.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -14,9 +25,9 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 			return (1);
 		i++;
 	}
-    if (s1[i] && s1[i] != ' ')
-    {
-        return (1);
-    }
+	if (s1[i] && s1[i] != ' ')
+	{
+		return (1);
+	}
 	return (0);
 }

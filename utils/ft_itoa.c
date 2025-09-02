@@ -6,11 +6,11 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 21:51:33 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/31 21:51:37 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/02 22:32:27 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../cub.h"
+#include "../cub.h"
 
 static int	len_of_number(int n)
 {
