@@ -10,7 +10,7 @@ SRC_PARCING = \
 	./Parsing/init_struct.c \
 	./Parsing/parcing_color.c \
 	./Parsing/parcing_dir.c \
-	./Parsing/prcing_map.c \
+	./Parsing/parcing_map.c \
 	./Parsing/cheack_lines.c
 
 SRC_ERROR = \

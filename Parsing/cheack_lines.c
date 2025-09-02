@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 21:16:33 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/08/31 22:05:10 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/01 09:09:07 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ int	check_direction(t_game *game, int index, int i, int j)
 	char	*str;
 
 	str = game->map->grid[index];
-	if (str[i + j] == '0' && ((str[i + j - 1] == ' ')
+	if (ft_strchr("0NSWED", str[i + j]) && ((str[i + j - 1] == ' ')
 			|| (str[i + j + 1] && str[i + j + 1] == ' ')
 			|| (!str[i + j + 1])))
 		return (ft_putendl_fd(ERROR_MAP, 2), 0);
-	else if (ft_strchr("0NSWE", str[i + j])
+	else if (ft_strchr("0NSWED", str[i + j])
 		&& game->map->grid[index - 1][i + j] == ' ')
 		return (ft_putendl_fd(ERROR_MAP, 2), 0);
-	else if (ft_strchr("0NSWE", str[i + j])
+	else if (ft_strchr("0NSWED", str[i + j])
 		&& game->map->grid[index + 1][i + j] == ' ')
 		return (ft_putendl_fd(ERROR_MAP, 2), 0);
 	return (1);

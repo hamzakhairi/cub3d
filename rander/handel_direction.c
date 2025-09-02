@@ -14,6 +14,7 @@ int mouse_move_player(int x, int y, void *struct_game)
 {
     t_game *game = (t_game *)struct_game;
     static int start = 0;
+
     if (start == 0)
     {
         handel_move(x, 0);
