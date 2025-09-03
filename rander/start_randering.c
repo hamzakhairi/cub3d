@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_randering.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 10:55:48 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/08/31 15:22:51 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:17:20 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	create_window(t_game *game)
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
 		return (ft_putendl_fd(ERROR_INIT, 2), 1);
-	loading_image(game);
+	if (!loading_image(game))
+		return (1);
 	game->win_ptr = mlx_new_window(game->mlx_ptr, WIDTH_3D, HEIGHT_3D, "cub3D");
 	if (!game->win_ptr)
 		return (ft_putendl_fd(ERROR_WINDOW, 2), 1);

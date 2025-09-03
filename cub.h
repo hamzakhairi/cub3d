@@ -4,6 +4,7 @@
 # define CUB_H
 
 # include <mlx.h>
+// # include "/home/rd_md_haker/Documents/mlx/mlx.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -34,9 +35,6 @@
 # define SPEED 4
 # define PLAYER_SIZE 2
 # define MOVE_PLAYER_SIZE 4
-# define MINIMAP_SIZE 100
-# define PREFIX_PX 102
-# define PREFIX_PY 102
 # define PATH_WLKING "./texter/player/rm_bg_walk/"
 # define PATH_FEEDING "./texter/player/feeding/"
 # define PATH_SOTING "./texter/player/xpm_shot/"
@@ -102,8 +100,6 @@ typedef struct s_player
 	int		frame;
 	int		is_state;
 } t_player;
-
-
 
 typedef struct s_game {
 	t_config	*config;
@@ -218,7 +214,6 @@ int loading_image(t_game *game);
 int loop_inimation(t_game *game);
 void update_state(t_game *game);
 void render_images(t_game *game);
-int loading_image(t_game *game);
 void free_feed_images(t_game *game);
 void free_shot_images(t_game *game);
 void free_walk_images(t_game *game);

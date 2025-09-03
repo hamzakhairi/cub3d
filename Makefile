@@ -1,5 +1,5 @@
 CC = cc
-CFLAG = -g -fsanitize=address  #-Wall -Wextra -Werror
+CFLAG = #-g -fsanitize=address  #-Wall -Wextra -Werror
 
 SRC_MAIN = \
 	./main.c
@@ -53,11 +53,13 @@ NAME = cub
 # MLX_DIR = ./minilibx-mac
 
 MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit -lm
-all : $(NAME) clean
+#-L /home/rd_md_haker/Documents/mlx -lmlx_Linux -lXext -lX11 -lm  #-lmlx -framework OpenGL -framework AppKit
+
+all : $(NAME)
 	clear
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAG) $(MLX_FLAGS) $(OBJ) -o $(NAME) 
+	$(CC) $(CFLAG) $(OBJ) $(MLX_FLAGS)  -o $(NAME) 
 #$(MAKE) -C $(MLX_DIR)
 #$(MLX_FLAGS)
 

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_drawing.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/27 16:57:01 by ylagzoul          #+#    #+#             */
+/*   Updated: 2025/09/01 21:14:52 by ylagzoul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../cub.h"
 
@@ -122,31 +133,24 @@ void draw_line_height(t_game *game, int x)
 
 void image_3d(t_game *game)
 {
-	float	angle_step;
-    
     int     x;
     float   ray_angle;
 
     x = 0;
     game->distance_plane = (WIDTH_3D / 2) / tanf(FOV / 2);
     
-    angle_step = FOV / WIDTH_3D;
-	ray_angle = game->map->angle - FOV / 2;
     while (x < WIDTH_3D)
     {
+        ray_angle = game->map->angle - FOV / 2 + (x * FOV / WIDTH_3D);
         game->corrected_distance = game->map->dis[x] * cosf(game->map->angle - ray_angle);
         if (game->corrected_distance < 0.1f)
             game->corrected_distance = 0.1f;
-        
         game->wall_height = (SIZE / game->corrected_distance) * game->distance_plane;
         if (game->wall_height > HEIGHT_3D * 3)
             game->wall_height = HEIGHT_3D * 3;
-        
         game->wall_top = (HEIGHT_3D / 2) - (game->wall_height / 2);
         game->wall_bottom = (HEIGHT_3D / 2) + (game->wall_height / 2);
-        
         draw_line_height(game, x);
-        ray_angle += angle_step;
         x++;
     }
 }

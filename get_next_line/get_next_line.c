@@ -65,7 +65,11 @@ char	*get_next_line(int fd)
 	t_gnl		str;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= INT_MAX)
+	{
+		if (fd == -1 && line)
+			(free(line), line = NULL);
 		return (NULL);
+	}
 	line = get_line(fd, line);
 	if (!line) 
 		return (NULL);
