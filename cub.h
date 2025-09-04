@@ -34,7 +34,7 @@
 # define NUM_GAME_MOVES 8
 # define SPEED 4
 # define PLAYER_SIZE 4
-# define MOVE_PLAYER_SIZE 10
+# define DST_W_P 10
 # define PATH_WLKING "./texter/player/rm_bg_walk/"
 # define PATH_FEEDING "./texter/player/feeding/"
 # define PATH_SOTING "./texter/player/xpm_shot/"
@@ -211,9 +211,9 @@ void	setup_ray(t_game *game);
 void image_3d(t_game *game);
 int create_image(t_game *game);
 void setup1_ray(t_game *game);
-float ray_casting(t_game *game, float ray_angle, int ray_count);
+float ray_cast(t_game *game, float ray_angle, int ray_count);
 
-int Move_player(t_game *game, float y, float x, int i);
+int move_player(t_game *game, float y, float x, int i);
 void directoin_player(t_game *game);
 float distance_palyer_wall(t_game *game, float dis_v, float dis_h, int ray_count);
 

@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 10:55:48 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/04 10:13:00 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/04 11:25:58 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	store_direction(t_game *game, int width, int height)
 {
+	game->player_pixl_x = game->player_x * SIZE + (SIZE / 2);
+	game->player_pixl_y = game->player_y * SIZE + (SIZE / 2);
 	if (game->map->grid[height][width] == 'N')
 	{
 		game->map->palyer = 'N';
@@ -36,23 +38,23 @@ void	store_direction(t_game *game, int width, int height)
 	}
 }
 
-void calculate_width_height(t_game *game)
+void	calculate_width_height(t_game *game)
 {
-	int width;
-	int height;
-	int x;
+	int	width;
+	int	height;
+	int	x;
 
 	x = 0;
 	height = 0;
-	game->player_pixl_x = game->player_x * SIZE + (SIZE / 2);
-	game->player_pixl_y = game->player_y * SIZE + (SIZE / 2);
 	while (game->map->grid[height])
 	{
 		width = 0;
 		while (game->map->grid[height][width])
 		{
-			if (game->map->grid[height][width] == 'N' || game->map->grid[height][width] == 'S'
-				|| game->map->grid[height][width] == 'E' || game->map->grid[height][width] == 'W')
+			if (game->map->grid[height][width] == 'N'
+				|| game->map->grid[height][width] == 'S'
+				|| game->map->grid[height][width] == 'E'
+				|| game->map->grid[height][width] == 'W')
 				store_direction(game, width, height);
 			width++;
 		}
