@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:57:01 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/01 21:14:52 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/04 11:11:17 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,12 @@ void	setup_ray(t_game *game)
 	ray_count = 0;
 	angle_step = FOV / WIDTH_3D;
 	ray_angle = game->map->angle - FOV / 2;
+    game->is_door_vx = -1;
+    game->is_door_vy = -1;
+    game->is_door_hx = -1;
+    game->is_door_hy = -1;
+    game->dst_door_h = -1;
+    game->dst_door_v = -1;
 	while (ray_count < WIDTH_3D)
 	{
 		if (ray_angle < 0)
@@ -175,6 +181,7 @@ void	setup_ray(t_game *game)
 		ray_angle += angle_step;
 		ray_count++;
 	}
+    printf("game->is_door_x    == %d      , game->is_door_y    == %d    ,game->dst_door == %f\n",game->is_door_x, game->is_door_y,game->dst_door);
 	image_3d(game);
 }
 

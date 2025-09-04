@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:58:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/02 10:38:54 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/04 11:00:15 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,12 @@ float	horizontal_wall(t_game *game)
 			if (game->map->grid[check_y][xh] == '1')
 				game->ray_valeu_h = '1';
 			else
+			{
+				game->is_door_hy = check_y;
+				game->is_door_hx = xh;
+				game->dst_door_h = sqrtf(powf(game->map->X_horizontal - game->player_pixl_x, 2) + powf(game->map->Y_horizontal - game->player_pixl_y, 2));
 				game->ray_valeu_h = 'D';
+			}
 			return (sqrtf(powf(game->map->X_horizontal - game->player_pixl_x, 2) + powf(game->map->Y_horizontal - game->player_pixl_y, 2)));
 		}
 		get_horizontal(game);
@@ -115,7 +120,12 @@ float	vertical_wall(t_game *game)
 			if (game->map->grid[yv][check_x] == '1')
 				game->ray_valeu_v = '1';
 			else
+			{
+				game->is_door_vy = yv;
+				game->is_door_vx = check_x;
+				game->dst_door_v = sqrtf(powf(game->map->X_vertical - game->player_pixl_x, 2) + powf(game->map->Y_vertical - game->player_pixl_y, 2));
 				game->ray_valeu_v = 'D';
+			}
 			return (sqrtf(powf(game->map->X_vertical - game->player_pixl_x, 2) + powf(game->map->Y_vertical - game->player_pixl_y, 2)));
 		}
 		get_vertical(game);
@@ -127,6 +137,9 @@ float distance_palyer_wall(t_game *game, float dis_v, float dis_h, int ray_count
 {
     if (dis_v < dis_h)
     {
+		game->is_door_x = game->is_door_vx;
+		game->is_door_y = game->is_door_vy;
+		game->dst_door = game->dst_door_v;
 		game->ray_valeu[ray_count] = game->ray_valeu_v;
         if (game->map->RayFacingRight)
             game->map->wall_direction[ray_count] = 3;
@@ -136,6 +149,9 @@ float distance_palyer_wall(t_game *game, float dis_v, float dis_h, int ray_count
     }
     else
     {
+		game->is_door_x = game->is_door_hx;
+		game->is_door_y = game->is_door_hy;
+		game->dst_door = game->dst_door_h;
 		game->ray_valeu[ray_count] = game->ray_valeu_h;
         if (game->map->RayFacingDown)
             game->map->wall_direction[ray_count] = 1;

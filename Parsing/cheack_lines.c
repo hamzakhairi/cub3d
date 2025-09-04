@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cheack_lines.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 21:16:33 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/02 22:36:36 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/04 10:33:34 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ int	check_direction(t_game *game, int index, int i, int j)
 
 	str = game->map->grid[index];
 	x = i + j;
-	if (x > 0 && ft_strchr("0NSWED", str[x]) && ft_strchr(" \t", str[x - 1]))
+	if (x == 0 && ft_strchr("0NSWED", str[x]))
+		return (ft_putendl_fd(ERROR_MAP, 2), 0);
+	else if (x > 0 && ft_strchr("0NSWED", str[x]) && ft_strchr(" \t", str[x - 1]))
 		return (ft_putendl_fd(ERROR_MAP, 2), 0);
 	if (ft_strchr("0NSWED", str[x]) && ft_strchr(" \t", str[x + 1]))
 		return (ft_putendl_fd(ERROR_MAP, 2), 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_randering.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 10:55:48 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/03 11:17:20 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/04 10:13:00 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,26 @@ void	store_direction(t_game *game, int width, int height)
 	if (game->map->grid[height][width] == 'N')
 	{
 		game->map->palyer = 'N';
-		game->map->angle = (3 * M_PI) / 2;//270 degrees dwon
+		game->map->angle = (3 * M_PI) / 2;
 	}
 	else if (game->map->grid[height][width] == 'S')
 	{
 		game->map->palyer = 'S';
-		game->map->angle = M_PI / 2;//90 degrees up
+		game->map->angle = M_PI / 2;
 	}
 	else if (game->map->grid[height][width] == 'E')
 	{
 		game->map->palyer = 'E';
-		game->map->angle = 0;//0 degrees left
+		game->map->angle = 0;
 	}
 	else if (game->map->grid[height][width] == 'W')
 	{
 		game->map->palyer = 'W';
-		game->map->angle = M_PI;// 180 degrees rigte¢
+		game->map->angle = M_PI;
 	}
 }
 
-void Calculate_width_height(t_game *game)
+void calculate_width_height(t_game *game)
 {
 	int width;
 	int height;
@@ -66,7 +66,7 @@ void Calculate_width_height(t_game *game)
 
 int	create_window(t_game *game)
 {
-	Calculate_width_height(game);
+	calculate_width_height(game);
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
 		return (ft_putendl_fd(ERROR_INIT, 2), 1);

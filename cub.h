@@ -31,10 +31,10 @@
 # define KEY_F 15
 # define KEY_RIGHT 124
 # define KEY_LEFT 123
-# define NUM_GAME_MOVES 10
+# define NUM_GAME_MOVES 8
 # define SPEED 4
-# define PLAYER_SIZE 2
-# define MOVE_PLAYER_SIZE 4
+# define PLAYER_SIZE 4
+# define MOVE_PLAYER_SIZE 10
 # define PATH_WLKING "./texter/player/rm_bg_walk/"
 # define PATH_FEEDING "./texter/player/feeding/"
 # define PATH_SOTING "./texter/player/xpm_shot/"
@@ -109,6 +109,18 @@ typedef struct s_game {
 	int			player_y;
 	float		player_pixl_x;
 	float		player_pixl_y;
+
+	int		is_door_hx;
+	int		is_door_hy;
+	int		is_door_vx;
+	int		is_door_vy;
+	float		dst_door_h;
+	float		dst_door_v;
+
+
+	int		is_door_x;
+	int		is_door_y;
+	float		dst_door;
 
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -190,7 +202,7 @@ int		create_window(t_game *game);
 void	create_put_image_to_window(t_game *game);
 void	ft_image(t_game *game, int width, int height);
 int		create_xpm_file_image(t_game *game);
-void	Calculate_width_height(t_game *game);
+void	calculate_width_height(t_game *game);
 int		moving(int key, t_game *game);
 void    setup_player(t_game *game);
 void    put_pixel(t_game *game, int x, int y, int color);
