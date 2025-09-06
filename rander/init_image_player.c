@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 22:22:55 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/03 11:47:54 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/06 16:26:59 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,19 +83,19 @@ int	load_feed_images(t_game *game)
 	int		h;
 	char	*str;
 
-	game->img_player->images_Feeding = malloc(sizeof(void *) * 42);
-	if (!game->img_player->images_Feeding)
+	game->img_player->images_feeding = malloc(sizeof(void *) * 42);
+	if (!game->img_player->images_feeding)
 		return (0);
-	set_null(game->img_player->images_Feeding, 41);
-	game->img_player->images_counter_Feeding = 41;
+	set_null(game->img_player->images_feeding, 41);
+	game->img_player->images_counter_feeding = 41;
 	i = 0;
-	while (i < game->img_player->images_counter_Feeding)
+	while (i < game->img_player->images_counter_feeding)
 	{
 		str = path_image_image(PATH_FEEDING, i + 1);
-		game->img_player->images_Feeding[i] = mlx_xpm_file_to_image(
+		game->img_player->images_feeding[i] = mlx_xpm_file_to_image(
 				game->mlx_ptr, str, &w, &h);
 		free(str);
-		if (!game->img_player->images_Feeding[i])
+		if (!game->img_player->images_feeding[i])
 			return (printf("Error Feeding %d\n", i), 0);
 		i++;
 	}

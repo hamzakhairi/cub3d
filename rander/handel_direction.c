@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handel_direction.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/04 14:30:16 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/05 09:55:53 by ylagzoul         ###   ########.fr       */
+/*   Created: 2025/09/06 15:47:30 by hkhairi           #+#    #+#             */
+/*   Updated: 2025/09/06 18:39:39 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	handel_move(int val, int set)
 {
-	static int x = 0;
+	static int	x = 0;
 
 	if (set == 0)
 		x = val;
@@ -25,9 +25,10 @@ int	handel_move(int val, int set)
 
 int	mouse_move_player(int x, int y, void *struct_game)
 {
-	t_game	*game;
-	static int start = 0;
+	static int	start = 0;
+	t_game		*game;
 
+	(void)y;
 	game = (t_game *)struct_game;
 	if (start == 0)
 	{
@@ -39,8 +40,7 @@ int	mouse_move_player(int x, int y, void *struct_game)
 		if ((handel_move(0, 1) - x) < 0)
 		{
 			game->map->key = KEY_RIGHT;
-			moving(KEY_RIGHT, game);
-			handel_move(x, 0);
+			(moving(KEY_RIGHT, game), handel_move(x, 0));
 		}
 		else if ((handel_move(0, 1) - x) > 0)
 		{

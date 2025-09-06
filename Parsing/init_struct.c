@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:42:19 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/02 22:16:03 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/06 19:57:32 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,14 @@ void	init_game(t_game *game)
 	game->start_parcing_map = -1;
 	game->player_y = -1;
 	game->is_open_door = 0;
+	game->new_x = 0;
+	game->new_y = 0;
+	game->fov = (VD * M_PI) / TABE;
 }
 
 void	init_player(t_player *img_player)
 {
-	img_player->images_Feeding = NULL;
+	img_player->images_feeding = NULL;
 	img_player->images_walk = NULL;
 	img_player->images_shout = NULL;
 	img_player->frame = 0;
@@ -91,17 +94,18 @@ int	init_struct(t_game *game)
 	game->config = NULL;
 	game->map = NULL;
 	game->img_player = NULL;
+	game->doors = NULL;
 	game->config = malloc(sizeof(t_config));
 	if (!game->config)
-		return (0);
+		return (ft_putendl_fd(ERROR_ALOCATION, 2), 0);
 	game->map = malloc(sizeof(t_map));
 	if (!game->map)
-		return (free(game->config), 0);
+		return (ft_putendl_fd(ERROR_ALOCATION, 2), 0);
 	init_map(game->map);
 	init_config(game->config);
 	game->img_player = malloc(sizeof(t_player));
 	if (!game->img_player)
-		return (0);
+		return (ft_putendl_fd(ERROR_ALOCATION, 2), 0);
 	init_player(game->img_player);
 	return (1);
 }

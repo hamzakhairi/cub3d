@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flow_move_palyer.c                                 :+:      :+:    :+:   */
+/*   move_palyer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 09:56:10 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/05 09:56:29 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/06 18:38:17 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_ft(t_game *game, float y, float x, int i)
 {
 	float	mv;
 
+	(void)i;
 	mv = sqrtf(powf(DST_W_P, 2) - (powf(DST_W_P, 2) / 2));
 	if ((game->map->grid[(int)(y - DST_W_P) / SIZE][(int)x / SIZE] != 'D'
 		&& game->map->grid[((int)y + DST_W_P) / SIZE][(int)x / SIZE] != 'D'
@@ -25,7 +26,9 @@ int	ft_ft(t_game *game, float y, float x, int i)
 		&& game->map->grid[(int)(y + mv) / SIZE][(int)(x - mv) / SIZE] != 'D'
 		&& game->map->grid[(int)(y - mv) / SIZE][(int)(x - mv) / SIZE] != 'D'
 		&& game->map->grid[(int)(y + mv) / SIZE][(int)(x - mv) / SIZE] != 'D')
-		|| (game->is_open_door))
+		|| (!(game->is_door_x != -1 && game->is_door_y != -1
+			&& !v_get_doors(game, game->is_door_x, game->is_door_y))
+		|| v_get_doors(game, game->player_x, game->player_y)))
 	{
 		return (0);
 	}

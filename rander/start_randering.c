@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_randering.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 10:55:48 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/05 21:05:32 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/06 15:44:38 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,6 @@ void	calculate_width_height(t_game *game)
 
 void	create_put_image_to_window(t_game *game)
 {
-	int x;
-	int y;
-	x = 0;
-	y = 0;
-	while(y > HEIGHT_3D)
-	{
-		while(x > WIDTH_3D)
-		{
-			put_pixel(game, game->map->prefix_palyer_x + x, game->map->prefix_palyer_y + y, 0x000000);
-			x++;
-		}
-		y++;
-	}
 	setup_ray(game);
 	setup_minimap(game);
 	setup_player(game);

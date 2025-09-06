@@ -6,11 +6,11 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:11:18 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/07/02 15:17:23 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/06 18:00:57 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../cub.h"
+#include "../cub.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {

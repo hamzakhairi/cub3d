@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_create_window.c                               :+:      :+:    :+:   */
+/*   stup_minimap_player.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:04:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/05 10:36:56 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/06 18:28:08 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	drow_minimap(t_game *game, int center_x, int center_y)
 	int	map_x;
 	int	map_y;
 
+	color = 0;
 	map_x = center_x / SIZE;
 	map_y = center_y / SIZE;
 	if (center_x < 0 || center_y < 0
@@ -98,7 +99,6 @@ void	setup_player(t_game *game)
 {
 	int	i;
 	int	j;
-	int	color;
 	int	r;
 
 	r = game->map->player_size;

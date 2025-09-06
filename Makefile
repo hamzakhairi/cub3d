@@ -1,5 +1,5 @@
 CC = cc
-CFLAG = #-g -fsanitize=address  #-Wall -Wextra -Werror
+CFLAG =   -Wall -Wextra -Werror #-g -fsanitize=address
 
 SRC_MAIN = \
 	./main.c
@@ -11,7 +11,8 @@ SRC_PARCING = \
 	./Parsing/parcing_color.c \
 	./Parsing/parcing_dir.c \
 	./Parsing/parcing_map.c \
-	./Parsing/cheack_lines.c
+	./Parsing/cheack_lines.c \
+	./Parsing/check_door.c
 
 SRC_ERROR = \
 	./error/print_error.c
@@ -46,6 +47,7 @@ SRC_RANDER = \
 	./rander/get_vertical.c \
 	./rander/get_horizontal.c \
 	./rander/drow_texter.c \
+	./rander/algo_door.c
 
 
 OBJ = $(SRC_RANDER:.c=.o) $(SRC_PARCING:.c=.o) $(SRC_MAIN:.c=.o) $(SRC_ERROR:.c=.o) $(SRC_GET_LINE:.c=.o) $(SRC_UTILS:.c=.o)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_player.c                                      :+:      :+:    :+:   */
+/*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 12:50:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/05 09:28:17 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/06 19:49:43 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,27 @@ int	player_rotation(t_game *game)
 
 int	move_game(t_game *game, int i)
 {
-	float	new_x;
-	float	new_y;
-
 	if (game->map->key == KEY_S)
 	{
-		new_x = game->player_pixl_x - (cosf(game->map->angle) * i);
-		new_y = game->player_pixl_y - (sinf(game->map->angle) * i);
+		game->new_x = game->player_pixl_x - (cosf(game->map->angle) * i);
+		game->new_y = game->player_pixl_y - (sinf(game->map->angle) * i);
 	}
 	else if (game->map->key == KEY_W)
 	{
-		new_x = game->player_pixl_x + (cosf(game->map->angle) * i);
-		new_y = game->player_pixl_y + (sinf(game->map->angle) * i);
+		game->new_x = game->player_pixl_x + (cosf(game->map->angle) * i);
+		game->new_y = game->player_pixl_y + (sinf(game->map->angle) * i);
 	}
 	else if (game->map->key == KEY_A)
 	{
-		new_x = game->player_pixl_x + (sinf(game->map->angle) * i);
-		new_y = game->player_pixl_y - (cosf(game->map->angle) * i);
+		game->new_x = game->player_pixl_x + (sinf(game->map->angle) * i);
+		game->new_y = game->player_pixl_y - (cosf(game->map->angle) * i);
 	}
 	else if (game->map->key == KEY_D)
 	{
-		new_x = game->player_pixl_x - (sinf(game->map->angle) * i);
-		new_y = game->player_pixl_y + (cosf(game->map->angle) * i);
+		game->new_x = game->player_pixl_x - (sinf(game->map->angle) * i);
+		game->new_y = game->player_pixl_y + (cosf(game->map->angle) * i);
 	}
-	return (move_player(game, new_y, new_x, i));
+	return (move_player(game, game->new_y, game->new_x, i));
 }
 
 void	key1(t_game *game, int *check)
@@ -65,10 +62,7 @@ void	key1(t_game *game, int *check)
 	}
 	else if (game->map->key == KEY_Q)
 	{
-		if (!game->is_open_door)
-			game->is_open_door = 1;
-		else
-			game->is_open_door = 0;
+		state_door(game->doors, game->is_door_x, game->is_door_y);
 		*check = 0;
 	}
 	else if (game->map->key == KEY_F)

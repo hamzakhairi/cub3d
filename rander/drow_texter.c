@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drow_texter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 09:56:45 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/06 13:18:45 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/06 19:58:01 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ float	calculate_wall_hit_x(t_game *game, int ray_index, float distance)
 	float	hit_x;
 	float	hit_y;
 
-	ray_angle = game->map->angle - FOV / 2 + (ray_index * FOV / WIDTH_3D);
+	ray_angle = game->map->angle - game->fov / 2 + (ray_index * game->fov / WIDTH_3D);
 	hit_x = game->player_pixl_x + distance * cosf(ray_angle);
 	hit_y = game->player_pixl_y + distance * sinf(ray_angle);
 	wall_dir = game->map->wall_direction[ray_index];
@@ -70,28 +70,25 @@ void	draw_line_height(t_game *game, int x)
 	int		y;
 	t_tex	*tex;
 	float	wall_hit;
-	float		tex_x;
-	float		tex_y;
+	float	tex_x;
+	float	tex_y;
 	int		color;
 
 	y = 0;
 	tex = get_wall_texture(game, x);
 	wall_hit = calculate_wall_hit_x(game, x, game->map->dis[x]);
 	tex_x = ((wall_hit / SIZE) * (float)tex->width);
-	if ((int)tex_x < 0) 
+	if ((int)tex_x < 0)
 		tex_x = 0.0f;
 	if ((int)tex_x >= tex->width)
 		tex_x = (float)tex->width - 1;
-
 	if (game->wall_height <= 0.0f)
-		return;
+		return ;
 	tex_step = (float)tex->height / game->wall_height;
-
 	if (game->wall_top < 0)
 		tex_y = ((0 - (float)game->wall_top) * tex_step);
 	else
 		tex_y = 0;
-
 	while (y < HEIGHT_3D)
 	{
 		if (y < game->wall_top)

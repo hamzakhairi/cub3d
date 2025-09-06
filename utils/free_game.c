@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 22:29:24 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/02 22:30:35 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/06 18:22:49 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,16 @@ void	free_images_player(t_game *game)
 	free(game->img_player);
 }
 
-void	free_game(t_game *game)
+void	free_doors(t_game *game)
 {
-	if (game->map)
-		free_map(game->map);
-	destroy_images(game);
-	if (game->config)
-		free_config(game->config);
-	if (game->win_ptr)
+	t_door	*tmp;
+
+	if (!game->doors)
+		return ;
+	while (game->doors)
 	{
-		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-		game->win_ptr = NULL;
+		tmp = game->doors->next;
+		free(game->doors);
+		game->doors = tmp;
 	}
-	if (game->img_player)
-		free_images_player(game);
-	free(game);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 12:57:47 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/07/23 16:38:35 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/06 18:24:10 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	line = get_line(fd, line);
-	if (!line) 
+	if (!line)
 		return (NULL);
 	str = get_and_update_line(line);
 	line = str.new_line;

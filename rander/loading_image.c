@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loading_image.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 22:17:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/05 09:54:23 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/06 16:26:59 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	update_state(t_game *game)
 {
 	int	max_frames;
 
-	if (!game->img_player->images_Feeding
-		|| !game->img_player->images_Feeding
-		|| !game->img_player->images_Feeding)
+	if (!game->img_player->images_feeding
+		|| !game->img_player->images_feeding
+		|| !game->img_player->images_feeding)
 		(ft_putendl_fd("Error images", 2), \
 			free_game(game), exit(0));
 	game->img_player->frame++;
@@ -59,7 +59,7 @@ void	update_state(t_game *game)
 		else if (game->img_player->is_state == 1)
 			max_frames = game->img_player->images_counter_shot;
 		else
-			max_frames = game->img_player->images_counter_Feeding;
+			max_frames = game->img_player->images_counter_feeding;
 		if (game->img_player->current_image >= max_frames)
 		{
 			game->img_player->current_image = 0;
@@ -82,7 +82,7 @@ void	render_images(t_game *game)
 			(HEIGHT_3D - 400) + (HEIGHT_3D - 400) / 16);
 	else
 		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
-			game->img_player->images_Feeding[game->img_player->current_image],
+			game->img_player->images_feeding[game->img_player->current_image],
 			(WIDTH_3D) / 2 - (WIDTH_3D / 4),
 			(HEIGHT_3D - 400) + (HEIGHT_3D - 400) / 16);
 }

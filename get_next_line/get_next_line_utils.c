@@ -40,7 +40,8 @@ char	*ft_strjoin_line(char *line, char *buff)
 		line = ft_strdup_line("");
 	if (!line || !buff)
 		return (NULL);
-	str = malloc(sizeof(char) * ((ft_strlen_line(line) + ft_strlen_line(buff)) + 1));
+	str = malloc(sizeof(char)
+			* ((ft_strlen_line(line) + ft_strlen_line(buff)) + 1));
 	if (str == NULL)
 		return (NULL);
 	i = -1;
@@ -95,7 +96,8 @@ char	*update_remaining_line(char *line)
 		free(line);
 		return (NULL);
 	}
-	remaining_line = (char *)malloc(sizeof(char) * (ft_strlen_line(line) - count));
+	remaining_line = (char *)malloc(sizeof(char)
+			* (ft_strlen_line(line) - count));
 	if (!remaining_line)
 		return (NULL);
 	count++;
