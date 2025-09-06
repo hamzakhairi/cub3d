@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:04:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/04 14:57:45 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/05 10:36:56 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,32 +115,4 @@ void	setup_player(t_game *game)
 		}
 		i++;
 	}
-}
-
-void	create_put_image_to_window(t_game *game)
-{
-	setup_ray(game);
-	setup_minimap(game);
-	setup_player(game);
-}
-
-int	create_image(t_game *game)
-{
-	game->img_ptr = mlx_new_image(game->mlx_ptr, WIDTH_3D, HEIGHT_3D);
-	if (!game->img_ptr)
-		return (ft_putendl_fd(ERROR_IMAGE, 2), 1);
-	game->addr = mlx_get_data_addr(game->img_ptr, &game->bits_per_pixel, &game->line_length, &game->endian);
-	if (load_texture(game, &game->img_north, game->config->no_texture))
-		return (1);
-	if (load_texture(game, &game->img_east, game->config->ea_texture))
-		return (1);
-	if (load_texture(game, &game->img_west, game->config->we_texture))
-		return (1);
-	if (load_texture(game, &game->img_south, game->config->so_texture))
-		return (1);
-	if (load_texture(game, &game->img_door, "texter/door/1.xpm"))
-		return (1);
-	create_put_image_to_window(game);
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img_ptr, 0, 0);
-	return (0);
 }

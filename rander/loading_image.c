@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loading_image.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 22:17:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/03 11:49:07 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/05 09:54:23 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	update_state(t_game *game)
 	if (!game->img_player->images_Feeding
 		|| !game->img_player->images_Feeding
 		|| !game->img_player->images_Feeding)
-			(ft_putendl_fd("Error images", 2), 
-				free_game(game), exit(0));
+		(ft_putendl_fd("Error images", 2), \
+			free_game(game), exit(0));
 	game->img_player->frame++;
 	if (game->img_player->frame >= SPEED)
 	{

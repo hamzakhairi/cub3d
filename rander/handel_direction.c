@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:30:16 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/04 14:31:35 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/05 09:55:53 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	handel_move(int val, int set)
 int	mouse_move_player(int x, int y, void *struct_game)
 {
 	t_game	*game;
-	static int  start = 0;
+	static int start = 0;
 
 	game = (t_game *)struct_game;
 	if (start == 0)

@@ -1,5 +1,4 @@
 
-
 # ifndef CUB_H
 # define CUB_H
 
@@ -31,7 +30,7 @@
 # define KEY_F 15
 # define KEY_RIGHT 124
 # define KEY_LEFT 123
-# define NUM_GAME_MOVES 8
+# define NUM_GAME_MOVES 50
 # define SPEED 4
 # define PLAYER_SIZE 4
 # define DST_W_P 10
@@ -197,25 +196,42 @@ int cheack_lines(t_game *game);
 * 		Randering function				*
 *****************************************/
 
-int		start_randering(t_game *game);
-int		create_window(t_game *game);
+int	start_randering(t_game *game);
+int	create_image(t_game *game);
 void	create_put_image_to_window(t_game *game);
-void	ft_image(t_game *game, int width, int height);
-int		create_xpm_file_image(t_game *game);
 void	calculate_width_height(t_game *game);
-int		moving(int key, t_game *game);
-void    setup_player(t_game *game);
-void    put_pixel(t_game *game, int x, int y, int color);
-void	store_dir(t_game *game, int width, int height);
-void	setup_ray(t_game *game);
-void image_3d(t_game *game);
-int create_image(t_game *game);
-void setup1_ray(t_game *game);
-float ray_cast(t_game *game, float ray_angle, int ray_count);
+void	store_direction(t_game *game, int width, int height);
 
-int move_player(t_game *game, float y, float x, int i);
-void directoin_player(t_game *game);
-float distance_palyer_wall(t_game *game, float dis_v, float dis_h, int ray_count);
+void	setup_ray(t_game *game);
+float	ray_cast(t_game *game, float ray_angle, int ray_count);
+void	image_3d(t_game *game);
+float	distance_palyer_wall(t_game *game, float dis_v, float dis_h, int ray_count);
+
+float	vertical_wall(t_game *game);
+float	horizontal_wall(t_game *game);
+void	directoin_player(t_game *game);
+void	get_vertical(t_game *game);
+void	get_horizontal(t_game *game);
+
+int	moving(int key, t_game *game);
+void	key2(t_game *game, int *check);
+void	key1(t_game *game, int *check);
+int	move_game(t_game *game, int i);
+int	player_rotation(t_game *game);
+
+int	move_player(t_game *game, float y, float x, int i);
+int	ft_ft(t_game *game, float y, float x, int i);
+
+void	draw_line_height(t_game *game, int x);
+float	calculate_wall_hit_x(t_game *game, int ray_index, float distance);
+t_tex	*get_wall_texture(t_game *game, int ray_index);
+int	get_tex_pixel(t_tex *tex, int x, int y);
+
+void	setup_player(t_game *game);
+void	setup_minimap(t_game *game);
+int	drow_minimap(t_game *game, int center_x, int center_y);
+void	put_pixel(t_game *game, int x, int y, int color);
+int	load_texture(t_game *game, t_tex *tex, char *path);
 
 /*
 	bonus
