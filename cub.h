@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 16:17:22 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/07 16:31:11 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 19:28:07 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <stddef.h>
 # include <limits.h>
 # include <fcntl.h>
 # include <math.h>
@@ -200,6 +199,7 @@ int		parce_and_filling_line(char **texter, char *str,
 int		check_diection_texter(t_game *game, char *str);
 int		filling_map(t_game *game, char *path);
 int		cheack_lines(t_game *game);
+int		init_game(t_game *game);
 /****************************************
 * 		Randering function				*
 *****************************************/
@@ -219,7 +219,6 @@ void	directoin_player(t_game *game);
 void	get_vertical(t_game *game);
 void	get_horizontal(t_game *game);
 int		moving(int key, t_game *game);
-void	key2(t_game *game, int *check);
 void	key1(t_game *game, int *check);
 int		move_game(t_game *game, int i);
 int		player_rotation(t_game *game);
@@ -288,5 +287,7 @@ void	free_map(t_map *map);
 void	destroy_images(t_game *game);
 void	free_config(t_config *config);
 void	*ft_memcpy(void *dst, const void *src, int n);
+int		ft_close_win(t_game *game);
+void	destroy_images(t_game *game);
 
 #endif

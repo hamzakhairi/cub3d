@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:04:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/07 11:00:06 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 19:14:47 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,15 @@ int	load_texture(t_game *game, t_tex *tex, char *path)
 {
 	int	w;
 	int	h;
+	int	fd;
 
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_putendl_fd("Error: Cannot open file", 2);
+		return (1);
+	}
+	close(fd);
 	tex->img = mlx_xpm_file_to_image(game->mlx_ptr, path, &w, &h);
 	if (!tex->img)
 		return (ft_putendl_fd(ERROR_IMAGE_XPM, 2), 1);

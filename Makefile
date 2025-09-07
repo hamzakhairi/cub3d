@@ -1,5 +1,5 @@
 CC = cc
-CFLAG =   -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAG =   -Wall -Wextra -Werror
 
 SRC_MAIN = \
 	./main.c
@@ -12,7 +12,8 @@ SRC_PARCING = \
 	./Parsing/parcing_dir.c \
 	./Parsing/parcing_map.c \
 	./Parsing/cheack_lines.c \
-	./Parsing/check_door.c
+	./Parsing/check_door.c \
+	./Parsing/init_wall_game.c
 
 SRC_ERROR = \
 	./error/print_error.c
@@ -32,7 +33,8 @@ SRC_UTILS = \
 	./utils/ft_itoa.c \
 	./utils/ft_isdigit.c \
 	./utils/ft_mini_atoi.c \
-	./utils/ft_memcpy.c
+	./utils/ft_memcpy.c \
+	./utils/destroy_images.c
 
 SRC_RANDER = \
 	./rander/stup_minimap_player.c \

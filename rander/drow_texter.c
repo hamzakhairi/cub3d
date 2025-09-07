@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 09:56:45 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/07 16:44:04 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 19:15:49 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	drow_line(t_game *game, int y, int x, t_tex *tex)
 	int	color;
 
 	while (y < HEIGHT_3D)
-	{ 
+	{
 		if (y < game->wall_top)
 			put_pixel(game, x, y, (game->config->ceiling_color[0] << 16)
 				| (game->config->ceiling_color[1] << 8)

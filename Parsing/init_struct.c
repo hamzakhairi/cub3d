@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:42:19 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/07 16:52:11 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 19:19:31 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,45 +62,8 @@ void	init_win(t_game *game)
 	game->img_door = NULL;
 	game->img_south = NULL;
 	game->img_north = NULL;
-	game->img_north = NULL;
+	game->img_east = NULL;
 	game->img_west = NULL;
-}
-
-int	init_game(t_game *game)
-{
-	game->img_door = malloc(sizeof(t_tex));
-	if (!game->img_door)
-		return (ft_putendl_fd(ERROR_ALOCATION, 2), 0);
-	game->img_door->addr = NULL;
-	game->img_door->img = NULL;
-	game->img_south = malloc(sizeof(t_tex));
-	if (!game->img_south)
-		return (ft_putendl_fd(ERROR_ALOCATION, 2), 0);
-	game->img_south->addr = NULL;
-	game->img_south->img = NULL;
-	game->img_north = malloc(sizeof(t_tex));
-	if (!game->img_north)
-		return (ft_putendl_fd(ERROR_ALOCATION, 2), 0);
-	game->img_north->addr = NULL;
-	game->img_north->img = NULL;
-	game->img_west = malloc(sizeof(t_tex));
-	if (!game->img_west)
-		return (ft_putendl_fd(ERROR_ALOCATION, 2), 0);
-	game->img_west->addr = NULL;
-	game->img_west->img = NULL;
-	game->img_east = malloc(sizeof(t_tex));
-	if (!game->img_east)
-		return (ft_putendl_fd(ERROR_ALOCATION, 2), 0);
-	game->img_east->addr = NULL;
-	game->img_east->img = NULL;
-	game->player_x = -1;
-	game->start_parcing_map = -1;
-	game->player_y = -1;
-	game->is_open_door = 0;
-	game->new_x = 0;
-	game->new_y = 0;
-	game->fov = (VD * M_PI) / TABE;
-	return (1);
 }
 
 void	init_player(t_player *img_player)

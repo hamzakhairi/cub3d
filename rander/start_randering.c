@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 10:55:48 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/07 16:43:46 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 19:21:46 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int	start_randering(t_game *game)
 		return (ft_putendl_fd(ERROR_WINDOW, 2), 1);
 	if (create_image(game))
 		return (1);
+	mlx_hook(game->win_ptr, 17, 0, ft_close_win, game);
 	mlx_hook(game->win_ptr, 2, 0, moving, game);
 	mlx_hook(game->win_ptr, 6, 0L, mouse_move_player, game);
 	mlx_loop_hook(game->mlx_ptr, loop_inimation, game);

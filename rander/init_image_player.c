@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 22:22:55 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/06 16:26:59 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 18:23:14 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,10 @@ int	loading_image(t_game *game)
 {
 	game->img_player->current_image = 0;
 	if (!load_walk_images(game))
-		return (free_walk_images(game), free(game->img_player), 0);
+		return (0);
 	if (!load_shot_images(game))
-		return (free_shot_images(game),
-			free_walk_images(game), free(game->img_player), 0);
+		return (0);
 	if (!load_feed_images(game))
-		return (free_feed_images(game),
-			free_shot_images(game), free_walk_images(game),
-			free(game->img_player), 0);
+		return (0);
 	return (1);
 }
