@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 12:50:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/06 19:49:43 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 16:04:41 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,34 +71,8 @@ void	key1(t_game *game, int *check)
 		game->img_player->current_image = 0;
 		*check = 0;
 	}
-}
-
-void	key2(t_game *game, int *check)
-{
-	if (game->map->key == KEY_LEFT || game->map->key == KEY_RIGHT)
+	else if (game->map->key == KEY_LEFT || game->map->key == KEY_RIGHT)
 		*check = player_rotation(game);
-	else if (game->map->key == KEY_ZOOM)
-	{
-		if (game->map->iszoom == 0)
-		{
-			game->map->player_size = 8;
-			game->map->minimap_size = 250;
-			game->map->prefix_palyer_x = WIDTH_3D / 2;
-			game->map->prefix_palyer_y = HEIGHT_3D / 2;
-			game->map->scale = 1;
-			game->map->iszoom = 1;
-		}
-		else
-		{
-			game->map->player_size = PLAYER_SIZE;
-			game->map->minimap_size = 100;
-			game->map->prefix_palyer_x = 102;
-			game->map->prefix_palyer_y = 102;
-			game->map->scale = SCALE;
-			game->map->iszoom = 0;
-		}
-		*check = 0;
-	}
 }
 
 int	moving(int key, t_game *game)
@@ -111,14 +85,12 @@ int	moving(int key, t_game *game)
 	while (i > 0)
 	{
 		if (game->map->key == ESC || game->map->key == KEY_T
-			|| game->map->key == KEY_Q || game->map->key == KEY_F)
+			|| game->map->key == KEY_Q || game->map->key == KEY_F
+			|| game->map->key == KEY_LEFT || game->map->key == KEY_RIGHT)
 			key1(game, &check);
 		else if (game->map->key == KEY_S || game->map->key == KEY_W
 			|| game->map->key == KEY_A || game->map->key == KEY_D)
 			check = move_game(game, i);
-		else if (game->map->key == KEY_LEFT || game->map->key == KEY_RIGHT
-			|| game->map->key == KEY_ZOOM)
-			key2(game, &check);
 		if (check == 0)
 			break ;
 		i--;

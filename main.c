@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:11:48 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/07 10:55:34 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 16:52:52 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ void	free_game(t_game *game)
 	free(game);
 }
 
-// void	check_leaks(void)
-// {
-// 	system("leaks cub");
-// }
+void	check_leaks(void)
+{
+	system("leaks cub");
+}
 
 int	main(int argc, char *argv[])
 {
-	// atexit(check_leaks);
+	atexit(check_leaks);
 	t_game	*game;
 
 	game = malloc(sizeof(t_game));
@@ -50,7 +50,7 @@ int	main(int argc, char *argv[])
 	if (!fetch_door(game))
 		return (free_game(game), 1);
 	if (start_randering(game))
-		return (1);
+		return (free_game(game), 1);
 	free_game(game);
 	return (0);
 }

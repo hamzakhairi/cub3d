@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 22:29:24 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/06 18:22:49 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 16:51:14 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,36 @@ void	destroy_images(t_game *game)
 {
 	if (game->img_ptr)
 		mlx_destroy_image(game->mlx_ptr, game->img_ptr);
-	if (game->img_north.img)
-		mlx_destroy_image(game->mlx_ptr, game->img_north.img);
-	if (game->img_east.img)
-		mlx_destroy_image(game->mlx_ptr, game->img_east.img);
-	if (game->img_west.img)
-		mlx_destroy_image(game->mlx_ptr, game->img_west.img);
-	if (game->img_south.img)
-		mlx_destroy_image(game->mlx_ptr, game->img_south.img);
-	if (game->img_door.img)
-		mlx_destroy_image(game->mlx_ptr, game->img_door.img);
+	if (game->img_north)
+	{
+		if (game->img_north->img)
+			mlx_destroy_image(game->mlx_ptr, game->img_north->img);
+		free(game->img_north);
+	}
+	if (game->img_east)
+	{
+		if (game->img_east->img)
+			mlx_destroy_image(game->mlx_ptr, game->img_east->img);
+		free(game->img_east);
+	}
+	if (game->img_west)
+	{
+		if (game->img_west->img)
+			mlx_destroy_image(game->mlx_ptr, game->img_west->img);
+		free(game->img_west);
+	}
+	if (game->img_south)
+	{
+		if (game->img_south->img)
+			mlx_destroy_image(game->mlx_ptr, game->img_south->img);
+		free(game->img_south);
+	}
+	if (game->img_door)
+	{
+		if (game->img_door->img)
+			mlx_destroy_image(game->mlx_ptr, game->img_door->img);
+		free(game->img_door);
+	}
 }
 
 void	free_map(t_map *map)

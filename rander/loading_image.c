@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 22:17:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/07 11:12:36 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 16:09:10 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	render_images(t_game *game)
 
 int	loop_inimation(t_game *game)
 {
-	create_put_image_to_window(game);
+	setup_game(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img_ptr, 0, 0);
 	update_state(game);
 	render_images(game);

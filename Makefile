@@ -1,5 +1,5 @@
 CC = cc
-CFLAG =   -Wall -Wextra -Werror 
+CFLAG =   -Wall -Wextra -Werror #-g -fsanitize=address
 
 SRC_MAIN = \
 	./main.c
@@ -55,12 +55,11 @@ OBJ = $(SRC_RANDER:.c=.o) $(SRC_PARCING:.c=.o) $(SRC_MAIN:.c=.o) $(SRC_ERROR:.c=
 
 HEADER = cub.h
 
-NAME = cub
+NAME = cub3D
 
 MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit -lm
 
 all : $(NAME)
-	clear
 
 $(NAME) : $(OBJ)
 	$(CC) $(CFLAG) $(OBJ) $(MLX_FLAGS)  -o $(NAME) 

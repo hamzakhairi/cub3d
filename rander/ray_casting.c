@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:58:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/06 16:24:25 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 15:47:55 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	directoin_player(t_game *game)
 	game->map->ray_facing_left = !game->map->ray_facing_right;
 }
 
-float	ray_cast(t_game *game, float ray_angle, int ray_count)
+float	ray_casting(t_game *game, float ray_angle, int ray_count)
 {
 	float	dis_v;
 	float	dis_h;
@@ -75,7 +75,6 @@ float	ray_cast(t_game *game, float ray_angle, int ray_count)
 	game->map->y_vertical = game->player_pixl_y
 		+ (game->map->x_vertical - game->player_pixl_x) * tanf(ray_angle);
 	dis_v = vertical_wall(game);
-	directoin_player(game);
 	game->map->angle = temp_angle;
 	return (distance_palyer_wall(game, dis_v, dis_h, ray_count));
 }
