@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_randering.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 10:55:48 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/06 15:44:38 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 15:48:14 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	calculate_width_height(t_game *game)
 	game->map->height = height * SIZE;
 }
 
-void	create_put_image_to_window(t_game *game)
+void	setup_game(t_game *game)
 {
 	setup_ray(game);
 	setup_minimap(game);
@@ -90,7 +90,7 @@ int	create_image(t_game *game)
 		return (1);
 	if (load_texture(game, &game->img_door, "texter/door/1.xpm"))
 		return (1);
-	create_put_image_to_window(game);
+	setup_game(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img_ptr, 0, 0);
 	return (0);
 }
@@ -108,7 +108,6 @@ int	start_randering(t_game *game)
 		return (ft_putendl_fd(ERROR_WINDOW, 2), 1);
 	if (create_image(game))
 		return (1);
-	create_put_image_to_window(game);
 	mlx_hook(game->win_ptr, 2, 0, moving, game);
 	mlx_hook(game->win_ptr, 6, 0L, mouse_move_player, game);
 	mlx_loop_hook(game->mlx_ptr, loop_inimation, game);

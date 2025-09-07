@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_drawing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:57:01 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/06 20:01:42 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 15:24:33 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	image_3d(t_game *game)
 			game->corrected_distance = 0.1f;
 		game->wall_height = (SIZE / game->corrected_distance) \
 		* game->distance_plane;
-		if (game->wall_height > HEIGHT_3D * 3)
-			game->wall_height = HEIGHT_3D * 3;
 		game->wall_top = (HEIGHT_3D / 2) - (game->wall_height / 2);
 		game->wall_bottom = (HEIGHT_3D / 2) + (game->wall_height / 2);
 		draw_line_height(game, x);
@@ -57,7 +55,7 @@ void	setup_ray(t_game *game)
 			ray_angle += 2 * M_PI;
 		if (ray_angle >= 2 * M_PI)
 			ray_angle -= 2 * M_PI;
-		game->map->dis[ray_count] = ray_cast(game, ray_angle, ray_count);
+		game->map->dis[ray_count] = ray_casting(game, ray_angle, ray_count);
 		ray_angle += angle_step;
 		ray_count++;
 	}

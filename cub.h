@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 16:17:22 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/06 19:57:45 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 15:34:28 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define NUM_GAME_MOVES 10
 # define SPEED 4
 # define PLAYER_SIZE 4
-# define DST_W_P 10
+# define DST_W_P 12
 # define PATH_WLKING "./texter/player/rm_bg_walk/"
 # define PATH_FEEDING "./texter/player/feeding/"
 # define PATH_SOTING "./texter/player/xpm_shot/"
@@ -158,6 +158,9 @@ typedef struct s_game
 	float		new_x;
 	float		new_y;
 	float		fov;
+	float		tex_x;
+	float		tex_y;
+	float		tex_step;
 	t_player	*img_player;
 	t_door		*doors;
 }	t_game;
@@ -204,11 +207,11 @@ int		cheack_lines(t_game *game);
 *****************************************/
 int		start_randering(t_game *game);
 int		create_image(t_game *game);
-void	create_put_image_to_window(t_game *game);
+void	setup_game(t_game *game);
 void	calculate_width_height(t_game *game);
 void	store_direction(t_game *game, int width, int height);
 void	setup_ray(t_game *game);
-float	ray_cast(t_game *game, float ray_angle, int ray_count);
+float	ray_casting(t_game *game, float ray_angle, int ray_count);
 void	image_3d(t_game *game);
 float	distance_palyer_wall(t_game *game,
 			float dis_v, float dis_h, int ray_count);

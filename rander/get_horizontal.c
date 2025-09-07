@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_horizontal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 15:48:44 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/06 18:40:37 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 12:08:05 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	get_horizontal(t_game *game)
 	game->map->x_horizontal += xh_step;
 }
 
-float	horizontal_door(t_game *game, int check_y, int xh, int yh)
+float	horizontal_door(t_game *game, int check_y, int xh)
 {
 	if (check_y >= 0 && check_y < (game->map->height / SIZE)
 		&& xh < (int)strlen(game->map->grid[check_y])
 		&& game->map->grid[check_y] != NULL
 		&& (game->map->grid[check_y][xh] == '1'
-		|| (game->map->grid[check_y][xh] == 'D' && !game->is_open_door)))
+		|| game->map->grid[check_y][xh] == 'D'))
 	{
 		if (game->map->grid[check_y][xh] == '1')
 		{
@@ -55,7 +55,7 @@ float	horizontal_door(t_game *game, int check_y, int xh, int yh)
 				+ powf(game->map->y_horizontal - game->player_pixl_y, 2)));
 		}
 	}
-	return ((void)yh, -1);
+	return (-1);
 }
 
 float	horizontal_wall(t_game *game)
@@ -77,7 +77,7 @@ float	horizontal_wall(t_game *game)
 		check_y = yh;
 		if (game->map->ray_facing_up)
 			check_y = yh - 1;
-		dst = horizontal_door(game, check_y, xh, yh);
+		dst = horizontal_door(game, check_y, xh);
 		if (dst != -1)
 			return (dst);
 		get_horizontal(game);

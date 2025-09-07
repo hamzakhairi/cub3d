@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drow_texter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 09:56:45 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/06 19:58:01 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 15:45:47 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ float	calculate_wall_hit_x(t_game *game, int ray_index, float distance)
 	float	hit_x;
 	float	hit_y;
 
-	ray_angle = game->map->angle - game->fov / 2 + (ray_index * game->fov / WIDTH_3D);
+	ray_angle = game->map->angle - game->fov / 2 \
+	+ (ray_index * game->fov / WIDTH_3D);
 	hit_x = game->player_pixl_x + distance * cosf(ray_angle);
 	hit_y = game->player_pixl_y + distance * sinf(ray_angle);
 	wall_dir = game->map->wall_direction[ray_index];
@@ -64,100 +65,54 @@ float	calculate_wall_hit_x(t_game *game, int ray_index, float distance)
 		return (hit_y - floor(hit_y / SIZE) * SIZE);
 }
 
-void	draw_line_height(t_game *game, int x)
+void	drow_line(t_game *game, int y, int x, t_tex *tex)
 {
-	float	tex_step;
-	int		y;
-	t_tex	*tex;
-	float	wall_hit;
-	float	tex_x;
-	float	tex_y;
-	int		color;
+	int	color;
 
-	y = 0;
-	tex = get_wall_texture(game, x);
-	wall_hit = calculate_wall_hit_x(game, x, game->map->dis[x]);
-	tex_x = ((wall_hit / SIZE) * (float)tex->width);
-	if ((int)tex_x < 0)
-		tex_x = 0.0f;
-	if ((int)tex_x >= tex->width)
-		tex_x = (float)tex->width - 1;
-	if (game->wall_height <= 0.0f)
-		return ;
-	tex_step = (float)tex->height / game->wall_height;
-	if (game->wall_top < 0)
-		tex_y = ((0 - (float)game->wall_top) * tex_step);
-	else
-		tex_y = 0;
 	while (y < HEIGHT_3D)
 	{
 		if (y < game->wall_top)
-			put_pixel(game, x, y, 0xFF0000);
+			put_pixel(game, x, y, (game->config->ceiling_color[0] << 16)
+				| (game->config->ceiling_color[1] << 8)
+				| game->config->ceiling_color[2]);
 		else if (y <= game->wall_bottom)
 		{
-			if ((int)tex_y >= tex->height)
-				tex_y = (float)tex->height - 1;
-			if ((int)tex_y < 0)
-				tex_y = 0.0f;
-			color = get_tex_pixel(tex, (int)tex_x, (int)tex_y);
+			if ((int)game->tex_y >= tex->height)
+				game->tex_y = (float)tex->height - 1;
+			if ((int)game->tex_y < 0)
+				game->tex_y = 0.0f;
+			color = get_tex_pixel(tex, (int)game->tex_x, (int)game->tex_y);
 			put_pixel(game, x, y, color);
-			tex_y += tex_step;
+			game->tex_y += game->tex_step;
 		}
 		else
-			put_pixel(game, x, y, 0x8B4513);
+			put_pixel(game, x, y, (game->config->floor_color[0] << 16)
+				| (game->config->floor_color[1] << 8)
+				| game->config->floor_color[2]);
 		y++;
 	}
 }
 
+void	draw_line_height(t_game *game, int x)
+{
+	int		y;
+	t_tex	*tex;
+	float	wall_hit;
 
-// void	draw_line_height(t_game *game, int x)
-// {
-// 	float	tex_step;
-// 	float	tex_pos;
-// 	int		y;
-// 	t_tex	*tex;
-// 	float	wall_hit;
-// 	int		tex_x;
-// 	int		tex_y;
-// 	int		color;
-
-// 	tex_pos = 0;
-// 	y = 0;
-// 	tex = get_wall_texture(game, x);
-// 	wall_hit = calculate_wall_hit_x(game, x, game->map->dis[x]);
-// 	tex_x = (int)((wall_hit / SIZE) * tex->width);
-// 	if (tex_x < 0)
-// 		tex_x = 0;
-// 	if (tex_x >= tex->width)
-// 		tex_x = tex->width - 1;
-
-// 	if (game->wall_top < 0)
-// 		tex_pos = (0 - game->wall_top) * tex_step;
-
-// 	if (game->wall_top < 0)
-// 		game->wall_top = 0;
-
-// 	if (game->wall_bottom >= HEIGHT_3D)
-// 		game->wall_bottom = HEIGHT_3D - 1;
-
-// 	tex_step = (float)tex->height / game->wall_height;
-// 	while (y < HEIGHT_3D)
-// 	{
-// 		if (y < game->wall_top)
-// 			put_pixel(game, x, y, 0xFF0000);
-// 		else if (y <= game->wall_bottom)
-// 		{
-// 			tex_y = (int)tex_pos;
-// 			if (tex_y >= tex->height)
-// 				tex_y = tex->height - 1;
-// 			if (tex_y < 0)
-// 				tex_y = 0;
-// 			color = get_tex_pixel(tex, tex_x, tex_y);
-// 			put_pixel(game, x, y, color);
-// 			tex_pos += tex_step;
-// 		}
-// 		else
-// 			put_pixel(game, x, y, 0x8B4513);
-// 		y++;
-// 	}
-// }
+	y = 0;
+	tex = get_wall_texture(game, x);
+	wall_hit = calculate_wall_hit_x(game, x, game->map->dis[x]);
+	game->tex_x = ((wall_hit / SIZE) * (float)tex->width);
+	if ((int)game->tex_x < 0)
+		game->tex_x = 0.0f;
+	if ((int)game->tex_x >= tex->width)
+		game->tex_x = (float)tex->width - 1;
+	if (game->wall_height <= 0.0f)
+		return ;
+	game->tex_step = (float)tex->height / game->wall_height;
+	if (game->wall_top < 0)
+		game->tex_y = ((0 - (float)game->wall_top) * game->tex_step);
+	else
+		game->tex_y = 0;
+	drow_line(game, y, x, tex);
+}
