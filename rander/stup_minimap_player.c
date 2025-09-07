@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 11:04:49 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/06 18:28:08 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 11:00:06 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	drow_minimap(t_game *game, int center_x, int center_y)
 		|| map_y < 0 || map_y >= game->map->height / SIZE
 		|| map_x < 0 || map_x >= game->map->width / SIZE
 		|| game->map->grid[map_y] == NULL
-		|| map_x >= (int)strlen(game->map->grid[map_y]))
+		|| map_x >= (int)ft_strlen(game->map->grid[map_y]))
 		color = 0x000000;
 	else if (game->map->grid[map_y][map_x] == '1')
 		color = 0x0000FF;

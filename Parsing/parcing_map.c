@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 10:10:02 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/02 22:17:13 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 12:33:24 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	filling_map(t_game *game, char *path)
 		return (ft_putendl_fd(NOT_FOUND, 2), 0);
 	length = get_map_length(path, game->start_parcing_map);
 	if (length == -1)
-		return (0);
+		return (close(fd), 0);
 	game->map->grid = malloc(sizeof(char *) * (length + 1));
 	if (!game->map->grid)
 		return (close(fd), ft_putendl_fd(ERROR_ALOCATION, 2), 0);
@@ -96,6 +96,5 @@ int	filling_map(t_game *game, char *path)
 		return (close(fd), 0);
 	if (!read_map_lines(fd, game))
 		return (close(fd), 0);
-	close(fd);
-	return (1);
+	return (close(fd), 1);
 }

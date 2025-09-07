@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 15:47:04 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/06 18:40:02 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 10:59:59 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ float	vertical_door(t_game *game, int check_x, int xv, int yv)
 	(void)xv;
 	if (check_x >= 0 && check_x < (game->map->width / SIZE)
 		&& yv < (game->map->height / SIZE)
-		&& check_x < (int)strlen(game->map->grid[yv])
+		&& check_x < (int)ft_strlen(game->map->grid[yv])
 		&& (game->map->grid[yv][check_x] == '1'
 		|| (game->map->grid[yv][check_x] == 'D' && !game->is_open_door)))
 	{
@@ -71,7 +71,7 @@ float	vertical_wall(t_game *game)
 		yv = (int)game->map->y_vertical / SIZE;
 		if (xv < 0 || yv < 0 || xv >= (game->map->width / SIZE)
 			|| yv >= (game->map->height / SIZE) || game->map->grid[yv] == NULL
-			|| xv >= (int)strlen(game->map->grid[yv]))
+			|| xv >= (int)ft_strlen(game->map->grid[yv]))
 			break ;
 		check_x = xv;
 		if (game->map->ray_facing_left)

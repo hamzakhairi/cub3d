@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/05 09:56:45 by ylagzoul          #+#    #+#             */
-/*   Updated: 2025/09/06 19:58:01 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 15:30:30 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,11 @@ void	draw_line_height(t_game *game, int x)
 	else
 		tex_y = 0;
 	while (y < HEIGHT_3D)
-	{
+	{ 
 		if (y < game->wall_top)
-			put_pixel(game, x, y, 0xFF0000);
+			put_pixel(game, x, y, game->config->ceiling_color[0] << 16
+                  | game->config->ceiling_color[1] << 8
+                  | game->config->ceiling_color[2]);
 		else if (y <= game->wall_bottom)
 		{
 			if ((int)tex_y >= tex->height)
@@ -104,7 +106,9 @@ void	draw_line_height(t_game *game, int x)
 			tex_y += tex_step;
 		}
 		else
-			put_pixel(game, x, y, 0x8B4513);
+			put_pixel(game, x, y, game->config->floor_color[0]  << 16
+                  | game->config->floor_color[1] << 8
+                  | game->config->floor_color[2]);
 		y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 16:17:22 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/06 19:57:45 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 11:10:53 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <math.h>
-# include <string.h>
 
 # define SIZE	32
 # define VD		60
@@ -286,14 +285,6 @@ void	free_images_player(t_game *game);
 void	free_map(t_map *map);
 void	destroy_images(t_game *game);
 void	free_config(t_config *config);
-
-/****************************************
-*	ceiling_color = (game->config->ceiling_color[0] << 16) | 
-					(game->config->ceiling_color[1] << 8) | 
-					game->config->ceiling_color[2];
-	floor_color = (game->config->floor_color[0] << 16) | 
-				  (game->config->floor_color[1] << 8) | 
-				  game->config->floor_color[2];				*
-*****************************************/
+void	*ft_memcpy(void *dst, const void *src, int n);
 
 #endif

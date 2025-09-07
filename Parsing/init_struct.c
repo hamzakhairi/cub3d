@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:42:19 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/06 19:57:32 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 10:57:55 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,12 @@ int	init_struct(t_game *game)
 	game->config = malloc(sizeof(t_config));
 	if (!game->config)
 		return (ft_putendl_fd(ERROR_ALOCATION, 2), 0);
+	if (!init_config(game->config))
+		return (0);
 	game->map = malloc(sizeof(t_map));
 	if (!game->map)
 		return (ft_putendl_fd(ERROR_ALOCATION, 2), 0);
 	init_map(game->map);
-	init_config(game->config);
 	game->img_player = malloc(sizeof(t_player));
 	if (!game->img_player)
 		return (ft_putendl_fd(ERROR_ALOCATION, 2), 0);

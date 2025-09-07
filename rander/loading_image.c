@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 22:17:35 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/06 16:26:59 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 11:12:36 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ char	*path_image_image(char *PRE_FIX, int n)
 		free(index_str);
 		return (NULL);
 	}
-	memcpy(str, PRE_FIX, len_prefix);
-	memcpy(str + len_prefix, index_str, len_index);
-	memcpy(str + len_prefix + len_index, ".xpm", 4);
+	ft_memcpy(str, PRE_FIX, len_prefix);
+	ft_memcpy(str + len_prefix, index_str, len_index);
+	ft_memcpy(str + len_prefix + len_index, ".xpm", 4);
 	str[total_len] = '\0';
 	free(index_str);
 	return (str);

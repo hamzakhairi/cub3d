@@ -6,7 +6,7 @@
 /*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 15:48:44 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/06 18:40:37 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 10:59:49 by hkhairi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	get_horizontal(t_game *game)
 float	horizontal_door(t_game *game, int check_y, int xh, int yh)
 {
 	if (check_y >= 0 && check_y < (game->map->height / SIZE)
-		&& xh < (int)strlen(game->map->grid[check_y])
+		&& xh < (int)ft_strlen(game->map->grid[check_y])
 		&& game->map->grid[check_y] != NULL
 		&& (game->map->grid[check_y][xh] == '1'
 		|| (game->map->grid[check_y][xh] == 'D' && !game->is_open_door)))
@@ -72,7 +72,7 @@ float	horizontal_wall(t_game *game)
 		if (xh < 0 || yh < 0 || xh >= (game->map->width / SIZE)
 			|| yh >= (game->map->height / SIZE)
 			|| game->map->grid[yh] == NULL
-			|| xh >= (int)strlen(game->map->grid[yh]))
+			|| xh >= (int)ft_strlen(game->map->grid[yh]))
 			break ;
 		check_y = yh;
 		if (game->map->ray_facing_up)

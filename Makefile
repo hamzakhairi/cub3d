@@ -1,5 +1,5 @@
 CC = cc
-CFLAG =   -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAG =   -Wall -Wextra -Werror 
 
 SRC_MAIN = \
 	./main.c
@@ -31,7 +31,8 @@ SRC_UTILS = \
 	./utils/free_game.c \
 	./utils/ft_itoa.c \
 	./utils/ft_isdigit.c \
-	./utils/ft_mini_atoi.c
+	./utils/ft_mini_atoi.c \
+	./utils/ft_memcpy.c
 
 SRC_RANDER = \
 	./rander/stup_minimap_player.c \
@@ -56,29 +57,22 @@ HEADER = cub.h
 
 NAME = cub
 
-# MLX_DIR = ./minilibx-mac
-
 MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit -lm
-#-L /home/rd_md_haker/Documents/mlx -lmlx_Linux -lXext -lX11 -lm  #-lmlx -framework OpenGL -framework AppKit
 
 all : $(NAME)
 	clear
 
 $(NAME) : $(OBJ)
 	$(CC) $(CFLAG) $(OBJ) $(MLX_FLAGS)  -o $(NAME) 
-#$(MAKE) -C $(MLX_DIR)
-#$(MLX_FLAGS)
 
 %.o : %.c $(HEADER)
 	$(CC) $(CFLAG) -c $< -o $@
 
 clean :
 	rm -f $(OBJ)
-# $(MAKE) -C $(MLX_DIR) clean
 
 fclean : clean
 	rm -f $(NAME)
-# $(MAKE) -C $(MLX_DIR) clean
 
 re : fclean all
 
