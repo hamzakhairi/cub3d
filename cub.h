@@ -6,7 +6,7 @@
 /*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 16:17:22 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/07 15:34:28 by ylagzoul         ###   ########.fr       */
+/*   Updated: 2025/09/07 16:06:11 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # define VD		60
 # define TABE	180
 # define ESC	53
-# define SCALE	4
 
 # define WIDTH_3D 1050
 # define HEIGHT_3D 768
@@ -289,14 +288,5 @@ void	free_images_player(t_game *game);
 void	free_map(t_map *map);
 void	destroy_images(t_game *game);
 void	free_config(t_config *config);
-
-/****************************************
-*	ceiling_color = (game->config->ceiling_color[0] << 16) | 
-					(game->config->ceiling_color[1] << 8) | 
-					game->config->ceiling_color[2];
-	floor_color = (game->config->floor_color[0] << 16) | 
-				  (game->config->floor_color[1] << 8) | 
-				  game->config->floor_color[2];				*
-*****************************************/
 
 #endif

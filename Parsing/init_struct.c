@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkhairi <hkhairi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagzoul <ylagzoul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:42:19 by hkhairi           #+#    #+#             */
-/*   Updated: 2025/09/06 19:57:32 by hkhairi          ###   ########.fr       */
+/*   Updated: 2025/09/07 16:05:37 by ylagzoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	init_map(t_map *map)
 	map->minimap_size = 100;
 	map->prefix_palyer_x = 102;
 	map->prefix_palyer_y = 102;
-	map->scale = SCALE;
 }
 
 void	init_game(t_game *game)
